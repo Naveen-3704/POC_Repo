@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: tpcds_sf100tcl
+    database: snowflake_sample_data
+    schema: tpcds_sf100tcl
+    tables:
+      - name: customer
+        description: "Customer data table"
+
+models:
+
+  - name: dim_customer
+    description: "Customer data"
+    columns:
+      - name: c_customer_id
+        description: "The primary key for this table"
