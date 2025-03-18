@@ -11,9 +11,14 @@ def trigger_dbt_flow(a):
     ).run()
     return result
 
+
+
+
+
 @Flow
 def run_dbt(a):
     trigger_dbt_flow(a)
 
 if __name__ == "__main__":
     run_dbt('dim_customer')
+

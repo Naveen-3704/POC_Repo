@@ -40,7 +40,7 @@ def get_dashboards():
 
 def get_vis_pages():
     page_name = st.text_input("Page Name:", "")
-    page_number = st.number_input("Page Number:", min_value=1, value=1)
+    page_number = st.number_input("Page Number:", min_value=0, value=1)
     pageUid = st.text_input("Page Uid:", "")
     path = st.text_input("Path:", "/")
     depth = st.number_input("Depth:", min_value=0, value=1)
@@ -53,15 +53,16 @@ def get_vis_pages():
     vis_page_data = {
         "pageName": page_name,
         "pageNumber": page_number,
+        "pageUid": pageUid,
         "path": path,
         "depth": depth,
         "iconName": icon_name,
         "parent": parent,
-        "visualizations": {
+        "visualizations": {"0":{
             "visName": visName,
             "visPageUid": visPageUid,
             "visUid": visUid
-        }
+        }}
     }
 
     return vis_page_data
@@ -69,29 +70,28 @@ def get_vis_pages():
 def close_firebase(app):
     firebase_admin.delete_app(app)
 
-
-if st.button("start process"):
-    st.session_state = "start process"
-    if st.session_state == "start process":
-        project = get_project()
-        db, app = get_firebase_connection(project)
+st.session_state = "start process"
+if st.session_state == "start process":
+    project = get_project()
+    st.session_state = "connected to firebase"
+    st.write("Update/Add Dashboard Details:")
+    dashboards = get_dashboards()
+    st.write("Update/Add Page Details:")
+    if st.session_state == "connected to firebase":
+        pages = get_vis_pages()
         st.session_state = "connected to firebase"
-        st.write("Update/Add Dashboard Details:")
-        dashboards = get_dashboards()
-        st.write("Update/Add Page Details:")
-        if st.session_state == "connected to firebase":
-            pages = get_vis_pages()
-            st.session_state = "connected to firebase"
-        if st.session_state == "connected to firebase" and st.button("dashboards"):
-            st.write("firebase initialised")
-            # dashboards = get_dashboards()
+    if st.session_state == "connected to firebase":
+        st.write("firebase initialised")
+        # dashboards = get_dashboards()
+        if st.button("Load Page"):
+            db, app = get_firebase_connection(project)
             dashboard_ref = db.collection("dashboards").document(dashboards["dashboardUid"])
             dashboard_ref.set(dashboards)
             st.write(dashboards)
             st.session_state = "dashboard details updated"
-            if st.session_state == "dashboard details updated" and st.button("pages"):
+            if st.session_state == "dashboard details updated":
                 # pages = get_vis_pages()
-                db.collection("pages").document(pages["pageName"]).set(pages)
+                dashboard_ref.collection("pages").document(pages["pageName"]).set(pages)
                 st.write(pages)
-    st.success("Page details saved successfully!")
-    close_firebase(app)
+                st.success("Page details saved successfully!")
+        close_firebase(app)
