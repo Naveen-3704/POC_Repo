@@ -1,0 +1,7 @@
+expression DateParam = #date(2025, 2, 1) meta [IsParameterQuery=true, List={#date(2025, 1, 1), #date(2025, 2, 1), #date(2025, 3, 1)}, DefaultValue=#date(2025, 3, 1), Type="Date", IsParameterQueryRequired=true]
+	lineageTag: 3e47cbc9-e882-471a-bb8c-50a06b1d3360
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Date
+
