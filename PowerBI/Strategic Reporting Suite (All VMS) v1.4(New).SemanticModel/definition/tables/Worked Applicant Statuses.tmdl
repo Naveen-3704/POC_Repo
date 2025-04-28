@@ -1,0 +1,37 @@
+table 'Worked Applicant Statuses'
+	lineageTag: 4b4a7e5c-297f-4844-a3b8-6099c81d668a
+
+	column 'Applicant Status ID'
+		dataType: string
+		lineageTag: 494a2abd-411e-4fd3-b120-fbcd6ff3913f
+		summarizeBy: none
+		sourceColumn: Applicant Status ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: a9eaa40a-9a63-4b46-b7ea-e6211d9bf601
+		summarizeBy: none
+		sourceColumn: Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Worked Applicant Statuses-5444363a-6359-461f-b296-75977cc0638a' = m
+		mode: import
+		queryGroup: MAPPING\manual
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WSkwuySxLVdJRCs8vyk5NUYrViVZKzUvJT0ssLs5Mz8tNzStBlSxKLchJTE5Fk4gFAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Applicant Status ID" = _t, Status = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Applicant Status ID", type text}, {"Status", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

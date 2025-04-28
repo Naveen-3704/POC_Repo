@@ -1,0 +1,72 @@
+table 'Scorecard Averages'
+	lineageTag: f93c0cb1-e6af-40b8-bdf2-86f3103d1ad8
+
+	column Vendor
+		lineageTag: 59f25d81-e75e-4b2d-a97e-fbd7b8aa209d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Vendors[Vendor]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Vendor'
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b735ce22-39cc-4f55-8790-dc29760e3951
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Vendors[Active Vendor]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		formatString: General Date
+		lineageTag: 696a7350-18f4-46e5-861b-2910eb89a208
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: a29258ce-e0aa-4c40-a5ed-cf70ceca41f7
+			defaultHierarchy: LocalDateTable_e313a9ac-e957-4ad7-ba4c-43a869532d89.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Score'
+		lineageTag: ef7e7800-78a7-4e8f-a86f-e2fd2041fc12
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Total Score]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quarter
+		formatString: 0
+		lineageTag: 97d4218b-ee45-4b1e-801a-371f502a93da
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Date Table[Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 995c7231-7782-40c5-89dd-22346a780d56
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Date Table[Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Scorecard Averages' = calculated
+		mode: import
+		source = ```
+				CALCULATETABLE(SUMMARIZECOLUMNS(Vendors[Vendor], Vendors[Active Vendor], 'Date Table'[Quarter], 'Date Table'[Year], "Date", STARTOFQUARTER('Date Table'[Date]), "Total Score", [Total Score]), 
+				    Vendors[Active Vendor] = TRUE(),
+				    'Date Table'[Year] >= 2023)
+				```
+
+	annotation PBI_Id = 82a5713a78c74a74aeeb7688ad160148
+

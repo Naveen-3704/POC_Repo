@@ -1,0 +1,165 @@
+table 'Requisitions Accepted/Rejected by Vendor'
+	lineageTag: 4e5aa045-367c-43a8-8297-cf6eb58348e7
+
+	column cstatus
+		dataType: string
+		lineageTag: e8de7ed4-eb04-4e2b-abcc-f3377895c9dd
+		summarizeBy: none
+		sourceColumn: cstatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column djobreceived
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 1e1c5eeb-3896-4e70-bfbe-c49f27aba0a7
+		summarizeBy: none
+		sourceColumn: djobreceived
+
+		variation Variation
+			isDefault
+			relationship: 9861d1a3-aa97-4de7-b349-0dab28670b4b
+			defaultHierarchy: LocalDateTable_b72aff41-56c7-43ad-92fb-f92534c8a621.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstSubmit =
+			
+			MINX(
+			    FILTER('assignment',
+			        'assignment'[nrequestid] = 'Requisitions Accepted/Rejected by Vendor'[nrequestid] &&
+			        'assignment'[nvendorlocationid] = 'Requisitions Accepted/Rejected by Vendor'[nvendorlocationid]),
+			    'assignment'[Candidate Submitted by Primary Vendor Date]
+			)
+		formatString: Short Date
+		lineageTag: 722222da-e542-4dc0-970d-b12dff97b4ae
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: ec3894d8-5550-4417-8a93-27813539f59c
+			defaultHierarchy: LocalDateTable_9982ac81-1f20-4a6a-8f7c-f603256bb135.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nrequestid
+		dataType: int64
+		formatString: 0
+		lineageTag: 515c7fd8-967b-40d4-b39b-a6d81ba2db49
+		summarizeBy: none
+		sourceColumn: nrequestid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvendorlocationid
+		dataType: int64
+		formatString: 0
+		lineageTag: 35b2d13d-47b3-4293-bb93-a5665f76249f
+		summarizeBy: none
+		sourceColumn: nvendorlocationid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Positions = RELATED(jobrequest[Positions])
+		formatString: 0
+		lineageTag: a60e0625-fe11-421c-8e35-2c32da1fece8
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Submittals =
+			
+			var ven = 'Requisitions Accepted/Rejected by Vendor'[nvendorlocationid]
+			var req = 'Requisitions Accepted/Rejected by Vendor'[nrequestid]
+			
+			var submittals = CALCULATE(DISTINCTCOUNT(assignment[Assignment #]),
+			    'Requisitions Accepted/Rejected by Vendor'[nvendorlocationid] = ven,
+			    assignment[nrequestid] = req)
+			
+			var submittalFormat = IF(submittals = BLANK(), 0, submittals)
+			
+			return submittalFormat
+		formatString: 0
+		lineageTag: 4b537ba6-0249-4aec-a08a-6acf05303487
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Engagements = ```
+			
+			var ven = 'Requisitions Accepted/Rejected by Vendor'[nvendorlocationid]
+			var req = 'Requisitions Accepted/Rejected by Vendor'[nrequestid]
+			
+			var Engagements = CALCULATE(DISTINCTCOUNT(assignment[Assignment #]),
+			    assignment[Hire Date]<> BLANK(),
+			    assignment[nvendorlocationid] = ven,
+			    assignment[nrequestid] = req)
+			    
+			return Engagements
+			```
+		formatString: 0
+		lineageTag: 09e5a5cf-5ca3-4ccf-8e3d-8b950eb150c9
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Interviews = ```
+			
+			var ven = 'Requisitions Accepted/Rejected by Vendor'[nvendorlocationid]
+			var req = 'Requisitions Accepted/Rejected by Vendor'[nrequestid]
+			
+			var Interview = CALCULATE(DISTINCTCOUNT(assignment[Assignment #]),
+			    Interviews[Interview Date] <> BLANK(),
+			    assignment[nvendorlocationid] = ven,
+			    assignment[nrequestid] = req)
+			    
+			return Interview
+			```
+		formatString: 0
+		lineageTag: ee4969a9-d27c-4841-b6db-7d4bbfc0506e
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Requisitions Accepted/Rejected by Vendor-25d65a15-98bd-4dcf-9bb3-53a45566912e' = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "vendorjobs",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(DataTable,{{"djobreceived", type date}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"nrequestid", "nvendorlocationid", "cstatus", "djobreceived"})
+				in
+				    #"Removed Other Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":20,"keyColumnNames":["nvendorjobcomid"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocation.{nvendorlocationid,0}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nvendorjobcomid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nrequestid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nvendorlocationid,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nprimaryvendorlocationid,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{lselected,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{cstatus,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{ccomments,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{ddate,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{ctire,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nuserid,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nbillrate,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{npayrate,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nmarkup,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{dcreated,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{csubmittalstatus,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{dlastresubmitted,15}","Section1/vendorjobs/Changed Type.{djobreceived,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{dvendorresponse,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{leauctioninvite,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{crejectreason,19}"],"ColumnCount":20,"KeyColumnNames":["nvendorjobcomid"],"ColumnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nvendorjobcomid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nrequestid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nvendorlocationid,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nprimaryvendorlocationid,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{lselected,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{cstatus,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{ccomments,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{ddate,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{ctire,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nuserid,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nbillrate,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{npayrate,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nmarkup,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{dcreated,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{csubmittalstatus,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{dlastresubmitted,15}","Section1/vendorjobs/Changed Type.{djobreceived,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{dvendorresponse,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{leauctioninvite,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{crejectreason,19}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocation.{nvendorlocationid,0}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Table
+

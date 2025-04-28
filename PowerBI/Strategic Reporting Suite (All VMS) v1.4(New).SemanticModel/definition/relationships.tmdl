@@ -1,0 +1,305 @@
+relationship 9861d1a3-aa97-4de7-b349-0dab28670b4b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Requisitions Accepted/Rejected by Vendor'.djobreceived
+	toColumn: LocalDateTable_b72aff41-56c7-43ad-92fb-f92534c8a621.Date
+
+relationship 38c8a977-ffef-4a50-a45c-8fb87d8c1630
+	joinOnDateBehavior: datePartOnly
+	fromColumn: jobrequest.'Requisition Create Date'
+	toColumn: LocalDateTable_b77222b8-8399-44a2-8319-945b360af138.Date
+
+relationship 770de95c-8d1e-4f15-939a-c2f8f4bb1e8a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: jobrequest.'Requisition Approved Date'
+	toColumn: LocalDateTable_b08720b3-bb57-4773-9a2c-a8522f2cf674.Date
+
+relationship a6ac4cc3-2b78-4c4f-be15-7603b5dc66a3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: jobrequest.dsubmitted
+	toColumn: LocalDateTable_94ca6227-0ddf-4455-a7a5-e9add0d41ee4.Date
+
+relationship 8dfc8f78-9b74-4858-803b-cab54304b29d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: assignment.'Assignment Start Date'
+	toColumn: LocalDateTable_a39182c1-4bb8-4d91-ad55-1e55f61f1f33.Date
+
+relationship f2bf7553-dd73-4ce1-b29c-833c140fbe6f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: assignment.'Assignment End Date'
+	toColumn: LocalDateTable_480f354e-3a25-4f9c-b140-fa9a043a4a98.Date
+
+relationship 0de845d7-a7a3-45b8-b5f9-732e5c1afaab
+	joinOnDateBehavior: datePartOnly
+	fromColumn: assignment.'Hire Date'
+	toColumn: LocalDateTable_e68e21e7-121f-4fd6-acbe-0c1e6f00a5b9.Date
+
+relationship 40536df4-542a-4ea2-879c-e083d70a660b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: assignment.'Job Received Date'
+	toColumn: LocalDateTable_638ac38f-0d9f-4955-97fa-0d47f4eab8ad.Date
+
+relationship f498b00e-f295-4385-af4b-92b1ae6dc0fa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: assignment.'Candidate Submitted by Primary Vendor Date'
+	toColumn: LocalDateTable_53600da0-6642-4dd7-8c0f-b6900b6b14f7.Date
+
+relationship 405d6aa5-6cb5-42a2-8c63-ab1805026094
+	joinOnDateBehavior: datePartOnly
+	fromColumn: assignment.'Candidate Submitted Date'
+	toColumn: LocalDateTable_b8ab1b45-5b68-40e8-aa2b-f80256ea6a74.Date
+
+relationship bc6e216e-8522-4b22-bd76-7718b6e13634
+	joinOnDateBehavior: datePartOnly
+	fromColumn: globaljobtitles.ddeleted
+	toColumn: LocalDateTable_2dc3cb69-f388-463f-aa45-024b41a568a9.Date
+
+relationship e7358606-7bb5-48e1-ad59-4887d628afc4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: globaljobtitles.dcreated
+	toColumn: LocalDateTable_66872d6a-9b08-4d44-a0e4-72b101c61424.Date
+
+relationship 46c5aa2c-f228-4bd2-9202-a630fbfa5ddb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Interviews.'Interview Date'
+	toColumn: LocalDateTable_291002be-a9f6-42c1-835d-a0e16ef58b48.Date
+
+relationship 608c122f-b183-4409-9de1-3a6162f18909
+	fromColumn: assignment.nvendorlocationid
+	toColumn: Vendors.nvendorlocationid
+
+relationship 452bcc38-e9b0-4b72-b5c5-bedb40a23275
+	fromColumn: assignment.nrequestid
+	toColumn: jobrequest.'Requisition #'
+
+relationship 8ef8057b-f0bb-48f2-9210-43f920858d54
+	fromColumn: assignment.'Assignment Status'
+	toColumn: 'Worked Applicant Statuses'.'Applicant Status ID'
+
+relationship b9c17e9f-4114-4cee-9add-655f9e1904c3
+	fromColumn: assignment.Key-clevelcode_cleveltype
+	toColumn: 'End of Assignment Reasons'.Key-clevelcode_cleveltype
+
+relationship 0f832d3a-cc0d-4e99-a28e-82a1918b4734
+	fromColumn: 'Requisitions Accepted/Rejected by Vendor'.nvendorlocationid
+	toColumn: Vendors.nvendorlocationid
+
+relationship aef0f486-b7df-45ec-afcd-7f4f3e4c88a1
+	fromColumn: 'Requisitions Accepted/Rejected by Vendor'.nrequestid
+	toColumn: jobrequest.'Requisition #'
+
+relationship ec3894d8-5550-4417-8a93-27813539f59c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Requisitions Accepted/Rejected by Vendor'.FirstSubmit
+	toColumn: LocalDateTable_9982ac81-1f20-4a6a-8f7c-f603256bb135.Date
+
+relationship 0cec8571-9893-4386-a35a-7045236b03f7
+	fromColumn: assignment.'Assignment #'
+	toColumn: Interviews.nassignmentid
+
+relationship c6b787de-c781-4ab4-8cb5-39c1c784aebb
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Attribute Table'.'Requisition #'
+	toColumn: jobrequest.'Requisition #'
+
+relationship 4f899b70-4423-41a0-af89-0a6a12a90de6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'First Timecard'.'First Timecard Date'
+	toColumn: LocalDateTable_5f5af441-0b7c-42a8-bcce-278fa24532d1.Date
+
+relationship 380e2f83-5a9b-4a35-8715-6ae790cf57db
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'First Timecard'.nassignmentid
+	toColumn: assignment.'Assignment #'
+
+relationship f0b3f2b0-40c8-491a-93cb-ac9248fb5e52
+	fromColumn: invoice.nassignmentid
+	toColumn: assignment.'Assignment #'
+
+relationship 6bd23b00-c024-4378-bf4a-5184268ceedd
+	fromColumn: assignment.'Tenure Bucket'
+	toColumn: 'Tenure Buckets'.Bucket
+
+relationship 75dc58b1-6667-4a43-a7da-a819b72d3e97
+	fromColumn: 'Time to Fill'.'Assignment #'
+	toColumn: assignment.'Assignment #'
+
+relationship c925745a-2f6e-4aa6-94ea-e37c6a711107
+	fromColumn: invoice.'Charge Code'
+	toColumn: 'Labor Charge Codes'.'Labor Charge Code'
+
+relationship 4c146b6b-18a1-4caa-b659-c92065aab2f5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Table'.Date
+	toColumn: LocalDateTable_45d61b71-7d25-423f-8ac6-5d0f4fe622f7.Date
+
+relationship 2d9da644-8e98-4200-962a-67755f81b0f3
+	isActive: false
+	fromColumn: invoice.'Invoice Date'
+	toColumn: 'Date Table'.Date
+
+relationship 6286ff00-6c67-498e-97bc-edd71ba24309
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.ddate
+	toColumn: LocalDateTable_99a265da-afe7-4fd3-8cd5-e7d6b4e4f46a.Date
+
+relationship 93338ee8-2ab6-4f3b-a9c1-50778bc2763d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dstarttime
+	toColumn: LocalDateTable_380ed3e1-e389-4d9c-a95b-95c4b9f642f6.Date
+
+relationship cc5605b7-6a26-402a-b465-5a7b011d61ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dlunchstart
+	toColumn: LocalDateTable_45825c32-5b11-41e2-8bf5-05964a9541b2.Date
+
+relationship bf0d62c2-8a40-4ed8-ac62-34ec137bc00c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dlunchend
+	toColumn: LocalDateTable_7f9e8346-6334-4652-91cb-1b1f8642eb7f.Date
+
+relationship 3ef5d80d-6b2d-49e1-9c06-6fc9c2ae0d6d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dendtime
+	toColumn: LocalDateTable_55a46c97-2467-4525-9c46-48b18ea4800d.Date
+
+relationship e0232755-777a-4ff1-a6af-00997c4c8727
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dapproved
+	toColumn: LocalDateTable_348af019-4eb4-4757-92ff-df47674f7149.Date
+
+relationship 108564f9-9b8e-47bf-9bbd-4cbae532c007
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dweekend
+	toColumn: LocalDateTable_4f94619c-6363-4a43-801d-32afb266b8ea.Date
+
+relationship 305e0d64-24e8-4292-9da3-67bacbeb4f9c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dschedulein
+	toColumn: LocalDateTable_be1c336b-2452-4e95-8943-9d4a1a594f41.Date
+
+relationship 1a931b7c-6deb-4672-b04b-5361d7f1d040
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dscheduleout
+	toColumn: LocalDateTable_02fd1251-e584-4044-acd3-55d7b7788287.Date
+
+relationship c6316922-ee8c-4565-b830-708b719c4091
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dschedulelunchstart
+	toColumn: LocalDateTable_c04026af-53cc-484d-9976-4dd914c43805.Date
+
+relationship f03fbe42-1cb2-4da8-b8f3-2d63e9b5b5e9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dschedulelunchend
+	toColumn: LocalDateTable_362882f4-20ce-42a7-b207-7dc4f30ce1bc.Date
+
+relationship eea518e4-3136-4a90-b7f6-a95545de4e66
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dactualin
+	toColumn: LocalDateTable_f4fdfbef-884e-4f43-863e-80ca1209fb47.Date
+
+relationship 6ade3aa7-08e6-4970-9d91-757131279f96
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dactualout
+	toColumn: LocalDateTable_3832c79d-6942-42a5-b250-9421144ddfdc.Date
+
+relationship fca51967-b762-43f7-8aa7-ff8162baa4d0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dactualluncstart
+	toColumn: LocalDateTable_352a75e4-0b5f-4c76-bf5a-f7a407facebf.Date
+
+relationship 0976417a-4f45-40fe-9469-dd1913660693
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dactuallunchend
+	toColumn: LocalDateTable_60503619-f078-4497-8bbc-18c30d6494dd.Date
+
+relationship f93ec0aa-dbab-4ba8-95cf-1a6db248a616
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dreject
+	toColumn: LocalDateTable_240781d8-eb74-49d8-aa8b-b4b57873e9c4.Date
+
+relationship 85cf929a-49e1-409d-b28b-e54b72cf9588
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dbilled
+	toColumn: LocalDateTable_5db3c946-bcaa-4652-9cb2-60117617b47e.Date
+
+relationship 73e3a711-658c-413f-8a09-641407ab36f7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.drecordinsert
+	toColumn: LocalDateTable_ec7694af-e13a-4a93-be11-ee6900ab7a86.Date
+
+relationship 8f413b33-3a9a-4be7-85da-89ee4688fed7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dvendorexport
+	toColumn: LocalDateTable_79cd430c-1de7-4d95-beab-d331ee15e130.Date
+
+relationship cdccf4d9-e534-4ad7-a1bd-f7a3fcf9a6ea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dpvendorexport
+	toColumn: LocalDateTable_5e396f72-4fdc-4152-92a5-32e6ebde234d.Date
+
+relationship 1ed65631-d76b-4dff-beba-132b4b8d96ba
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dvendorapproved
+	toColumn: LocalDateTable_eb3f92ef-b569-4c18-a783-e45a6e3d32da.Date
+
+relationship 7d3abc0d-5911-4bea-9a4e-06ed2535d380
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dadjusted
+	toColumn: LocalDateTable_277e7341-cfc9-44af-884b-5da1c128cb73.Date
+
+relationship 072abfbf-55e6-4eef-8273-f75d5ae9462d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dvendorreject
+	toColumn: LocalDateTable_93c9bba5-aa46-4748-9453-cc865e04fe8b.Date
+
+relationship 2844882a-47b0-4efe-a103-997cdcb077cd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dapproved1
+	toColumn: LocalDateTable_f3495900-b1c7-4df0-8345-c4ca693cd26b.Date
+
+relationship 3c5df30a-2687-4d57-9af9-37b1347b1bfb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dapproved2
+	toColumn: LocalDateTable_daad099e-e3e2-46f0-8bb7-5996d01c4e45.Date
+
+relationship daec8dfb-fc80-47dd-9e28-ffbe144756be
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dreject1
+	toColumn: LocalDateTable_1d4d2e44-6c03-4634-b575-382de82cbd5a.Date
+
+relationship 0a85a6b6-205c-407e-b959-fd02f9129993
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dreject2
+	toColumn: LocalDateTable_ef356726-ce3b-4263-a9c4-1ac2641e1565.Date
+
+relationship c3c5df2d-2098-4d86-b017-8321d71feb98
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Timecard.dsubpvendorexport
+	toColumn: LocalDateTable_c9cf5989-b7ee-498f-8d56-556273f1f3ee.Date
+
+relationship d2d4ad73-3dc3-40a4-b418-1da6ecad90de
+	fromColumn: Timecard.nassignmentid
+	toColumn: assignment.'Assignment #'
+
+relationship a29258ce-e0aa-4c40-a5ed-cf70ceca41f7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Scorecard Averages'.Date
+	toColumn: LocalDateTable_e313a9ac-e957-4ad7-ba4c-43a869532d89.Date
+
+relationship 0b98cac6-8bab-4140-cd03-59c7df421f75
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Special Bills'.'Data.nrequestid'
+	toColumn: 'Special Bills (2)'.'Data.nrequestid'
+
+relationship 043c0128-e53e-1121-6697-eee053048db1
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: CandidateStatusBridge.'Assignment #'
+	toColumn: assignment.'Assignment #'
+
+relationship c083ae71-a40c-4830-bd23-3f30970b2305
+	joinOnDateBehavior: datePartOnly
+	fromColumn: CandidateStatusBridge.Date
+	toColumn: LocalDateTable_646eba34-8dbf-4eac-89a6-32f67a932af5.Date
+

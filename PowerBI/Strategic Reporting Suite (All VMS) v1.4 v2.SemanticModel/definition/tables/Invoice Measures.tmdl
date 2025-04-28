@@ -1,0 +1,205 @@
+table 'Invoice Measures'
+	lineageTag: 2e676f29-944d-4399-b28d-8407125e4267
+
+	measure 'Total Spend' =
+			CALCULATE(SUMX(invoice,(invoice[Invoice Amount] + invoice[Tax])),
+			    TREATAS(VALUES('Date Table'[Date]), invoice[Invoice Date]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 78194fe6-027f-4c99-b89d-9e037ec83288
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Bill Rate' =
+			
+			CALCULATE(
+			    SUMX(invoice,'invoice'[Invoice Amount] / SUM('invoice'[Hours])),
+			        'invoice'[Pricing Catalog] = "MGMTSVCS",
+			        invoice[Charge Code] = "Standard Regular"
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: b4f2a17b-c333-41d2-b16c-534c731fa6b6
+
+		changedProperty = IsHidden
+
+	measure 'Diverse Spend' =
+			
+			CALCULATE([Total Spend],
+			    Vendors[Diverse Vendor] = TRUE()
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 6b8a7bad-cdf3-46a9-83d3-ab2c99f330bc
+
+		changedProperty = IsHidden
+
+	measure 'Diverse Spend %' =
+			
+			IFERROR(DIVIDE(
+			    [Diverse Spend],[Total Spend]),
+			    "N/A"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 246ee229-e2f1-4449-a308-c6f8f76f5c83
+
+		changedProperty = IsHidden
+
+	measure 'Expense Spend' =
+			
+			CALCULATE([Total Spend],
+			    'invoice'[Pricing Catalog] = "MGMTSVCS",
+			    'Labor Charge Codes'[Labor Charge Code] = BLANK()
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d02d64a1-0769-4754-b4d2-dc1e959827ac
+
+		changedProperty = IsHidden
+
+	measure 'Labor Spend' =
+			
+			CALCULATE([Total Spend],
+			    'invoice'[Pricing Catalog] = "MGMTSVCS",
+			    'Labor Charge Codes'[Labor Charge Code] <> BLANK()
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 1d20a99e-bfa8-4465-8be9-e78d6eb888d9
+
+		changedProperty = IsHidden
+
+	measure 'Project Spend' =
+			
+			CALCULATE([Total Spend],
+			    'invoice'[Pricing Catalog] = "PRJMGT"
+			)
+		formatString: #,0
+		lineageTag: 6bbffec9-b025-46a9-8453-011cb124ecc6
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Tax Spend' =
+			CALCULATE(SUMX('invoice','invoice'[Tax]),
+			    TREATAS(VALUES('Date Table'[Date]), invoice[Invoice Date]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2cf668a5-53ba-409c-8172-eea5f6c6b0ce
+
+		changedProperty = IsHidden
+
+	measure UI-Div_01 =
+			
+			switch(SELECTEDVALUE('UI-Slicer Selection'[User Selection]),
+			    "Total Diverse Spend",[Diverse Spend],
+			    "Project Diverse Spend", [Diverse Project Spend])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 542402d5-b0e9-423b-ae61-10db33bd049e
+
+		changedProperty = IsHidden
+
+	measure 'UI-Div_01 SPLY' =
+			
+			calculate([UI-Div_01],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 4e723d8a-e137-4077-a9ce-55fd9aa00dff
+
+		changedProperty = IsHidden
+
+	measure 'UI-Div_01 YOY %' =
+			
+			if(or([UI-Div_01] = blank(), [UI-Div_01 SPLY] = BLANK()), 0,
+			([UI-Div_01] - [UI-Div_01 SPLY]) / [UI-Div_01 SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a22af762-71ad-4fe4-8776-7eadfcd7fc19
+
+		changedProperty = IsHidden
+
+	measure UI-Inv_01 =
+			
+			switch(SELECTEDVALUE('UI-Slicer Selection'[User Selection]),
+			    "Total Spend",[Total Spend],
+			    "Project Spend",[Project Spend],
+			    "Diverse Spend",[Diverse Spend],
+			    "Average Bill Rate (Invoiced)", [Average Bill Rate],
+			    "Null")
+		formatString: #,0.00
+		lineageTag: a8827e11-c41c-46a1-8572-94c0bb8a915a
+
+		changedProperty = IsHidden
+
+	measure 'UI-Inv_01 SPLY' =
+			
+			calculate([UI-Inv_01],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		formatString: #,0.00
+		lineageTag: 5d3a2e35-3bba-4c0a-8a0d-8307aaa44f69
+
+		changedProperty = IsHidden
+
+	measure 'UI-Inv_01 YOY %' =
+			
+			if(or([UI-inv_01] = blank(), [UI-inv_01 SPLY] = BLANK()), BLANK(),
+			([UI-inv_01] - [UI-inv_01 SPLY]) / [UI-inv_01 SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 41689b14-d03f-40ad-9576-6459784154d6
+
+		changedProperty = IsHidden
+
+	measure 'Diverse Project Spend' =
+			
+			CALCULATE([Diverse Spend],
+			    invoice[Pricing Catalog] = "PRJMGT"
+			)
+		lineageTag: df24aea2-b547-4a1b-8af4-920334fdf4b5
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Spend SPLY' =
+			
+			calculate([Total Spend],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 6ff8d93a-c8e8-4b6d-9c44-e0fb62c50d4a
+
+		changedProperty = IsHidden
+
+	measure 'Total Spend YOY %' =
+			
+			if(or([Total Spend] = blank(), [Total Spend SPLY] = BLANK()), BLANK(),
+			([Total Spend] - [Total Spend SPLY]) / [Total Spend SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: bce1124a-1df3-46c0-8407-b0dc5cdf8856
+
+		changedProperty = IsHidden
+
+	measure 'Payroll Spend' = CALCULATE([Total Spend],Vendors[Vendor (Payroll)] = "Payroll")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: dd0dccde-559f-4ece-a61c-3db941b4ff2a
+
+		changedProperty = IsHidden
+
+	measure 'Diverse Spend YoY%' =
+			
+			if(or([Diverse Spend] = blank(), [Diverse Spend SPLY] = BLANK()), BLANK(),
+			([Diverse Spend] - [Diverse Spend SPLY]) / [Diverse Spend SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f4597c56-0035-4986-b9d6-5998e2ac62fb
+
+	partition 'Invoice Measures-28329663-a2bb-4121-90e1-2ca579b7253f' = m
+		mode: import
+		queryGroup: MEASURES
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

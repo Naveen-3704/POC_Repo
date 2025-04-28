@@ -1,0 +1,360 @@
+expression globalcodes =
+		let
+		  tablename = "globalcodes",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 94cf91d5-01aa-4776-955b-86efb85aa434
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression globalcodes_desc =
+		let
+		  tablename = "globalcodes_desc",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data],
+		    #"Filtered Rows" = Table.SelectRows(DataTable, each ([nlanguageid] = 1))
+		in
+		    #"Filtered Rows"
+	lineageTag: 9d0fd686-1a96-4eab-99c2-e07c652c62a3
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression globaljobcategory =
+		let
+		  tablename = "globaljobcategory",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 4d0fea67-5dc2-407d-a7f5-88a80d094da8
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Job Categories' =
+		let
+		    Source = globaljobcategory_desc,
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([nlanguageid] = 1)),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"njobcategoryid", "ccategorydesc"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"ccategorydesc", "Job Category"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 2c137a44-ec7c-495f-948c-c0741a6562a9
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Job Titles' =
+		let
+		  tablename = "globaljobtitles_desc",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data],
+		    #"Uppercased Text" = Table.TransformColumns(DataTable,{{"cjobtitlecode", Text.Upper, type text}}),
+		    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"cjobtitlecode", Text.Trim, type text}}),
+		    #"Filtered Rows" = Table.SelectRows(#"Trimmed Text", each [nlanguageid] = 1),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"cjobtitlecode", "cdesc"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"cdesc", "Job Title"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: f2964a01-084d-4093-8014-355519273cac
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Map-Asgn_EndReasons =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jVRNk9owDP0rGk7tzDLp9MgNQralw7KUhPawsweRKMSLY1Pb4ePfVw4w0wazy82J9J6l5ye9vPSGeU5bRwU8ZvBbmw2gg9koXsJSiR0ZizIalqWQAh31HnpzbYXjAB9jrXyC0Kr3+hAgSqSlfUWGoA/Pjg//w4Og/oicIwNzPEYjUlQKZ0Mwa8Va1aQcxLreSnK+infzElUMLsl8X9rwzdaWjZTHu4C+Vw90+iRP6rAs3xekw3FTg05eerSOaogloWq2dwAyUg2rPNdS5MFmnBOuKSiaKP6P59CM1vhv1pgb0w6mYkPAlbbPESBLDl43/gHDleUSiIStowxNIRQHAsQTKX0kGguLKzaSC9U4xXwDuoS50UWTc4TTonQjpIQxuyAXpNreuuQXXOu40ui6rT2WnO8C11zgrJmphULvmwGMmGRtdKMKiCtiQi/ETa90SwhzshmcwdxpA1MqnW/sjXJ+MTRhluTbMJv8SiBLFk+TGZ+fZwOYs5+0QgkLQj6E5A1fv1SWT7ZsKzi28vBAVbgT2txN4lE8jGNRtIqw5Y2LZhrSSu8DJLcMPmdYPxM1waevX6AyNtpvoMbD5+iRJT1F4grVmmAAMARFe3jTKzD0B/beASuC3BCexw/zvDH8IY/gFd5ApRsT2hK8RGBxtbZOoWtduymL5EcSZ7BI0uVTMmABONc2XCqPE+YVFR9jbgnSSTvzeitb+NmgFGz49gkszIgKbrtkGy20DLXSHZJoqbaXIQrN+UfbYqlwJckL3c7Udy9ulFaiDM3TadGrnTD6tJAU+wQtJIctm/1ao9e/", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [#"End Reason" = _t, ReasonType = _t, Conversion = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"End Reason", type text}, {"ReasonType", type text}, {"Conversion", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: 5a2c245f-5c8c-4ef9-8b68-45cee0beb097
+	queryGroup: MAPPING\manual
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Map-Index_NegTurnover =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wcsksy0xJTVFIqlRwTC7JLEtVitVBEXXNSylWio0FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [#"Index-Negative Turnover" = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Index-Negative Turnover", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: f8720399-246e-4f33-8a71-d5fcd66a3f96
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Client Locations' =
+		let
+		  tablename = "clientlocation_desc",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data],
+		    #"Filtered Rows" = Table.SelectRows(DataTable, each [nlanguageid] = 1),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"nclientlocationid", "clocationname"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"clocationname", "Client Location"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 48280d57-6572-41c6-a5e7-60ebd6da03a6
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression vendorlocation =
+		let
+		  tablename = "vendorlocation",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 93def86d-fbdd-4760-993d-3eddc8771e62
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression vendor =
+		let
+		  tablename = "vendor",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 1bbccc54-4e4f-4197-8081-44c7d075507c
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression vendorjoblocation =
+		let
+		  tablename = "vendorjoblocation",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 1c8af463-ff3e-4244-9ebb-b6d9b18514c5
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression vendorlocationservicetype =
+		let
+		  tablename = "vendorlocationservicetype",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: cc961df9-0e20-4783-a3b9-f867aaa65407
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression clientjobtitle =
+		let
+		  tablename = "clientjobtitle",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 419f6448-6a53-4852-875e-91524b88b665
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression globalcodesnegativereason =
+		let
+		  tablename = "globalcodesnegativereason",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 2f0276de-e4fa-4e30-911a-1a9a2d1602e9
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression 'Job Types' =
+		let
+		    Source = globalcodes_desc,
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([nlanguageid] = 1) and ([cleveltype] = "jobtype")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"cleveldesc", "clevelcode"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"cleveldesc", "Job Type"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 61ce1b80-218f-435e-b6cd-88a094ad2c48
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression clientpaycode =
+		let
+		  tablename = "clientpaycode",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(DataTable,{"cpayrollcode", "cclariuscode"}),
+		    #"Grouped Rows" = Table.Group(#"Removed Other Columns", {"cclariuscode"}, {{"cpayrollcode", each List.Min([cpayrollcode]), type text}})
+		in
+		    #"Grouped Rows"
+	lineageTag: 6ec42b9f-2361-4fc8-a079-f96195b38adf
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression 'Charge Codes' =
+		let
+		    Source = globalcodes_desc,
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([nlanguageid] = 1) and ([cleveltype] = "clientpaycode")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"cleveldesc", "clevelcode"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"cleveldesc", "Charge Code"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: e71ff6b3-7fcf-4524-897c-f15514a7fd97
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression applicant =
+		let
+		  tablename = "applicant",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 693ef1c6-903d-4e84-9f05-d4db3b17c367
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression clientuser =
+		let
+		  tablename = "clientuser",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 363577c7-d50e-4c94-bc6f-7334c5b16374
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Workspace Name' = "VMS_Travelandleisure" meta [IsParameterQuery=true, ExpressionIdentifier=WorkspaceNames, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 22db8dac-3eef-4766-85f4-30d380e62d7a
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression globaljobcategory_desc =
+		let
+		  tablename = "globaljobcategory_desc",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 65573b8f-3bb9-4404-8e35-8a11222f0a5b
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression client =
+		let
+		  tablename = "client",
+		    Source = PowerPlatform.Dataflows(null),
+		    ID = Source{[Id="Workspaces"]}[Data],
+		    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+		    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+		    DataTable = DataFlow{[entity=tablename]}[Data]
+		in
+			DataTable
+	lineageTag: 274ab1a3-1354-4495-9d22-acfdeb41873d
+	queryGroup: SOURCE
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

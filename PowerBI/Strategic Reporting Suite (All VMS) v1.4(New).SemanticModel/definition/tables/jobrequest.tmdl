@@ -1,0 +1,399 @@
+table jobrequest
+	lineageTag: bcb86455-cc26-4408-bedb-d85262c07e37
+
+	measure TitleMeasure = "Total Spend by" & SELECTEDVALUE('jobrequest'[Job Type])
+		lineageTag: 04a7028d-d8c8-4e81-99a3-39d3b8efcad5
+
+	column 'Requisition #'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6387c206-4e5d-456e-9c87-7235344f88e3
+		summarizeBy: none
+		sourceColumn: Requisition #
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Requisition Status'
+		dataType: string
+		lineageTag: f396dbd9-6ff7-48a8-b329-aebf560e142c
+		summarizeBy: none
+		sourceColumn: Requisition Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Positions
+		dataType: int64
+		formatString: 0
+		lineageTag: fb60583e-b088-4df9-a272-9f08db277b15
+		summarizeBy: sum
+		sourceColumn: Positions
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requisition Create Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: f31eed85-5ebd-4485-b632-4e8da008bacc
+		summarizeBy: none
+		sourceColumn: Requisition Create Date
+
+		variation Variation
+			isDefault
+			relationship: 38c8a977-ffef-4a50-a45c-8fb87d8c1630
+			defaultHierarchy: LocalDateTable_b77222b8-8399-44a2-8319-945b360af138.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column nrequestor
+		dataType: int64
+		formatString: 0
+		lineageTag: 66ccd07d-6499-49f7-84f7-d7cb5c699d32
+		summarizeBy: none
+		sourceColumn: nrequestor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Work Location Address'
+		dataType: string
+		lineageTag: a6d3bcca-9c3b-4de1-ba1d-73ce9c84a216
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: Work Location Address
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Location Address 2'
+		dataType: string
+		lineageTag: 4ad3734e-0fb9-4dcf-9f91-cd818dd5e1c4
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: Work Location Address 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 11358d0c-a353-43f2-bf0b-a02b5db296cb
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Zip Code'
+		dataType: string
+		lineageTag: 7a0e0496-62eb-4d42-a35f-19b15cffe39d
+		summarizeBy: none
+		sourceColumn: Zip Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: effbe0c9-e3d2-4302-ad8d-0c7163437729
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Requisition'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e7dc4dee-b0e0-4b3e-9bf2-14c4b2d2952c
+		summarizeBy: none
+		sourceColumn: Active Requisition
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project #'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a3d0fe1-fb90-42d6-9f14-49c3ce1d4696
+		summarizeBy: none
+		sourceColumn: Project #
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Work Location Name'
+		dataType: string
+		lineageTag: ff9e693d-5002-4900-99be-aae6fadbf4a3
+		summarizeBy: none
+		sourceColumn: Work Location Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requisition Approved Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: cba1fbd1-b950-4dc1-a721-d7e69637a86f
+		summarizeBy: none
+		sourceColumn: Requisition Approved Date
+
+		variation Variation
+			isDefault
+			relationship: 770de95c-8d1e-4f15-939a-c2f8f4bb1e8a
+			defaultHierarchy: LocalDateTable_b08720b3-bb57-4773-9a2c-a8522f2cf674.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"jobrequest","TableItemName":"Go Live Filter","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column dsubmitted
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 51b4cff8-b55c-418e-aea1-20e76f5e0950
+		summarizeBy: none
+		sourceColumn: dsubmitted
+
+		variation Variation
+			isDefault
+			relationship: a6ac4cc3-2b78-4c4f-be15-7603b5dc66a3
+			defaultHierarchy: LocalDateTable_94ca6227-0ddf-4455-a7a5-e9add0d41ee4.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Job Category'
+		dataType: string
+		lineageTag: 4edc9669-65f8-436e-8f93-7df263aca47a
+		summarizeBy: none
+		sourceColumn: Job Category
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Title'
+		dataType: string
+		lineageTag: 555e9f6b-6217-4a54-b05b-c3b576ce3045
+		summarizeBy: none
+		sourceColumn: Job Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Type'
+		dataType: string
+		lineageTag: 9331349f-e6a6-41f8-94a5-871d9fd5eb92
+		summarizeBy: none
+		sourceColumn: Job Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"jobrequest","TableItemName":"Job Type (Payroll)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column State
+		dataType: string
+		lineageTag: b8cd424e-d93b-42ba-8111-df4cd53d0880
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Location'
+		dataType: string
+		lineageTag: 3f68b261-23b0-4e92-bf29-36b4587d8219
+		summarizeBy: none
+		sourceColumn: Client Location
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column creasoncode
+		dataType: string
+		lineageTag: 015cc3bf-2a9e-47c0-83ee-2db997ba1a12
+		summarizeBy: none
+		sourceColumn: creasoncode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Need Interview'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 28bfdcc7-b403-48b8-a809-3b4036d9a539
+		summarizeBy: none
+		sourceColumn: Need Interview
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report To'
+		dataType: string
+		lineageTag: af48b33b-ae38-4dcb-9003-c8c996c152c6
+		summarizeBy: count
+		sourceColumn: Report To
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Job Type (Payroll)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('jobrequest'[Job Type]),
+				"(Blank)",
+				'jobrequest'[Job Type] IN {"Payroll (20 Hours or Less)",
+					"Payroll (20+ Hours)",
+					"Pre-Identified Resource - General Temp",
+					"Pre-Identified Resource - Intern/Co-op",
+					"Pre-Identified Resource - Project-Based Temp"},
+				"Payroll",
+				"Other"
+			)
+		lineageTag: bb8e69b7-024e-41d5-a640-df1d4e9f7269
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "jobrequest"
+				          }
+				        },
+				        "Property": "Job Type"
+				      }
+				    }
+				  ]
+				}
+
+		changedProperty = IsHidden
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"j","Entity":"jobrequest"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"j"}},"Property":"Job Type"}}],"GroupItems":[{"DisplayName":"(Blank)","BlankDefaultPlaceholder":true},{"DisplayName":"Payroll","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"j"}},"Property":"Job Type"}}],"Values":[[{"Literal":{"Value":"'Payroll (20 Hours or Less)'"}}],[{"Literal":{"Value":"'Payroll (20+ Hours)'"}}],[{"Literal":{"Value":"'Pre-Identified Resource - General Temp'"}}],[{"Literal":{"Value":"'Pre-Identified Resource - Intern/Co-op'"}}],[{"Literal":{"Value":"'Pre-Identified Resource - Project-Based Temp'"}}]]}}},{"DisplayName":"Other"}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Go Live Filter' =
+			SWITCH(
+				TRUE,
+				ISBLANK('jobrequest'[Requisition Approved Date]),
+				"(Blank)",
+				'jobrequest'[Requisition Approved Date] IN {DATE(2024, 7, 8)},
+				"Go Live",
+				"Other"
+			)
+		formatString: Short Date
+		lineageTag: 2ece7155-f4a2-4ae9-8017-4d31acb0976e
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "jobrequest"
+				          }
+				        },
+				        "Property": "Requisition Approved Date"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"j","Entity":"jobrequest"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"j"}},"Property":"Requisition Approved Date"}}],"GroupItems":[{"DisplayName":"(Blank)","BlankDefaultPlaceholder":true},{"DisplayName":"Go Live","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"j"}},"Property":"Requisition Approved Date"}}],"Values":[[{"Literal":{"Value":"datetime'2024-07-08T00:00:00'"}}]]}}},{"DisplayName":"Other"}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Job Title Hierarchy'
+		lineageTag: cad7de40-c567-4754-9531-35eb23834b2c
+
+		level 'Job Title'
+			lineageTag: e47dfb9d-1e43-4252-b74f-9c97cc87b9c9
+			column: 'Job Title'
+
+	partition jobrequest-4e0d12d0-05a4-49be-ac47-a747f16ea838 = m
+		mode: import
+		queryGroup: 'MAIN TABLES'
+		source =
+				let
+				  tablename = "jobrequest",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(DataTable,{"nrequestid", "nclientlocationid", "cjobtitlecode", "cjobreqstatus", "cjobtype", "nfill", "creasoncode", "dreqdate", "nrequestor", "nreporttoid", "lneedinterview", "cworklocaddress1", "cworklocaddress2", "cworkloccity", "cworklocstate", "cworkloczipcode", "cworkloccountry", "lactive", "nprojectdefid", "cworklocationname", "dapproved", "dsubmitted"}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Removed Other Columns",{{"cworklocstate", Text.Upper, type text}, {"cjobtitlecode", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"cjobtitlecode", Text.Trim, type text}, {"cworklocstate", Text.Trim, type text}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Trimmed Text",{{"dreqdate", type date}, {"dapproved", type date}, {"dsubmitted", type date}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"cjobreqstatus", Text.Proper, type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Capitalized Each Word", {"cjobtitlecode"}, globaljobtitles, {"cjobtitlecode"}, "globaljobtitles", JoinKind.LeftOuter),
+				    #"Expanded globaljobtitles" = Table.ExpandTableColumn(#"Merged Queries", "globaljobtitles", {"njobcategoryid"}, {"njobcategoryid"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded globaljobtitles", {"cjobtitlecode"}, #"Job Titles", {"cjobtitlecode"}, "Job Titles", JoinKind.LeftOuter),
+				    #"Expanded Job Titles" = Table.ExpandTableColumn(#"Merged Queries1", "Job Titles", {"Job Title"}, {"Job Title"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Expanded Job Titles", {"njobcategoryid"}, #"Job Categories", {"njobcategoryid"}, "Job Categories", JoinKind.LeftOuter),
+				    #"Expanded Job Categories" = Table.ExpandTableColumn(#"Merged Queries2", "Job Categories", {"Job Category"}, {"Job Category"}),
+				    #"Merged Queries3" = Table.NestedJoin(#"Expanded Job Categories", {"cjobtype"}, #"Job Types", {"clevelcode"}, "Job Types", JoinKind.LeftOuter),
+				    #"Expanded Job Types" = Table.ExpandTableColumn(#"Merged Queries3", "Job Types", {"Job Type"}, {"Job Type"}),
+				    #"Merged Queries4" = Table.NestedJoin(#"Expanded Job Types", {"cworklocstate"}, #"Map-State", {"State"}, "Map-State", JoinKind.LeftOuter),
+				    #"Expanded Map-State" = Table.ExpandTableColumn(#"Merged Queries4", "Map-State", {"State Name"}, {"State Name"}),
+				    #"Merged Queries5" = Table.NestedJoin(#"Expanded Map-State", {"nclientlocationid"}, #"Client Locations", {"nclientlocationid"}, "Client Locations", JoinKind.LeftOuter),
+				    #"Expanded Client Locations" = Table.ExpandTableColumn(#"Merged Queries5", "Client Locations", {"Client Location"}, {"Client Location"}),
+				    #"Merged Queries6" = Table.NestedJoin(#"Expanded Client Locations", {"nreporttoid"}, clientuser, {"nclientuserid"}, "clientuser", JoinKind.LeftOuter),
+				    #"Expanded clientuser" = Table.ExpandTableColumn(#"Merged Queries6", "clientuser", {"cfname", "clname"}, {"cfname", "clname"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded clientuser", "Report To", each [clname] & ", " &[cfname]),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Added Custom",{"cjobreqstatus", "Client Location", "creasoncode", "cworklocaddress1", "cworklocaddress2", "cworklocationname", "cworkloccity", "cworkloccountry", "cworkloczipcode", "dapproved", "dreqdate", "dsubmitted", "Job Category", "Job Title", "Job Type", "lactive", "lneedinterview", "nfill", "nprojectdefid", "nrequestid", "nrequestor", "Report To", "State Name"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns1",{{"cjobreqstatus", "Requisition Status"}, {"dapproved", "Requisition Approved Date"}, {"dreqdate", "Requisition Create Date"}, {"cworkloccity", "City"}, {"cworkloccountry", "Country"}, {"cworkloczipcode", "Zip Code"}, {"lactive", "Active Requisition"}, {"nfill", "Positions"}, {"State Name", "State"}, {"cworklocaddress1", "Work Location Address"}, {"cworklocaddress2", "Work Location Address 2"}, {"cworklocationname", "Work Location Name"}, {"nrequestid", "Requisition #"}, {"nprojectdefid", "Project #"}, {"lneedinterview", "Need Interview"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":175,"keyColumnNames":["nrequestid"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":130,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/ProjectDef.{nprojectdefid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/clientjobtitle.{njobtitlecode,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobapprovals.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobdocument.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobeducation.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest_desc.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequestmessages.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobscreening.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobskills.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobspecialbill.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nrequestid,1}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nclientlocationid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{njobtitlecode,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cjobtitlecode,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cjobreqstatus,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cjobtype,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cemptype,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nfill,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creasoncode,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creasoncomment,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpriority,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dreqdate,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestor,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nproxyuser,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cfwdresumeid,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dstart,15}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dend,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cendflag,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cenddesc,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaytype,19}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrsperwk,20}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrpayratehour,21}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrpayratehourmax,22}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrbillratehour,23}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrbillratehourmax,24}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaycurrency,25}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpayperiodtype,26}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrpayrateday,27}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaybonus,28}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaybonusfreq,29}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaybonusrange,30}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{npayrelocation,31}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpayexpexc,32}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cbenifitdescP,33}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cbenifitdescUL,34}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cbenifitdescQUALIF,35}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaysummary,36}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifreqP,37}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifreqUL,38}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifreqQUALIF,39}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifprefP,40}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifprefUL,41}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifprefQUALIF,42}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ntrialperioddays,43}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkeligibilitystatus,44}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dstarttime,45}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dendtime,46}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nlunchbreak,47}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreporttoid,48}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreportlocationid,49}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creportphone,50}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creportphoneext,51}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creportdepartment,52}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedresume,53}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dresumedue,54}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nresumerequired,55}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedsubmital,56}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dsubmitaldue,57}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedinterview,58}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dinterviewdue,59}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedbackground,60}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneeddrugtest,61}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedtravel,62}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctravelpercent,63}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctravelsummary,64}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneeddresscode,65}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedcreditcheck,66}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneeddmvcheck,67}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedovertime,68}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lexempt,69}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lnonexempt,70}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocaddress1,71}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocaddress2,72}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkloccity,73}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocstate,74}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkloczipcode,75}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkloccountry,76}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nclientpaypolicyid,77}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ccomments,78}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{linternalreq,79}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lvenodrmanagment,80}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ldraftrequest,81}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lactive,82}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chireorgtype,83}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cclassification,84}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cdistribute,85}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ldirecthire,86}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lcontract,87}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ltemp,88}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ltemptoperm,89}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{csummary,90}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday1,91}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday2,92}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday3,93}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday4,94}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday5,95}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday6,96}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday7,97}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ntotalreghours,98}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nfulltimehoursweek,99}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cshiftdiff,100}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctemplenght,101}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctempsummary,102}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{covertimesummary,103}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cessfunctionP,104}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cessfunctionUI,105}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cessfunctionQUALIF,106}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkenvP,107}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkenvUI,108}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkenvQUALIF,109}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chowtoapply,110}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chowtoapplyinfo,111}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chowtoapplysummary,112}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nlinkedjobrequestid,113}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nestimatedcost,114}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ncreatedby,115}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpreferredemployee,116}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nmarkup,117}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nexpense,118}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cexpensecomment,119}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ninitailbalance,120}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nremainbalance,121}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nspentamount,122}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nbuyingmanagerid,123}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lDNER,124}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lDNEM,125}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ninclusivebill,126}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{capprovalcomment,127}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{crequestsource,128}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{napprovalneed,129}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nprojectdefid,130}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cprojectname,131}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creviewfrequency,132}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{npreferbillrate,133}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocationname,134}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dapproved,135}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cclientrefnumber,136}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{limplementation,137}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lshiftpremium,138}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lopenbidjob,139}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creasoncodeother,140}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{djobrelease,141}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nothrsperwk,142}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ndthrsperwk,143}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nmarketrate,144}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreqoriginalrate,145}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ldeliverablebasedproject,146}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lonhold,147}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nawrpayrate,148}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nsowid,149}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreporttoid2,150}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dopenbidjob,151}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lpunchoutassignment,152}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lpunchoutjob,153}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nprevailingpayrate,154}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lenableprevailingpayrate,155}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lproposalaccepted,156}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{npaymenttermid,157}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lnonbillworkerservice,158}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nadditionaltimecardspend,159}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ntotalestimatedcost,160}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cprojectbilltype,161}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cprojectsourcetype,162}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nparentjobid,163}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cduplicatedstatus,164}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dend_flexibilityearly,165}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dend_flexibilitylate,166}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nsalary,167}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dsubmitted,168}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lpayrollservice,169}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lbypassproposalacceptreject,170}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{csource,171}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cdisplaysbvalue1,172}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cdisplaysbvalue2,173}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nequivalentpayratecap,174}"],"ColumnCount":175,"KeyColumnNames":["nrequestid"],"ColumnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nclientlocationid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{njobtitlecode,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cjobtitlecode,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cjobreqstatus,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cjobtype,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cemptype,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nfill,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creasoncode,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creasoncomment,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpriority,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dreqdate,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestor,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nproxyuser,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cfwdresumeid,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dstart,15}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dend,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cendflag,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cenddesc,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaytype,19}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrsperwk,20}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrpayratehour,21}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrpayratehourmax,22}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrbillratehour,23}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrbillratehourmax,24}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaycurrency,25}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpayperiodtype,26}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nhrpayrateday,27}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaybonus,28}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaybonusfreq,29}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaybonusrange,30}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{npayrelocation,31}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpayexpexc,32}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cbenifitdescP,33}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cbenifitdescUL,34}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cbenifitdescQUALIF,35}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpaysummary,36}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifreqP,37}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifreqUL,38}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifreqQUALIF,39}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifprefP,40}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifprefUL,41}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cqualifprefQUALIF,42}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ntrialperioddays,43}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkeligibilitystatus,44}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dstarttime,45}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dendtime,46}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nlunchbreak,47}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreporttoid,48}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreportlocationid,49}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creportphone,50}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creportphoneext,51}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creportdepartment,52}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedresume,53}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dresumedue,54}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nresumerequired,55}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedsubmital,56}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dsubmitaldue,57}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedinterview,58}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dinterviewdue,59}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedbackground,60}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneeddrugtest,61}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedtravel,62}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctravelpercent,63}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctravelsummary,64}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneeddresscode,65}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedcreditcheck,66}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneeddmvcheck,67}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lneedovertime,68}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lexempt,69}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lnonexempt,70}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocaddress1,71}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocaddress2,72}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkloccity,73}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocstate,74}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkloczipcode,75}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkloccountry,76}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nclientpaypolicyid,77}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ccomments,78}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{linternalreq,79}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lvenodrmanagment,80}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ldraftrequest,81}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lactive,82}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chireorgtype,83}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cclassification,84}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cdistribute,85}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ldirecthire,86}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lcontract,87}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ltemp,88}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ltemptoperm,89}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{csummary,90}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday1,91}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday2,92}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday3,93}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday4,94}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday5,95}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday6,96}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lworkday7,97}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ntotalreghours,98}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nfulltimehoursweek,99}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cshiftdiff,100}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctemplenght,101}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ctempsummary,102}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{covertimesummary,103}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cessfunctionP,104}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cessfunctionUI,105}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cessfunctionQUALIF,106}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkenvP,107}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkenvUI,108}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworkenvQUALIF,109}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chowtoapply,110}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chowtoapplyinfo,111}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{chowtoapplysummary,112}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nlinkedjobrequestid,113}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nestimatedcost,114}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ncreatedby,115}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cpreferredemployee,116}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nmarkup,117}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nexpense,118}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cexpensecomment,119}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ninitailbalance,120}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nremainbalance,121}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nspentamount,122}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nbuyingmanagerid,123}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lDNER,124}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lDNEM,125}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ninclusivebill,126}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{capprovalcomment,127}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{crequestsource,128}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{napprovalneed,129}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nprojectdefid,130}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cprojectname,131}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creviewfrequency,132}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{npreferbillrate,133}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cworklocationname,134}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dapproved,135}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cclientrefnumber,136}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{limplementation,137}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lshiftpremium,138}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lopenbidjob,139}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{creasoncodeother,140}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{djobrelease,141}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nothrsperwk,142}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ndthrsperwk,143}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nmarketrate,144}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreqoriginalrate,145}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ldeliverablebasedproject,146}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lonhold,147}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nawrpayrate,148}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nsowid,149}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nreporttoid2,150}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dopenbidjob,151}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lpunchoutassignment,152}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lpunchoutjob,153}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nprevailingpayrate,154}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lenableprevailingpayrate,155}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lproposalaccepted,156}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{npaymenttermid,157}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lnonbillworkerservice,158}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nadditionaltimecardspend,159}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{ntotalestimatedcost,160}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cprojectbilltype,161}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cprojectsourcetype,162}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nparentjobid,163}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cduplicatedstatus,164}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dend_flexibilityearly,165}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dend_flexibilitylate,166}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nsalary,167}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{dsubmitted,168}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lpayrollservice,169}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{lbypassproposalacceptreject,170}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{csource,171}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cdisplaysbvalue1,172}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{cdisplaysbvalue2,173}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nequivalentpayratecap,174}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":130,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/ProjectDef.{nprojectdefid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/clientjobtitle.{njobtitlecode,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobapprovals.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobdocument.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobeducation.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest_desc.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequestmessages.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobscreening.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobskills.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobspecialbill.{nrequestid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorjobs.{nrequestid,1}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

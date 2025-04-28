@@ -1,0 +1,42 @@
+table Map-VendorSOW
+	lineageTag: b5546ced-4678-43b5-bd8c-88369ecb5270
+
+	column nvendorlocationid
+		dataType: int64
+		formatString: 0
+		lineageTag: 01f08ab1-e55a-4b54-9969-61008ccaa359
+		summarizeBy: sum
+		sourceColumn: nvendorlocationid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cservicetype
+		dataType: string
+		lineageTag: feee04e5-f593-474e-8fbf-fa4296afbda5
+		summarizeBy: none
+		sourceColumn: cservicetype
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Map-VendorSOW-42fc6dc1-3cb4-4b88-8000-176c6718964f = m
+		mode: import
+		queryGroup: MAPPING\auto
+		source =
+				let
+				    Source = vendorlocationservicetype,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"nvendorlocationid", "cservicetype"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each [cservicetype] = "sow"),
+				    #"Removed Duplicates" = Table.Distinct(#"Filtered Rows")
+				in
+				    #"Removed Duplicates"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":["nvendorlocationid","cservicetype"],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocationservicetype.{nvendorlocationid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocationservicetype.{cservicetype,2}"],"ColumnCount":2,"KeyColumnNames":["nvendorlocationid","cservicetype"],"ColumnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocationservicetype.{nvendorlocationid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocationservicetype.{cservicetype,2}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

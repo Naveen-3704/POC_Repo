@@ -1,0 +1,539 @@
+table 'Vendor Measures'
+	lineageTag: f7ab498e-58dc-4ce2-8626-03a39656e48a
+
+	measure 'Vendor Rejected' =
+			
+			var RejectedStatus = {"declinedbyprimaryvendor","rejected"}
+			
+			return
+			CALCULATE([Vendor Submitted],
+			    assignment[Assignment Status] in RejectedStatus
+			)
+		formatString: 0
+		lineageTag: afca12c2-ff9b-4e5b-aaea-f3be7788e35a
+
+		changedProperty = IsHidden
+
+	measure 'Active Vendor Count' =
+			
+			CALCULATE(DISTINCTCOUNTNOBLANK(Vendors[nvendorid]),
+			    Vendors[Active Vendor] = TRUE()
+			)
+		formatString: 0
+		lineageTag: bd3e090f-883d-4648-8bc6-40e780aa198c
+
+		changedProperty = IsHidden
+
+	measure 'Requisitions Accepted' =
+			
+			CALCULATE(DISTINCTCOUNTNOBLANK('Requisitions Accepted/Rejected by Vendor'[nrequestid]),
+			    'Requisitions Accepted/Rejected by Vendor'[cstatus] = "vendoraccept",
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'Requisitions Accepted/Rejected by Vendor'[djobreceived]
+			    )
+			)
+		formatString: 0
+		lineageTag: 8fbbaa21-d2dd-4a5a-a6a1-de9acb67e2a1
+
+		changedProperty = IsHidden
+
+	measure 'Requisitions Accepted and Submitted To' =
+			
+			CALCULATE([Requisitions Accepted],
+			    'Requisitions Accepted/Rejected by Vendor'[FirstSubmit] <> BLANK()
+			)
+		formatString: 0
+		lineageTag: 0cf3e436-c5dc-4209-9361-00913d717ae5
+
+		changedProperty = IsHidden
+
+	measure UI-Ven01 =
+			
+			switch(SELECTEDVALUE('UI-Slicer Selection'[User Selection]),
+			    "Total Spend",[Total Spend],
+			    "Assignments Worked",[Assignments Worked],
+			    "Assignment Starts",[Assignment Starts],
+			    "Assignment Ends", [Assignment Ends],
+			    "Negative Turnover", [Negative Turnover %],
+			    "Reqs Submitted To", [Requisitions Accepted and Submitted To],
+			    "Null")
+		lineageTag: a3b76b9f-5ac2-41e5-b640-e8094fe6f223
+
+		changedProperty = IsHidden
+
+	measure 'UI-Ven01 SPLY' =
+			
+			calculate([UI-Ven01],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		lineageTag: b8f307f3-d002-487d-aebd-ab7ac937cb8d
+
+		changedProperty = IsHidden
+
+	measure 'UI-Ven01 YOY %' =
+			
+			if(or([UI-Ven01] = blank(), [UI-Ven01 SPLY] = BLANK()), BLANK(),
+			([UI-Ven01] - [UI-Ven01 SPLY]) / [UI-Ven01 SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6a514a7c-2365-4bc8-a5d6-67775b0bfc3a
+
+		changedProperty = IsHidden
+
+	measure 'Requisitions Accepted and Submitted %' =
+			
+			IFERROR(DIVIDE(
+			    [Requisitions Accepted and Submitted To],[Requisitions Accepted]),
+			    BLANK()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6afe156b-5bee-4dcd-b3b2-0e32942b3ba7
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Submitted' =
+			
+			CALCULATE(DISTINCTCOUNT(assignment[Assignment #]),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        assignment[Job Received Date]
+			    )
+			)
+		formatString: 0
+		lineageTag: 30d2b5b9-7f74-43d8-8043-628e699f53eb
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Interviewed' =
+			
+			CALCULATE([Vendor Submitted],
+			    Interviews[Interview Date] <> BLANK()
+			)
+		formatString: 0
+		lineageTag: 4ccb20dd-66f4-4a4a-b20a-1da653726756
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Rejected %' =
+			
+			IFERROR(DIVIDE(
+			    [Vendor Rejected],[Vendor Submitted]),
+			    blank()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 21b878c6-56b3-48ad-97d5-912575e4cb65
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Interviewed %' =
+			
+			IFERROR(DIVIDE(
+			    [Vendor Interviewed],[Vendor Submitted]),
+			    BLANK()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a90a8375-2ad7-42e7-832b-0af1278f07a6
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Engaged' =
+			
+			CALCULATE([Vendor Submitted],
+			    'assignment'[Hire Date] <> BLANK()
+			)
+		formatString: 0
+		lineageTag: bf136f3f-cde5-4dc9-b175-19af86491be0
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Engaged %' =
+			
+			IFERROR(DIVIDE(
+			    [Vendor Engaged],[Vendor Submitted]),
+			    BLANK()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6c2bbe7d-c906-44f5-871c-cb581e3a3fa6
+
+		changedProperty = IsHidden
+
+	measure 'Submit Score' = ```
+			[Requisitions Accepted and Submitted %] * 
+			LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Submit")
+			```
+		lineageTag: efcb67ad-3a15-4d09-a61b-b211241b4888
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Reject Score' = ```
+			IF([Vendor Submitted] = BLANK(), BLANK(), 1-[Vendor Rejected %]) * 
+			LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Reject")
+			```
+		lineageTag: 65f648f3-2932-4d3c-9679-56832d091e9c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Interview Score' = ```
+			
+			var MetricResult = [Vendor Interviewed %] 
+			var Minimum = 0
+			var Score =
+			    IF([Vendor Submitted] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 0.40, 5,
+			            MetricResult >= 0.30, 4,
+			            MetricResult >= 0.20, 3,
+			            MetricResult >= 0.10, 2,
+			            MetricResult > 0.0, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Interview")
+			```
+		lineageTag: 4d4e25b9-e0e6-45ed-baeb-4b603034b16d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Engaged Score' = ```
+			
+			var MetricResult = [Vendor Engaged %] 
+			var Minimum = 0
+			var Score =
+			    IF([Vendor Submitted] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 0.20, 5,
+			            MetricResult >= 0.15, 4,
+			            MetricResult >= 0.10, 3,
+			            MetricResult >= 0.5, 2,
+			            MetricResult > 0.0, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Engagement")
+			```
+		lineageTag: d88d289c-ee81-4c80-85f0-d03a0a469b8d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Negative End Score' =
+			
+			var MetricResult = 1-[Negative Turnover %]
+			var Minimum = 0
+			var Score =
+			    IF([Assignments Worked] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 1, 5,
+			            MetricResult >= 0.85, 4,
+			            MetricResult >= 0.70, 3,
+			            MetricResult >= 0.55, 2,
+			            MetricResult >= 0.40, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Neg. End")
+		lineageTag: 75336c6e-f1f1-4605-a6bb-093effae262c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Score' = [Interview Score] + [Engaged Score] + [Shortlisted Score] + [False Start Score] + [Submit Time Score] + [Negative End Score] + [Onboarding Compliance Score] + [Conversions Score] + [Need Filled Score] + [Rules of Engagement Score]
+		lineageTag: 4f98d5ba-ab0f-4a01-9929-3f17a36ef2f4
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vendor Submit Time' =
+			
+			CALCULATE(AVERAGE(assignment[Received:Submitted]),
+			    assignment[Hire Date] <> BLANK(),
+			    TREATAS(
+			        values('Date Table'[Date]),
+			        assignment[Job Received Date]
+			    )
+			)
+		formatString: 0.00
+		lineageTag: d7b6693f-9925-4611-99a9-12271bec74db
+
+		changedProperty = IsHidden
+
+	measure Text_SelectedVendor =
+			
+			IF( HASONEVALUE(Vendors[Vendor]),
+			    MIN(Vendors[Vendor]),
+			    "(Multiple Vendors)"
+			)
+		lineageTag: 9e8aaa6e-20b7-4bae-8fba-6ef3097c7279
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Score Ranking' = RANKX(ALL(Vendors[Vendor]),[Total Score])
+		formatString: 0
+		lineageTag: 8054a3fc-eecd-46c3-b2d3-898bdfa1bf3c
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Shortlisted' =
+			
+			CALCULATE([Vendor Submitted],
+			    assignment[Candidate Submitted by Primary Vendor Date] <> BLANK()
+			)
+		formatString: 0
+		lineageTag: 1f1ac02c-0b59-4e62-8303-16233a9ba309
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Shortlisted %' =
+			
+			IFERROR(DIVIDE(
+			    [Vendor Shortlisted],[Vendor Submitted]),
+			    BLANK()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b791ca56-28ce-4fa9-9317-dbd818cebe80
+
+		changedProperty = IsHidden
+
+	measure 'Shortlisted Score' = ```
+			
+			var MetricResult = [Vendor Shortlisted %] 
+			var Minimum = 0
+			var Score =
+			    IF([Vendor Submitted] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 0.50, 5,
+			            MetricResult >= 0.40, 4,
+			            MetricResult >= 0.30, 3,
+			            MetricResult >= 0.20, 2,
+			            MetricResult > 0.0, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Shortlist")
+			```
+		formatString: 0.00
+		lineageTag: f4ad8d0f-a863-4a09-8c87-526dbcbf57b0
+
+		changedProperty = IsHidden
+
+	measure 'False Start Score' =
+			
+			var MetricResult = 1-[False Start %]
+			var Minimum = 0
+			var Score =
+			    IF([Assignment Starts] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 1, 5,
+			            MetricResult >= 0.85, 4,
+			            MetricResult >= 0.70, 3,
+			            MetricResult >= 0.55, 2,
+			            MetricResult >= 0.40, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"False Start")
+		formatString: 0.00
+		lineageTag: 2250f2ac-b0c1-41ab-a64b-77ea1027625f
+
+		changedProperty = IsHidden
+
+	measure 'Submit Time Score' = ```
+			
+			var MetricResult = [Received to First Submitted] 
+			var Minimum = 0
+			var Score =
+			    IF([Vendor Submitted] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult <= 1, 5,
+			            MetricResult <= 2, 4,
+			            MetricResult <= 3, 3,
+			            MetricResult <= 4, 2,
+			            MetricResult <= 5, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Submit Time")
+			```
+		formatString: 0.00
+		lineageTag: a93c374a-b94d-4c48-a692-0276a6e28de6
+
+		changedProperty = IsHidden
+
+	measure 'Onboarding Compliance Score' =
+			
+			var MetricResult = [Onboarding Compliance %]
+			var Minimum = 0
+			var Score =
+			    IF([Assignment Starts] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 1, 5,
+			            MetricResult >= 0.95, 4,
+			            MetricResult >= 0.90, 3,
+			            MetricResult >= 0.85, 2,
+			            MetricResult >= 0.80, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Onboard")
+		formatString: 0.00
+		lineageTag: 76cc221c-0dae-4501-98f3-d8d9b9561e65
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Positions Needed' =
+			
+			CALCULATE(SUM('Requisitions Accepted/Rejected by Vendor'[Positions]),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'Requisitions Accepted/Rejected by Vendor'[djobreceived].[Date]
+			    )
+			)
+		formatString: 0
+		lineageTag: 8ec847d8-0801-4e4f-a2f9-fc008aee3f79
+
+		changedProperty = IsHidden
+
+	measure 'Vendor Need Filled %' =
+			
+			IFERROR(DIVIDE(
+			    [Vendor Engaged],[Vendor Positions Needed]),
+			    BLANK()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c9fdf141-e7a5-43b7-b51a-d66e3224e011
+
+		changedProperty = IsHidden
+
+	measure 'Need Filled Score' =
+			
+			var MetricResult = [Vendor Need Filled %]
+			var Minimum = 0
+			var Score =
+			    IF([Vendor Positions Needed] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 0.40, 5,
+			            MetricResult >= 0.30, 4,
+			            MetricResult >= 0.20, 3,
+			            MetricResult >= 0.10, 2,
+			            MetricResult > 0.0, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Need Filled")
+		formatString: 0
+		lineageTag: 07b4aeab-ca78-45f8-84a7-5330a9422fe0
+
+		changedProperty = IsHidden
+
+	measure 'Conversions Score' =
+			
+			var MetricResult = [Conversion %]
+			var Minimum = 0
+			var Score =
+			    IF([Assignments Worked] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult >= 0.20, 5,
+			            MetricResult >= 0.15, 4,
+			            MetricResult >= 0.10, 3,
+			            MetricResult >= 0.5, 2,
+			            MetricResult > 0.0, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Conversion")
+		formatString: 0.00
+		lineageTag: 3e4819b7-bc59-40f6-a6e2-d6c06fdac353
+
+		changedProperty = IsHidden
+
+	measure 'Rules of Engagement Infractions' = BLANK()
+		formatString: 0
+		lineageTag: 22cca4eb-4459-46bd-b738-1e31c85df678
+
+		changedProperty = IsHidden
+
+	measure 'Rules of Engagement Score' =
+			
+			var MetricResult = [Rules of Engagement Infractions]
+			var Minimum = 0
+			var Score =
+			    IF([Total Spend] <= Minimum,
+			        BLANK(),
+			        SWITCH( TRUE(),
+			            MetricResult <= 0, 5,
+			            MetricResult <= 1, 4,
+			            MetricResult <= 2, 3,
+			            MetricResult <= 3, 2,
+			            MetricResult <= 4, 1,
+			            0
+			        )
+			    )
+			
+			return
+			Score * 10 * LOOKUPVALUE('Map-ScorecardWeights'[Weighting (Must Equal 100)],'Map-ScorecardWeights'[Metric],"Rules of Engagement")
+		lineageTag: 9120325f-5f14-4704-b8fa-b1535f6f9fc3
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Total Score' =
+			CALCULATE(AVERAGE('Scorecard Averages'[Total Score]),
+			    TREATAS(VALUES('Date Table'[Date]), 'Scorecard Averages'[Date].[Date]))
+		lineageTag: 23bc0351-f658-4692-82eb-ce17c9c189ab
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Vendor Measures-e45d9c58-43b8-4dbe-83ca-76ba59433d1b' = m
+		mode: import
+		queryGroup: MEASURES
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WSknNSS1JVYqNBQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":0,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":[],"ColumnCount":0,"KeyColumnNames":[],"ColumnIdentities":[],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

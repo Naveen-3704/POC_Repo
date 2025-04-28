@@ -1,0 +1,29 @@
+table ReportNav
+	lineageTag: 7f60e042-e4f6-48d6-aa69-b17aaba61a63
+
+	measure SelectedReport = SELECTEDVALUE(ReportNav[Report Name], "All")
+		lineageTag: 874950bd-3acf-4da7-b1f7-7bfbd934d145
+
+	column 'Report Name'
+		lineageTag: 4ac7a190-a4e8-4d4c-a3b6-13462eec5699
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Report Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ReportNav = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "Report Name", STRING,
+				    {
+				        {"Sales"},
+				        {"Finance"}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 24ed2558efc440b8997d68cd1cb15601
+

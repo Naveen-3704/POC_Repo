@@ -1,0 +1,53 @@
+table 'Data Glossary'
+	lineageTag: f7510bad-c799-4161-8d6f-12bc6cd998f1
+
+	column 'Measure Group'
+		dataType: string
+		lineageTag: 4a039454-c04a-48ad-a585-5731e965c95d
+		summarizeBy: none
+		sourceColumn: Measure Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Measure
+		dataType: string
+		lineageTag: 4f05d7a7-3e68-4091-8ba9-bc35f4be0868
+		summarizeBy: none
+		sourceColumn: Measure
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Calculation
+		dataType: string
+		lineageTag: c285ee66-c8f8-4f92-b755-0a42bcef1085
+		summarizeBy: none
+		sourceColumn: Calculation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Criteria
+		dataType: string
+		lineageTag: 7e560907-9259-4a89-a311-59d2cf4e7663
+		summarizeBy: none
+		sourceColumn: Criteria
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Data Glossary' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Measure Group" = _t, Measure = _t, Calculation = _t, Criteria = _t])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

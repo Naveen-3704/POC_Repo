@@ -1,0 +1,73 @@
+table globalspecialbill_desc
+	lineageTag: e02e46f1-0627-4413-92c9-403182b3d35e
+
+	column csbcode
+		dataType: string
+		lineageTag: 9c8f1964-928a-45de-8c93-74ed254a554e
+		summarizeBy: none
+		sourceColumn: csbcode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdesc
+		dataType: string
+		lineageTag: 91eabd81-8bf0-499e-9d5c-d6dea4a30bcd
+		summarizeBy: none
+		sourceColumn: cdesc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cexplanation
+		dataType: string
+		lineageTag: cb52102c-f85e-43d2-8a3a-5b7a5451cd7f
+		summarizeBy: none
+		sourceColumn: cexplanation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nlanguageid
+		dataType: int64
+		formatString: 0
+		lineageTag: b42c8e3a-091b-444c-bf91-188a3084fbf4
+		summarizeBy: sum
+		sourceColumn: nlanguageid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cshortdesc
+		dataType: string
+		lineageTag: 24ff7ef7-6fa0-4af5-820b-239f1303e788
+		summarizeBy: none
+		sourceColumn: cshortdesc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition globalspecialbill_desc = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "globalspecialbill_desc",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(DataTable, each ([nlanguageid] = 1))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

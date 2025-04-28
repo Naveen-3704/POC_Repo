@@ -1,0 +1,9 @@
+role 'Finance Team'
+	modelPermission: read
+
+	tablePermission ReportAccess = [Role] == "Finance Team"
+
+	tablePermission financials
+
+	annotation PBI_Id = 79a100ba93f641e3a9d686fb387bb6dc
+

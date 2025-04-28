@@ -1,0 +1,89 @@
+table 'Currency Conversion to USD'
+	lineageTag: f0a255d7-f298-43d4-bc7a-c2af48ab5c7a
+
+	column CURRENCY_TYPE
+		dataType: string
+		lineageTag: 6e010e16-e593-4abe-bd53-2798ea9b6355
+		summarizeBy: none
+		sourceColumn: CURRENCY_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: 22fdb740-6633-4606-b894-e6548c836fed
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD_END_RATE
+		dataType: double
+		lineageTag: ba652159-b789-4259-a613-20aa53178b2a
+		summarizeBy: sum
+		sourceColumn: PERIOD_END_RATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PERIOD_AVG_RATE
+		dataType: double
+		lineageTag: 4fcd65bc-1e76-4515-888a-814f93f0d1cb
+		summarizeBy: sum
+		sourceColumn: PERIOD_AVG_RATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: c17badb4-2dcb-4a9e-a800-e818c6d211d3
+		summarizeBy: sum
+		sourceColumn: PERIOD
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 60adc7fd-035a-4832-a8fc-14e71b9a09af
+		summarizeBy: sum
+		sourceColumn: PERIOD_YEAR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Currency Conversion to USD' = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName="Common Data"]}[Data],
+				    DataFlow = Workspace{[dataflowName="Currency Conversion to USD"]}[Data],
+				    DataTable = DataFlow{[entity="Currency Conversion to USD"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(DataTable,{{"PERIOD", Int64.Type}, {"PERIOD_YEAR", Int64.Type}}),
+				    #"Sorted Rows" = Table.Buffer(Table.Sort(#"Changed Type",{{"PERIOD_YEAR", Order.Descending}, {"PERIOD", Order.Descending}})),
+				    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows", {"CURRENCY_CODE"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

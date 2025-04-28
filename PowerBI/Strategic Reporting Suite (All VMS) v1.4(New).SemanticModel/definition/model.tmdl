@@ -1,0 +1,148 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup SOURCE
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup DATA
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup MAPPING
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup MAPPING\auto
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup MAPPING\manual
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'USER INTERFACE'
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup 'USER INTERFACE\auto (2)'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'USER INTERFACE\manual (2)'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'MAIN TABLES'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup MEASURES
+
+	annotation PBI_QueryGroupOrder = 9
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_QueryOrder = ["jobrequest","assignment","invoice","globalcodes","globalcodes_desc","globaljobcategory","Job Categories","globaljobtitles","Job Titles","Map-State","UI-Slicer Selection","Map-Asgn_EndReasons","Tenure Buckets","Map-ScorecardWeights","Worked Applicant Statuses","Labor Charge Codes","Screening Demo","Map-Index_NegTurnover","Workspace Name","Interviews","First Timecard","Requisitions Accepted/Rejected by Vendor","Client Locations","vendorlocation","vendor","vendorjoblocation","vendorlocationservicetype","Vendors","Map-VendorTemp","Map-VendorSOW","Map-VendorICC","clientjobtitle","globalcodesnegativereason","CustomerCurrency","Job Types","Special Bills","globalspecialbill_desc","Requisition Measures","Assignment Measures","Candidate Quality Measures","Cycle Time Measures","Invoice Measures","Vendor Measures","End of Assignment Reasons","Attribute Table","clientpaycode","Cycle Time Calculation Select","Charge Codes","applicant","clientuser","WorkspaceNames","DFName","globaljobcategory_desc","Currency Conversion to USD","Timecard","client","Data Glossary","Special Bills (2)","Report Table"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_8dd5dded-5d50-4849-a789-87dc9af09790
+ref table 'Vendor Measures'
+ref table 'Date Table'
+ref table 'UI-Slicer Selection'
+ref table 'Requisitions Accepted/Rejected by Vendor'
+ref table LocalDateTable_b72aff41-56c7-43ad-92fb-f92534c8a621
+ref table Map-State
+ref table Map-VendorTemp
+ref table Map-VendorSOW
+ref table Map-VendorICC
+ref table jobrequest
+ref table LocalDateTable_b77222b8-8399-44a2-8319-945b360af138
+ref table LocalDateTable_b08720b3-bb57-4773-9a2c-a8522f2cf674
+ref table LocalDateTable_94ca6227-0ddf-4455-a7a5-e9add0d41ee4
+ref table assignment
+ref table LocalDateTable_a39182c1-4bb8-4d91-ad55-1e55f61f1f33
+ref table LocalDateTable_480f354e-3a25-4f9c-b140-fa9a043a4a98
+ref table LocalDateTable_e68e21e7-121f-4fd6-acbe-0c1e6f00a5b9
+ref table LocalDateTable_638ac38f-0d9f-4955-97fa-0d47f4eab8ad
+ref table LocalDateTable_53600da0-6642-4dd7-8c0f-b6900b6b14f7
+ref table LocalDateTable_b8ab1b45-5b68-40e8-aa2b-f80256ea6a74
+ref table globaljobtitles
+ref table LocalDateTable_2dc3cb69-f388-463f-aa45-024b41a568a9
+ref table LocalDateTable_66872d6a-9b08-4d44-a0e4-72b101c61424
+ref table invoice
+ref table Interviews
+ref table LocalDateTable_291002be-a9f6-42c1-835d-a0e16ef58b48
+ref table 'First Timecard'
+ref table 'Tenure Buckets'
+ref table Map-ScorecardWeights
+ref table CustomerCurrency
+ref table Vendors
+ref table 'Invoice Measures'
+ref table 'Assignment Measures'
+ref table 'Candidate Quality Measures'
+ref table 'Worked Applicant Statuses'
+ref table 'End of Assignment Reasons'
+ref table 'Requisition Measures'
+ref table 'Cycle Time Measures'
+ref table 'Attribute Table'
+ref table LocalDateTable_9982ac81-1f20-4a6a-8f7c-f603256bb135
+ref table 'Cycle Time Calculation Select'
+ref table 'Time to Fill'
+ref table LocalDateTable_5f5af441-0b7c-42a8-bcce-278fa24532d1
+ref table 'Labor Charge Codes'
+ref table LocalDateTable_45d61b71-7d25-423f-8ac6-5d0f4fe622f7
+ref table WorkspaceNames
+ref table DFName
+ref table Timecard
+ref table LocalDateTable_99a265da-afe7-4fd3-8cd5-e7d6b4e4f46a
+ref table LocalDateTable_380ed3e1-e389-4d9c-a95b-95c4b9f642f6
+ref table LocalDateTable_45825c32-5b11-41e2-8bf5-05964a9541b2
+ref table LocalDateTable_7f9e8346-6334-4652-91cb-1b1f8642eb7f
+ref table LocalDateTable_55a46c97-2467-4525-9c46-48b18ea4800d
+ref table LocalDateTable_348af019-4eb4-4757-92ff-df47674f7149
+ref table LocalDateTable_4f94619c-6363-4a43-801d-32afb266b8ea
+ref table LocalDateTable_be1c336b-2452-4e95-8943-9d4a1a594f41
+ref table LocalDateTable_02fd1251-e584-4044-acd3-55d7b7788287
+ref table LocalDateTable_c04026af-53cc-484d-9976-4dd914c43805
+ref table LocalDateTable_362882f4-20ce-42a7-b207-7dc4f30ce1bc
+ref table LocalDateTable_f4fdfbef-884e-4f43-863e-80ca1209fb47
+ref table LocalDateTable_3832c79d-6942-42a5-b250-9421144ddfdc
+ref table LocalDateTable_352a75e4-0b5f-4c76-bf5a-f7a407facebf
+ref table LocalDateTable_60503619-f078-4497-8bbc-18c30d6494dd
+ref table LocalDateTable_240781d8-eb74-49d8-aa8b-b4b57873e9c4
+ref table LocalDateTable_5db3c946-bcaa-4652-9cb2-60117617b47e
+ref table LocalDateTable_ec7694af-e13a-4a93-be11-ee6900ab7a86
+ref table LocalDateTable_79cd430c-1de7-4d95-beab-d331ee15e130
+ref table LocalDateTable_5e396f72-4fdc-4152-92a5-32e6ebde234d
+ref table LocalDateTable_eb3f92ef-b569-4c18-a783-e45a6e3d32da
+ref table LocalDateTable_277e7341-cfc9-44af-884b-5da1c128cb73
+ref table LocalDateTable_93c9bba5-aa46-4748-9453-cc865e04fe8b
+ref table LocalDateTable_f3495900-b1c7-4df0-8345-c4ca693cd26b
+ref table LocalDateTable_daad099e-e3e2-46f0-8bb7-5996d01c4e45
+ref table LocalDateTable_1d4d2e44-6c03-4634-b575-382de82cbd5a
+ref table LocalDateTable_ef356726-ce3b-4263-a9c4-1ac2641e1565
+ref table LocalDateTable_c9cf5989-b7ee-498f-8d56-556273f1f3ee
+ref table 'Scorecard Averages'
+ref table LocalDateTable_e313a9ac-e957-4ad7-ba4c-43a869532d89
+ref table 'Screening Demo'
+ref table 'Data Glossary'
+ref table 'Special Bills'
+ref table globalspecialbill_desc
+ref table 'Special Bills (2)'
+ref table 'Currency Conversion to USD'
+ref table 'Report Table'
+ref table CandidateStatusBridge
+ref table LocalDateTable_646eba34-8dbf-4eac-89a6-32f67a932af5
+
+ref cultureInfo en-US
+

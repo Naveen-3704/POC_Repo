@@ -1,0 +1,53 @@
+table 'Attribute Table'
+	lineageTag: 57b5ef8f-2236-4908-8dc7-eb56f7517a24
+
+	column 'Requisition #'
+		dataType: int64
+		formatString: 0
+		lineageTag: eb9bedc1-0aee-44b5-a2ec-31a4d4839359
+		summarizeBy: none
+		sourceColumn: Requisition #
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute
+		dataType: string
+		lineageTag: 9f52fc25-3a37-43f4-9fbf-e9365a79c17c
+		summarizeBy: none
+		sourceColumn: Attribute
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: string
+		lineageTag: 405a19b5-8b7e-4a72-899e-989480cd6497
+		summarizeBy: none
+		sourceColumn: Value
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Attribute Table-9df0156c-6c67-4e10-8e91-9c28b6967be5' = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				    Source = jobrequest,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Requisition #", "Job Title", "Job Category", "Job Type", "State"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Other Columns",null,"(Unknown)",Replacer.ReplaceValue,{"Job Title"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value",null,"(Unknown)",Replacer.ReplaceValue,{"Job Category"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1",null,"(Unknown)",Replacer.ReplaceValue,{"Job Type"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2",null,"(Unknown)",Replacer.ReplaceValue,{"State"}),
+				    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Replaced Value3", {"Requisition #"}, "Attribute", "Value")
+				in
+				    #"Unpivoted Other Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

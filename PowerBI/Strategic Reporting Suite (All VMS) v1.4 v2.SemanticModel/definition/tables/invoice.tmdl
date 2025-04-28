@@ -1,0 +1,135 @@
+table invoice
+	lineageTag: 43c94d5c-f2d8-4611-a6d1-ca52316a6859
+
+	column 'Invoice Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d84f0feb-a1b7-4b7b-b67e-de239bbdbb60
+		summarizeBy: none
+		sourceColumn: Invoice Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Invoice Amount'
+		dataType: double
+		lineageTag: 5e838a39-12f0-4e87-9435-52d9ecae0822
+		summarizeBy: sum
+		sourceColumn: Invoice Amount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Tax
+		dataType: double
+		lineageTag: 68a788f7-d2e4-4d55-9dce-91015e176472
+		summarizeBy: sum
+		sourceColumn: Tax
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nassignmentid
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f404101-4784-40bb-a53a-2ba63e396b8f
+		summarizeBy: none
+		sourceColumn: nassignmentid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pricing Catalog'
+		dataType: string
+		lineageTag: 5b40cd12-d6f1-48ff-bb8b-98136b6dd8d2
+		summarizeBy: none
+		sourceColumn: Pricing Catalog
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hours
+		dataType: double
+		lineageTag: 01d89368-84ac-407d-a3d9-4c36fd19c1ab
+		summarizeBy: sum
+		sourceColumn: Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Bill Rate'
+		dataType: double
+		lineageTag: 9fa0bd11-4b8c-474b-bb0e-0d5ff7cd353e
+		summarizeBy: sum
+		sourceColumn: Bill Rate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Charge Code'
+		dataType: string
+		lineageTag: 090f8c95-8369-4b5b-99ff-e55e0f2f7829
+		summarizeBy: none
+		sourceColumn: Charge Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ninvoicelineid
+		dataType: int64
+		formatString: 0
+		lineageTag: 37e58a9f-7006-4bdb-9424-290a237ad850
+		summarizeBy: sum
+		sourceColumn: ninvoicelineid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition invoice-d17128b1-b35b-41a1-b291-6c11f882d4b0 = m
+		mode: import
+		queryGroup: 'MAIN TABLES'
+		source =
+				let
+				  tablename = "invoice",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(DataTable,{{"dinvoice", type date}}),
+				    #"Inserted Month" = Table.AddColumn(#"Changed Type", "Month", each Date.Month([dinvoice]), Int64.Type),
+				    #"Inserted Year" = Table.AddColumn(#"Inserted Month", "Year", each Date.Year([dinvoice]), Int64.Type),
+				    #"Merged Queries1" = Table.NestedJoin(#"Inserted Year", {"ccatalogitem_type"}, clientpaycode, {"cclariuscode"}, "clientpaycode", JoinKind.LeftOuter),
+				    #"Expanded clientpaycode" = Table.ExpandTableColumn(#"Merged Queries1", "clientpaycode", {"cpayrollcode"}, {"cpayrollcode"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Expanded clientpaycode", {"cpayrollcode"}, #"Charge Codes", {"clevelcode"}, "Charge Codes", JoinKind.LeftOuter),
+				    #"Expanded Charge Codes" = Table.ExpandTableColumn(#"Merged Queries2", "Charge Codes", {"Charge Code"}, {"Charge Code"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Expanded Charge Codes",{"ninvoicelineid", "dinvoice", "ninvamount", "nsalestax", "nassignmentid", "ncatalogitem_hours", "ncatalogitem_rate", "cPricingCatalog", "Charge Code"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"dinvoice", "Invoice Date"}, {"ninvamount", "Invoice Amount"}, {"nsalestax", "Tax"}, {"cPricingCatalog", "Pricing Catalog"}, {"ncatalogitem_hours", "Hours"}, {"ncatalogitem_rate", "Bill Rate"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":125,"keyColumnNames":["ninvoicelineid"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoicespecialbill.{ninvoicelineid,1}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvoicelineid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nclientlocationid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvendorlocationid,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cename,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cssn,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dweekend,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cjobdesc,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{njobcat,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cjobcode,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvoiceno,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvseqno,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dinvoice,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntrancode,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncompany,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{noffice,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccustname,15}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncustno,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncustsite,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour1,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate1,19}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nregcode,20}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour2,21}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate2,22}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{notcode,23}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour3,24}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate3,25}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ndtcode,26}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour4,27}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate4,28}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmisccode,29}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nholhour,30}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nholrate,31}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nholcode,32}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvachour,33}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvacrate,34}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvaccode,35}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillhour,36}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillrate,37}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillamt,38}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillcode,39}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvamount,40}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nadjamount,41}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cadjflag,42}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cpo,43}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate1,44}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate2,45}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate3,46}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate4,47}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncheckno,48}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nwcode,49}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nworcost,50}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntaxes,51}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cbillcontact,52}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nbalance,53}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nsalestax,54}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nimpbatch,55}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nexpbatch,56}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{creplace,57}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cfiller,58}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccrlf,59}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cstateid,60}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cbatchid,61}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccorpid,62}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrequestid,63}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nassignmentid,64}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dlastupdate,65}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf1,66}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb1,67}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf2,68}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb2,69}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf3,70}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb3,71}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf4,72}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb4,73}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf5,74}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb5,75}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf6,76}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb6,77}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf7,78}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb7,79}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf8,80}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb8,81}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf9,82}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb9,83}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf10,84}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb10,85}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cexportbatch,86}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvendordiscount,87}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nagile1discount,88}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dexport,89}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccatalogitem_type,90}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncatalogitem_hours,91}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncatalogitem_rate,92}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{CATC_ID,93}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{CATC_LINE_NO,94}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ndiscountpercentage,95}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nagile1discountpercentage,96}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeeamount,97}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeepercentage,98}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nearlypaydiscount,99}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nearlypaydiscountpercentage,100}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntaxdiscount,101}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntaxdiscountamount,102}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nlengthdiscount,103}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nlengthdiscountamount,104}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_PRES_INV_NO,105}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_PRES_INV_LINE_NO,106}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccurrency,107}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninstantdiscountpercent,108}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninstantdiscountamount,109}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nsystemfeeamount,110}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nsystemfeepercent,111}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cPricingCatalog,112}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cProductCode,113}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntenurediscountpercent,114}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntenurediscountamount,115}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_SALES_TAX_AMOUNT,116}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_VAT_TAX_AMOUNT,117}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvendorbillrate,118}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeeamount_client,119}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeepercentage_client,120}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nthirdpartysystemfee,121}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nthirdpartysystemfeepercent,122}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrecruitingfee,123}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrecruitingfeepercent,124}"],"ColumnCount":125,"KeyColumnNames":["ninvoicelineid"],"ColumnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvoicelineid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nclientlocationid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvendorlocationid,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cename,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cssn,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dweekend,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cjobdesc,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{njobcat,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cjobcode,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvoiceno,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvseqno,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dinvoice,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntrancode,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncompany,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{noffice,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccustname,15}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncustno,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncustsite,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour1,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate1,19}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nregcode,20}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour2,21}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate2,22}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{notcode,23}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour3,24}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate3,25}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ndtcode,26}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nhour4,27}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrate4,28}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmisccode,29}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nholhour,30}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nholrate,31}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nholcode,32}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvachour,33}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvacrate,34}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvaccode,35}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillhour,36}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillrate,37}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillamt,38}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nnonbillcode,39}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninvamount,40}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nadjamount,41}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cadjflag,42}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cpo,43}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate1,44}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate2,45}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate3,46}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{npayrate4,47}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncheckno,48}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nwcode,49}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nworcost,50}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntaxes,51}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cbillcontact,52}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nbalance,53}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nsalestax,54}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nimpbatch,55}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nexpbatch,56}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{creplace,57}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cfiller,58}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccrlf,59}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cstateid,60}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cbatchid,61}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccorpid,62}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrequestid,63}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nassignmentid,64}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dlastupdate,65}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf1,66}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb1,67}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf2,68}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb2,69}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf3,70}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb3,71}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf4,72}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb4,73}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf5,74}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb5,75}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf6,76}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb6,77}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf7,78}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb7,79}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf8,80}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb8,81}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf9,82}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb9,83}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cudf10,84}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{csb10,85}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cexportbatch,86}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvendordiscount,87}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nagile1discount,88}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{dexport,89}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccatalogitem_type,90}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncatalogitem_hours,91}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ncatalogitem_rate,92}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{CATC_ID,93}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{CATC_LINE_NO,94}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ndiscountpercentage,95}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nagile1discountpercentage,96}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeeamount,97}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeepercentage,98}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nearlypaydiscount,99}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nearlypaydiscountpercentage,100}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntaxdiscount,101}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntaxdiscountamount,102}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nlengthdiscount,103}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nlengthdiscountamount,104}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_PRES_INV_NO,105}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_PRES_INV_LINE_NO,106}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ccurrency,107}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninstantdiscountpercent,108}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ninstantdiscountamount,109}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nsystemfeeamount,110}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nsystemfeepercent,111}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cPricingCatalog,112}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{cProductCode,113}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntenurediscountpercent,114}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{ntenurediscountamount,115}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_SALES_TAX_AMOUNT,116}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{U_VAT_TAX_AMOUNT,117}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nvendorbillrate,118}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeeamount_client,119}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nmgmtfeepercentage_client,120}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nthirdpartysystemfee,121}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nthirdpartysystemfeepercent,122}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrecruitingfee,123}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoice.{nrecruitingfeepercent,124}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/invoicespecialbill.{ninvoicelineid,1}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

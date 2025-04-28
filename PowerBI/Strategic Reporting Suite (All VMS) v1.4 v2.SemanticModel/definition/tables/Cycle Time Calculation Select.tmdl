@@ -1,0 +1,21 @@
+table 'Cycle Time Calculation Select'
+	lineageTag: 3ec309bd-ae45-42d8-9acd-e82e1e83daf7
+
+	column 'Cycle Time Calculation Select'
+		dataType: string
+		lineageTag: 7b1ae377-2385-49e4-a61a-37c0fa0086a1
+		summarizeBy: none
+		sourceColumn: Cycle Time Calculation Select
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Cycle Time Calculation Select-4df8c73a-5fd5-4618-a8b2-976031bdd722' = m
+		mode: import
+		source = "Business Days" meta [IsParameterQuery=true, List={"Business Days", "Calendar Days"}, DefaultValue="Business Days", Type="Text", IsParameterQueryRequired=true]
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Text
+

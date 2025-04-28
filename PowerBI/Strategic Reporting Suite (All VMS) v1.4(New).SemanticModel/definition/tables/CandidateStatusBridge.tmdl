@@ -1,0 +1,197 @@
+table CandidateStatusBridge
+	lineageTag: 7882e57d-fe8d-4c63-8e86-5b50c5cc24a1
+
+	measure Measure
+		lineageTag: 73c59192-572e-41d6-aa29-d6e8b0885ebb
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	column Status
+		lineageTag: e8100ce3-a249-4d09-a56d-e47a98ca9593
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Status]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Status Rank' = ```
+			
+			SWITCH(
+			    'CandidateStatusBridge'[Status],
+			    "Candidates Submitted", 1,
+			    "Vendor Shortlisted", 2,
+			    "Candidates Interviewed", 3,
+			    "Candidates Rejected", 4,
+			    "Candidates Engaged", 5,
+			    BLANK()
+			)
+			
+			```
+		formatString: 0
+		lineageTag: c6b2f0f3-25da-4da4-9396-7f0ec7f204eb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusColor =
+			
+			SWITCH(
+			    TRUE(),
+			    CandidateStatusBridge[Status] = " Candidates Submitted", "#955706",
+			    CandidateStatusBridge[Status] = "  Vendor Shortlisted", "#BF7B22",
+			    CandidateStatusBridge[Status] = "   Candidates Interviewed", "#E99B34",
+			    CandidateStatusBridge[Status] = "    Candidates Rejected", "#FCD096",
+			    CandidateStatusBridge[Status] = "      Candidates Engaged", "#FFE6C3",
+			    "#FFFFFF"  -- default/fallback color
+			)
+		lineageTag: 7db3ffa6-2083-4561-954b-464437eacfbe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment #'
+		formatString: 0
+		lineageTag: dfce642e-5c78-4b4e-9782-956a2fc2966f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Assignment #]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Category'
+		lineageTag: 8c78ecae-147d-4291-9176-c672dede1df7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Job Category]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Title'
+		lineageTag: 40048153-ea84-4c0b-be2f-f678a438dd2b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Job Title]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		formatString: General Date
+		lineageTag: 6d79aa63-2305-4b61-949a-1b9be5178a0d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: c083ae71-a40c-4830-bd23-3f30970b2305
+			defaultHierarchy: LocalDateTable_646eba34-8dbf-4eac-89a6-32f67a932af5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name' = FORMAT(CandidateStatusBridge[Date] , "MMM")
+		lineageTag: 01d13c7a-b096-41eb-9d02-b6d67b82a91d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusColor2 = ```
+			
+			SWITCH(
+			    TRUE(),
+			    CandidateStatusBridge[Status] = " Candidates Submitted", "#FFFFFF",
+			    CandidateStatusBridge[Status] = "  Vendor Shortlisted", "#FFFFFF",
+			    CandidateStatusBridge[Status] = "   Candidates Interviewed", "#303030",
+			    CandidateStatusBridge[Status] = "    Candidates Rejected", "#303030",
+			    CandidateStatusBridge[Status] = "      Candidates Engaged", "#303030",
+			    "#FFFFFF"  -- default/fallback color
+			)
+			
+			```
+		lineageTag: d8f3e6cd-9fed-4fcc-89d4-1029292eb489
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CandidateStatusBridge = calculated
+		mode: import
+		source = ```
+				
+				UNION(
+				
+				    // Candidates Submitted
+				    SELECTCOLUMNS(
+				        FILTER(
+				            CROSSJOIN('assignment', 'Date Table'),
+				            NOT(ISBLANK('assignment'[Candidate Submitted Date])) &&
+				            RELATED(jobrequest[Go Live Filter]) <> "Go Live" &&
+				            'assignment'[Candidate Submitted Date] = 'Date Table'[Date]
+				        ),
+				        "Assignment #", 'assignment'[Assignment #],
+				        "Status", " Candidates Submitted",
+				        "Job Category", RELATED(jobrequest[Job Category]),
+				        "Job Title", RELATED(jobrequest[Job Title]),
+				        "Date", 'Date Table'[Date]
+				    ),
+				
+				    // Vendor Shortlisted
+				    SELECTCOLUMNS(
+				        FILTER(
+				            CROSSJOIN('assignment', 'Date Table'),
+				            NOT(ISBLANK('assignment'[Candidate Submitted by Primary Vendor Date])) &&
+				            'assignment'[Candidate Submitted by Primary Vendor Date] = 'Date Table'[Date]
+				        ),
+				        "Assignment #", 'assignment'[Assignment #],
+				        "Status", "  Vendor Shortlisted",
+				        "Job Category", RELATED(jobrequest[Job Category]),
+				        "Job Title", RELATED(jobrequest[Job Title]),
+				        "Date", 'Date Table'[Date]
+				    ),
+				
+				    // Candidates Interviewed
+				    SELECTCOLUMNS(
+				        FILTER(
+				            CROSSJOIN('assignment', 'Date Table'),
+				            NOT(ISBLANK(RELATED(Interviews[Interview Date]))) &&
+				            RELATED(Interviews[Interview Date]) = 'Date Table'[Date]
+				        ),
+				        "Assignment #", 'assignment'[Assignment #],
+				        "Status", "   Candidates Interviewed",
+				        "Job Category", RELATED(jobrequest[Job Category]),
+				        "Job Title", RELATED(jobrequest[Job Title]),
+				        "Date", 'Date Table'[Date]
+				    ),
+				
+				    // Candidates Rejected
+				    SELECTCOLUMNS(
+				        FILTER(
+				            CROSSJOIN('assignment', 'Date Table'),
+				            'assignment'[Assignment Status] IN { "declinedbyprimaryvendor", "rejected" } &&
+				            'assignment'[Candidate Submitted Date] = 'Date Table'[Date]  // Assuming rejection happens near submission
+				        ),
+				        "Assignment #", 'assignment'[Assignment #],
+				        "Status", "    Candidates Rejected",
+				        "Job Category", RELATED(jobrequest[Job Category]),
+				        "Job Title", RELATED(jobrequest[Job Title]),
+				        "Date", 'Date Table'[Date]
+				    ),
+				
+				    // Candidates Engaged
+				    SELECTCOLUMNS(
+				        FILTER(
+				            CROSSJOIN('assignment', 'Date Table'),
+				            NOT(ISBLANK('assignment'[Hire Date])) &&
+				            'assignment'[Assignment Start Date] <= 'Date Table'[Date] &&
+				            'assignment'[Assignment End Date] >= 'Date Table'[Date]
+				        ),
+				        "Assignment #", 'assignment'[Assignment #],
+				        "Status", "      Candidates Engaged",
+				        "Job Category", RELATED(jobrequest[Job Category]),
+				        "Job Title", RELATED(jobrequest[Job Title]),
+				        "Date", 'Date Table'[Date]
+				    )
+				)
+				
+				```
+
+	annotation PBI_Id = f6fea68825d6493b995795693c6dc4ee
+

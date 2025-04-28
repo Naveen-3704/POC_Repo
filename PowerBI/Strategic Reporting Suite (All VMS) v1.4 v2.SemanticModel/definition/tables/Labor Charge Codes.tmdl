@@ -1,0 +1,26 @@
+table 'Labor Charge Codes'
+	lineageTag: f1f7f60d-18d3-4b7f-8118-88dcd4968cf3
+
+	column 'Labor Charge Code'
+		dataType: string
+		lineageTag: 6d501371-5dcd-412c-85cc-d81ff182d82d
+		summarizeBy: none
+		sourceColumn: Labor Charge Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Labor Charge Codes-e1897902-5faf-47e9-8e64-22fb04d2b455' = m
+		mode: import
+		queryGroup: MAPPING\manual
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCi5JzEtJLEpRCEpNL81JLFKK1YlW8i9LLSrJzE0Fc1zyS5NyUhVCwPxYAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Labor Charge Code" = _t])
+				in
+				    Source
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

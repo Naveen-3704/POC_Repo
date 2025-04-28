@@ -1,0 +1,1829 @@
+table Timecard
+	lineageTag: 94cf8fbb-7772-420a-885a-490e1180ca6f
+
+	column ntimecardentryid
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d416ecb-d568-4912-ab60-7fae3413a2cb
+		summarizeBy: sum
+		sourceColumn: ntimecardentryid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ntimecardid
+		dataType: int64
+		formatString: 0
+		lineageTag: c3ff1ab1-e2ee-4124-81aa-ab4d313db022
+		summarizeBy: sum
+		sourceColumn: ntimecardid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ddate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1c2f71e2-e837-41d5-b374-7d768e048c5d
+		summarizeBy: none
+		sourceColumn: ddate
+
+		variation Variation
+			isDefault
+			relationship: 6286ff00-6c67-498e-97bc-edd71ba24309
+			defaultHierarchy: LocalDateTable_99a265da-afe7-4fd3-8cd5-e7d6b4e4f46a.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dstarttime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a68c456c-e6bd-43a5-b488-8c8d02be2563
+		summarizeBy: none
+		sourceColumn: dstarttime
+
+		variation Variation
+			isDefault
+			relationship: 93338ee8-2ab6-4f3b-a9c1-50778bc2763d
+			defaultHierarchy: LocalDateTable_380ed3e1-e389-4d9c-a95b-95c4b9f642f6.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dlunchstart
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: abdffcec-9277-48db-b002-c26371dadc41
+		summarizeBy: none
+		sourceColumn: dlunchstart
+
+		variation Variation
+			isDefault
+			relationship: cc5605b7-6a26-402a-b465-5a7b011d61ae
+			defaultHierarchy: LocalDateTable_45825c32-5b11-41e2-8bf5-05964a9541b2.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dlunchend
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 93556a67-e7d5-4930-af7b-ebdf292f18ba
+		summarizeBy: none
+		sourceColumn: dlunchend
+
+		variation Variation
+			isDefault
+			relationship: bf0d62c2-8a40-4ed8-ac62-34ec137bc00c
+			defaultHierarchy: LocalDateTable_7f9e8346-6334-4652-91cb-1b1f8642eb7f.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dendtime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9d1ba2d6-7cc1-4004-a267-bdf5c579235e
+		summarizeBy: none
+		sourceColumn: dendtime
+
+		variation Variation
+			isDefault
+			relationship: 3ef5d80d-6b2d-49e1-9c06-6fc9c2ae0d6d
+			defaultHierarchy: LocalDateTable_55a46c97-2467-4525-9c46-48b18ea4800d.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nregular
+		dataType: double
+		lineageTag: 8b21de25-e46b-4a9f-afb9-fcdd6027d687
+		summarizeBy: sum
+		sourceColumn: nregular
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column novertime
+		dataType: double
+		lineageTag: 48a87777-a37f-474c-9def-badc9921164f
+		summarizeBy: sum
+		sourceColumn: novertime
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ndoubletime
+		dataType: double
+		lineageTag: 18095ad4-f0fa-42f4-ab65-1890241ccf52
+		summarizeBy: sum
+		sourceColumn: ndoubletime
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmisctypeid
+		dataType: int64
+		formatString: 0
+		lineageTag: e91ad189-23d0-4fb7-a861-850fd85b71d6
+		summarizeBy: sum
+		sourceColumn: nmisctypeid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nmischours
+		dataType: double
+		lineageTag: 3c3f4d02-ea88-4192-a46b-911564798c44
+		summarizeBy: sum
+		sourceColumn: nmischours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmiscamount
+		dataType: double
+		lineageTag: e98fad66-5712-417f-b4c2-990d6d87a433
+		summarizeBy: sum
+		sourceColumn: nmiscamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmiscamountbill
+		dataType: double
+		lineageTag: 4bafe061-e484-49c6-ac44-09ec78cccdea
+		summarizeBy: sum
+		sourceColumn: nmiscamountbill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lapproval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2a8a6910-d8e4-4030-9fe3-f7cf70f2569e
+		summarizeBy: none
+		sourceColumn: lapproval
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column napprovedby
+		dataType: int64
+		formatString: 0
+		lineageTag: 04cfb2e9-dd68-4257-8514-a42d3a756898
+		summarizeBy: sum
+		sourceColumn: napprovedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dapproved
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 60218c05-6a83-465e-bf67-7042bf4d9eec
+		summarizeBy: none
+		sourceColumn: dapproved
+
+		variation Variation
+			isDefault
+			relationship: e0232755-777a-4ff1-a6af-00997c4c8727
+			defaultHierarchy: LocalDateTable_348af019-4eb4-4757-92ff-df47674f7149.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nreportto
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bff108b-278f-405d-9264-1c11d50ed881
+		summarizeBy: sum
+		sourceColumn: nreportto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dweekend
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f49c2c6-21c7-444a-91dc-4180e28af11e
+		summarizeBy: none
+		sourceColumn: dweekend
+
+		variation Variation
+			isDefault
+			relationship: 108564f9-9b8e-47bf-9bbd-4cbae532c007
+			defaultHierarchy: LocalDateTable_4f94619c-6363-4a43-801d-32afb266b8ea.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column coutstatus
+		dataType: string
+		lineageTag: 79208760-d19b-4670-865f-56f69f8a5d00
+		summarizeBy: none
+		sourceColumn: coutstatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column csource
+		dataType: string
+		lineageTag: b3325762-e98c-4c74-92bb-2df5e00015d3
+		summarizeBy: none
+		sourceColumn: csource
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column npayrate
+		dataType: double
+		lineageTag: b56d4347-7172-4a79-bc52-6dfeaaa8ec75
+		summarizeBy: sum
+		sourceColumn: npayrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nbillrate
+		dataType: double
+		lineageTag: c52ab35e-5fb6-449c-a62d-f83d65cbf422
+		summarizeBy: sum
+		sourceColumn: nbillrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column notpayrate
+		dataType: double
+		lineageTag: e957519f-f114-4ca2-8cac-e447cf5cb9e1
+		summarizeBy: sum
+		sourceColumn: notpayrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ndtpayrate
+		dataType: double
+		lineageTag: 47b6ffbf-67c0-498b-a8d1-b9586dc616ce
+		summarizeBy: sum
+		sourceColumn: ndtpayrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column notbillrate
+		dataType: double
+		lineageTag: 90a9d65c-651f-493b-a7d0-162b4b649cf4
+		summarizeBy: sum
+		sourceColumn: notbillrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ndtbillrate
+		dataType: double
+		lineageTag: 6e0bc810-254a-45fd-8e52-7f31274e7dcc
+		summarizeBy: sum
+		sourceColumn: ndtbillrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column npremiumhours
+		dataType: double
+		lineageTag: 7f8005ba-e2d3-442d-9ddd-acbb03af5599
+		summarizeBy: sum
+		sourceColumn: npremiumhours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column npremiumpay
+		dataType: double
+		lineageTag: 4744183c-4047-4dbd-9485-f3355103a75f
+		summarizeBy: sum
+		sourceColumn: npremiumpay
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column npremiumbill
+		dataType: double
+		lineageTag: b000ec76-c3c7-4113-8fdb-856f4a724fe2
+		summarizeBy: sum
+		sourceColumn: npremiumbill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dschedulein
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c68479a3-0945-45ad-a501-cac580095f26
+		summarizeBy: none
+		sourceColumn: dschedulein
+
+		variation Variation
+			isDefault
+			relationship: 305e0d64-24e8-4292-9da3-67bacbeb4f9c
+			defaultHierarchy: LocalDateTable_be1c336b-2452-4e95-8943-9d4a1a594f41.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dscheduleout
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3f7ff6f1-51d1-4165-a124-7eb2d0abe101
+		summarizeBy: none
+		sourceColumn: dscheduleout
+
+		variation Variation
+			isDefault
+			relationship: 1a931b7c-6deb-4672-b04b-5361d7f1d040
+			defaultHierarchy: LocalDateTable_02fd1251-e584-4044-acd3-55d7b7788287.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dschedulelunchstart
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 15f65013-f5fc-4c83-b377-d658fe1bd358
+		summarizeBy: none
+		sourceColumn: dschedulelunchstart
+
+		variation Variation
+			isDefault
+			relationship: c6316922-ee8c-4565-b830-708b719c4091
+			defaultHierarchy: LocalDateTable_c04026af-53cc-484d-9976-4dd914c43805.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dschedulelunchend
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f479083c-b907-4731-a45f-dd336de1e888
+		summarizeBy: none
+		sourceColumn: dschedulelunchend
+
+		variation Variation
+			isDefault
+			relationship: f03fbe42-1cb2-4da8-b8f3-2d63e9b5b5e9
+			defaultHierarchy: LocalDateTable_362882f4-20ce-42a7-b207-7dc4f30ce1bc.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dactualin
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6ab06921-1ac2-4d9c-96dd-e27c88e1f2ca
+		summarizeBy: none
+		sourceColumn: dactualin
+
+		variation Variation
+			isDefault
+			relationship: eea518e4-3136-4a90-b7f6-a95545de4e66
+			defaultHierarchy: LocalDateTable_f4fdfbef-884e-4f43-863e-80ca1209fb47.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dactualout
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 32aa9ee7-2e4b-4016-b120-97b3b9a4eeae
+		summarizeBy: none
+		sourceColumn: dactualout
+
+		variation Variation
+			isDefault
+			relationship: 6ade3aa7-08e6-4970-9d91-757131279f96
+			defaultHierarchy: LocalDateTable_3832c79d-6942-42a5-b250-9421144ddfdc.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dactualluncstart
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8fc85087-9dc8-4a85-bbd0-d5d7fbfcefa9
+		summarizeBy: none
+		sourceColumn: dactualluncstart
+
+		variation Variation
+			isDefault
+			relationship: fca51967-b762-43f7-8aa7-ff8162baa4d0
+			defaultHierarchy: LocalDateTable_352a75e4-0b5f-4c76-bf5a-f7a407facebf.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dactuallunchend
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1041b40f-3eb1-4812-8b67-7c93885b4d3c
+		summarizeBy: none
+		sourceColumn: dactuallunchend
+
+		variation Variation
+			isDefault
+			relationship: 0976417a-4f45-40fe-9469-dd1913660693
+			defaultHierarchy: LocalDateTable_60503619-f078-4497-8bbc-18c30d6494dd.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lreject
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 24087546-ffb0-42be-9918-c1ede52bc8c6
+		summarizeBy: none
+		sourceColumn: lreject
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dreject
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3f5fce36-44f6-483a-a25e-c9400e98ad8c
+		summarizeBy: none
+		sourceColumn: dreject
+
+		variation Variation
+			isDefault
+			relationship: f93ec0aa-dbab-4ba8-95cf-1a6db248a616
+			defaultHierarchy: LocalDateTable_240781d8-eb74-49d8-aa8b-b4b57873e9c4.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nrejectedby
+		dataType: int64
+		formatString: 0
+		lineageTag: 86791098-528a-47fb-bbe3-a199df7d9be3
+		summarizeBy: sum
+		sourceColumn: nrejectedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lbilled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 78d445bf-2d5e-45d4-94e7-5363c61df4ca
+		summarizeBy: none
+		sourceColumn: lbilled
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cbillbatch
+		dataType: string
+		lineageTag: f0a89084-65b4-4604-8848-b6e0867c0595
+		summarizeBy: none
+		sourceColumn: cbillbatch
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dbilled
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dbd8d574-9fac-4b4b-bdcb-b00d65e12f74
+		summarizeBy: none
+		sourceColumn: dbilled
+
+		variation Variation
+			isDefault
+			relationship: 85cf929a-49e1-409d-b28b-e54b72cf9588
+			defaultHierarchy: LocalDateTable_5db3c946-bcaa-4652-9cb2-60117617b47e.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cexportnum
+		dataType: string
+		lineageTag: 61f0429f-befb-4d52-aaf2-33845758e4d8
+		summarizeBy: none
+		sourceColumn: cexportnum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cexportbatchname
+		dataType: string
+		lineageTag: b3d7d111-e855-442b-8ff1-09b87eb01805
+		summarizeBy: none
+		sourceColumn: cexportbatchname
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column drecordinsert
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 20f1723f-e8f2-4729-b34f-98afe8cf766b
+		summarizeBy: none
+		sourceColumn: drecordinsert
+
+		variation Variation
+			isDefault
+			relationship: 73e3a711-658c-413f-8a09-641407ab36f7
+			defaultHierarchy: LocalDateTable_ec7694af-e13a-4a93-be11-ee6900ab7a86.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lvendorexport
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a915d17d-dfbb-4cab-9873-9a8518659a3a
+		summarizeBy: none
+		sourceColumn: lvendorexport
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dvendorexport
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5c35dea5-377c-45ba-a4de-f952eb66f35d
+		summarizeBy: none
+		sourceColumn: dvendorexport
+
+		variation Variation
+			isDefault
+			relationship: 8f413b33-3a9a-4be7-85da-89ee4688fed7
+			defaultHierarchy: LocalDateTable_79cd430c-1de7-4d95-beab-d331ee15e130.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cvendorexport
+		dataType: string
+		lineageTag: 4fc61841-a52c-495c-85d1-a86d460d58ff
+		summarizeBy: none
+		sourceColumn: cvendorexport
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lpvendorexport
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f222d9fb-f349-423c-b49b-cd9ed354aa95
+		summarizeBy: none
+		sourceColumn: lpvendorexport
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dpvendorexport
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: edc7f1ff-3eeb-490d-8be1-a5baa1e212e2
+		summarizeBy: none
+		sourceColumn: dpvendorexport
+
+		variation Variation
+			isDefault
+			relationship: cdccf4d9-e534-4ad7-a1bd-f7a3fcf9a6ea
+			defaultHierarchy: LocalDateTable_5e396f72-4fdc-4152-92a5-32e6ebde234d.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpvendorexport
+		dataType: string
+		lineageTag: 2cdecceb-6848-46ba-8890-39ec2fdd89c4
+		summarizeBy: none
+		sourceColumn: cpvendorexport
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ninclusivebill
+		dataType: double
+		lineageTag: 7635ed54-8320-4a5d-91b6-ecc31f376968
+		summarizeBy: sum
+		sourceColumn: ninclusivebill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ninclusiveotbill
+		dataType: double
+		lineageTag: 54d5b2e4-0be8-449c-8aee-d9a42d52635c
+		summarizeBy: sum
+		sourceColumn: ninclusiveotbill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ninclusivedtbill
+		dataType: double
+		lineageTag: 49561172-c9fc-4074-8f88-4e1d188c9712
+		summarizeBy: sum
+		sourceColumn: ninclusivedtbill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nagile1discount
+		dataType: double
+		lineageTag: 874200ec-c87c-4a21-b07e-1c72eac27a56
+		summarizeBy: sum
+		sourceColumn: nagile1discount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nvendordiscount
+		dataType: double
+		lineageTag: dc15d85d-1bc3-4dde-8946-5f7f2c98b424
+		summarizeBy: sum
+		sourceColumn: nvendordiscount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nvendordiscountmarkup
+		dataType: double
+		lineageTag: 0b992100-01ee-4947-a4a2-45a2651e57f0
+		summarizeBy: sum
+		sourceColumn: nvendordiscountmarkup
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ldisplaytomanager
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: aef2b190-c269-4efd-b35e-7eee520082a5
+		summarizeBy: none
+		sourceColumn: ldisplaytomanager
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lvendorapproval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2506ad38-5fb8-4b68-aace-80010cca534d
+		summarizeBy: none
+		sourceColumn: lvendorapproval
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvendoruserid
+		dataType: int64
+		formatString: 0
+		lineageTag: 623a5c88-a316-4ba6-b67e-9c27ce7aacf6
+		summarizeBy: sum
+		sourceColumn: nvendoruserid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dvendorapproved
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8486e89-0184-4cf6-9d0d-445e3deb64ae
+		summarizeBy: none
+		sourceColumn: dvendorapproved
+
+		variation Variation
+			isDefault
+			relationship: 1ed65631-d76b-4dff-beba-132b4b8d96ba
+			defaultHierarchy: LocalDateTable_eb3f92ef-b569-4c18-a783-e45a6e3d32da.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ladjusted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0b8c7e72-1713-4f5b-b7c8-9e5ae8af499a
+		summarizeBy: none
+		sourceColumn: ladjusted
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dadjusted
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b4c90c99-9e86-42e1-95bf-a3de59998597
+		summarizeBy: none
+		sourceColumn: dadjusted
+
+		variation Variation
+			isDefault
+			relationship: 7d3abc0d-5911-4bea-9a4e-06ed2535d380
+			defaultHierarchy: LocalDateTable_277e7341-cfc9-44af-884b-5da1c128cb73.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nadjustedby
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b725604-b1fd-4527-bb19-d6e812f9dce7
+		summarizeBy: sum
+		sourceColumn: nadjustedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ccomments
+		dataType: string
+		lineageTag: dded9fd9-71a6-49b4-b70a-3b739a76256e
+		summarizeBy: none
+		sourceColumn: ccomments
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cadjcomments
+		dataType: string
+		lineageTag: 165483bd-9ba3-4aaa-8249-0275a5fbdf64
+		summarizeBy: none
+		sourceColumn: cadjcomments
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ndiscountpercentage
+		dataType: double
+		lineageTag: 84607415-0086-4f1a-ab5a-e0ff356c78cf
+		summarizeBy: sum
+		sourceColumn: ndiscountpercentage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nagile1discountpercentage
+		dataType: double
+		lineageTag: 513840ed-7631-47e1-bd71-3646d72fedb6
+		summarizeBy: sum
+		sourceColumn: nagile1discountpercentage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lvendorreject
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 577100cf-a07f-4b58-b811-025e816cf27c
+		summarizeBy: none
+		sourceColumn: lvendorreject
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dvendorreject
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: eb8be071-259b-4830-a58e-124bba00648e
+		summarizeBy: none
+		sourceColumn: dvendorreject
+
+		variation Variation
+			isDefault
+			relationship: 072abfbf-55e6-4eef-8273-f75d5ae9462d
+			defaultHierarchy: LocalDateTable_93c9bba5-aa46-4748-9453-cc865e04fe8b.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvendorreject
+		dataType: int64
+		formatString: 0
+		lineageTag: 84b7e05a-4435-4396-b3f8-0900bc098483
+		summarizeBy: sum
+		sourceColumn: nvendorreject
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ncreatedby
+		dataType: int64
+		formatString: 0
+		lineageTag: d9835395-a9d6-417f-af70-c7248b0c2c85
+		summarizeBy: sum
+		sourceColumn: ncreatedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ccreatedby
+		dataType: string
+		lineageTag: 27d9840d-5fbe-4669-8b80-41b09649b3e4
+		summarizeBy: none
+		sourceColumn: ccreatedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ladjustedhistory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 24aff7c0-0923-4a5e-a958-61b4327b06f5
+		summarizeBy: none
+		sourceColumn: ladjustedhistory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ctaplinenumber
+		dataType: string
+		lineageTag: a34ac54e-cd50-4be1-878f-8610917a3c93
+		summarizeBy: none
+		sourceColumn: ctaplinenumber
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lvendorrequest
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 79519ad6-0d8f-46aa-9046-ee2a77d349be
+		summarizeBy: none
+		sourceColumn: lvendorrequest
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lcalculatedone
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 09f0a7d2-0d7e-4304-abcd-d0b681f44f6d
+		summarizeBy: none
+		sourceColumn: lcalculatedone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cprojectphasecode
+		dataType: string
+		lineageTag: 31521c10-cb6b-4f91-bd9b-2058269942ca
+		summarizeBy: none
+		sourceColumn: cprojectphasecode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nmgmtfeeamount
+		dataType: double
+		lineageTag: 46e3574f-c1cb-464b-83b4-31865dd4bca4
+		summarizeBy: sum
+		sourceColumn: nmgmtfeeamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmgmtfeepercentage
+		dataType: double
+		lineageTag: ab168a55-8afa-4ca5-89ec-f6c223a0ff61
+		summarizeBy: sum
+		sourceColumn: nmgmtfeepercentage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nsaletaxamount
+		dataType: double
+		lineageTag: 1b2a8029-45dc-4fe9-a242-9c3ac6d794be
+		summarizeBy: sum
+		sourceColumn: nsaletaxamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nsaletaxburden
+		dataType: double
+		lineageTag: 2e6df2fb-717c-4812-9184-e53c87cd5bc7
+		summarizeBy: sum
+		sourceColumn: nsaletaxburden
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lnobill
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8c18e0e8-4076-4718-92de-69f4f67dff7b
+		summarizeBy: none
+		sourceColumn: lnobill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nearlypaydiscount
+		dataType: double
+		lineageTag: 4cf61394-2b05-43d6-b537-13261a0608cb
+		summarizeBy: sum
+		sourceColumn: nearlypaydiscount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column llocked
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 168e1791-beab-4923-b3e2-c08154dff753
+		summarizeBy: none
+		sourceColumn: llocked
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column capprovedby
+		dataType: string
+		lineageTag: 5ca20e6c-725a-4cfa-b6eb-10a77f02a0f5
+		summarizeBy: none
+		sourceColumn: capprovedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lnotaccepted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ec55d37f-7f8c-4579-8b00-5ef0ab0d2784
+		summarizeBy: none
+		sourceColumn: lnotaccepted
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ldonotsend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cf9e6ad2-167f-4a7b-9176-405b4adea583
+		summarizeBy: none
+		sourceColumn: ldonotsend
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lchargeotasregularrate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b30d9258-3a5e-4593-b250-3119872afb19
+		summarizeBy: none
+		sourceColumn: lchargeotasregularrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ntaxdiscount
+		dataType: double
+		lineageTag: 047374a4-e248-4996-b7c4-3adfd7ee6e11
+		summarizeBy: sum
+		sourceColumn: ntaxdiscount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ntaxdiscountamount
+		dataType: double
+		lineageTag: a4d2e189-d09b-44e0-a4f0-ba70e4ea28df
+		summarizeBy: sum
+		sourceColumn: ntaxdiscountamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nlengthdiscount
+		dataType: double
+		lineageTag: b828eb4e-dae5-4fad-ad64-706a492efb7a
+		summarizeBy: sum
+		sourceColumn: nlengthdiscount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nlengthdiscountamount
+		dataType: double
+		lineageTag: 83aa3233-1525-4934-92e7-2f226c6a131d
+		summarizeBy: sum
+		sourceColumn: nlengthdiscountamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lmonthlybilling
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f71ea625-a092-484e-b830-d1bfd1332eaa
+		summarizeBy: none
+		sourceColumn: lmonthlybilling
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lnomanagementfee
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 64f79237-e907-409d-96cd-a67038fd0419
+		summarizeBy: none
+		sourceColumn: lnomanagementfee
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lbillingonhold
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0744db52-021a-48c7-bd38-08593f1819c9
+		summarizeBy: none
+		sourceColumn: lbillingonhold
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nassignmentid
+		dataType: int64
+		formatString: 0
+		lineageTag: 44be14cf-8219-49cf-8f55-f9c846ab90a3
+		summarizeBy: none
+		sourceColumn: nassignmentid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvendorrebatepercent
+		dataType: double
+		lineageTag: 2142cb28-32fa-423b-a07d-c051abc767c0
+		summarizeBy: sum
+		sourceColumn: nvendorrebatepercent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nvendorrebateamount
+		dataType: double
+		lineageTag: 1235d0a3-6d99-4a5d-9f0c-50486a49865b
+		summarizeBy: sum
+		sourceColumn: nvendorrebateamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ninstantdiscountpercent
+		dataType: double
+		lineageTag: 973f051c-3be1-4091-8445-17a5b689c12d
+		summarizeBy: sum
+		sourceColumn: ninstantdiscountpercent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ninstantdiscountamount
+		dataType: double
+		lineageTag: b1ee4871-d037-43f4-9293-1498aca6aee3
+		summarizeBy: sum
+		sourceColumn: ninstantdiscountamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lbillonly
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 61e49400-342a-4664-94c1-e71b5a70f143
+		summarizeBy: none
+		sourceColumn: lbillonly
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nsystemfeeamount
+		dataType: double
+		lineageTag: 1c2209eb-623c-435b-b177-a4408e1063ed
+		summarizeBy: sum
+		sourceColumn: nsystemfeeamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nsystemfeepercent
+		dataType: double
+		lineageTag: 74edb3c8-ca15-4e31-a378-47ec610989b7
+		summarizeBy: sum
+		sourceColumn: nsystemfeepercent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nautoinsertedby
+		dataType: int64
+		formatString: 0
+		lineageTag: 13cd604d-56d7-438b-bac5-ce3966b578a4
+		summarizeBy: sum
+		sourceColumn: nautoinsertedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nparenttimecardentryid
+		dataType: int64
+		formatString: 0
+		lineageTag: be87c6f0-1701-41a7-b25b-c3cf23475ad3
+		summarizeBy: sum
+		sourceColumn: nparenttimecardentryid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ntenurediscountpercent
+		dataType: double
+		lineageTag: 97de9c15-e997-4c90-8b85-8f163dde8fe3
+		summarizeBy: sum
+		sourceColumn: ntenurediscountpercent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ntenurediscountamount
+		dataType: double
+		lineageTag: 4239e534-2709-45b5-b3d2-e5625c8b3a99
+		summarizeBy: sum
+		sourceColumn: ntenurediscountamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lmovedfromotherweek
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a4c9daed-f3b7-4c76-add1-494f90ddc4ce
+		summarizeBy: none
+		sourceColumn: lmovedfromotherweek
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvatamount
+		dataType: double
+		lineageTag: 9837fb91-dbac-4b84-ace3-5032f64ba264
+		summarizeBy: sum
+		sourceColumn: nvatamount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nbillingcycle
+		dataType: int64
+		formatString: 0
+		lineageTag: 288d2f35-c0ba-48be-84af-21874238dfa3
+		summarizeBy: sum
+		sourceColumn: nbillingcycle
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cworklocationname
+		dataType: string
+		lineageTag: 7b0f7400-4540-4035-bd17-386a6d2d8151
+		summarizeBy: none
+		sourceColumn: cworklocationname
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ccountry
+		dataType: string
+		lineageTag: e48c0104-d011-47e4-9909-e30ee050706f
+		summarizeBy: none
+		sourceColumn: ccountry
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cstate
+		dataType: string
+		lineageTag: 0c519997-f5dc-4582-b400-85d4916a08b4
+		summarizeBy: none
+		sourceColumn: cstate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column czipcode
+		dataType: string
+		lineageTag: 7f6f0eb9-973e-4786-b2f0-168727c57122
+		summarizeBy: none
+		sourceColumn: czipcode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nreportto2
+		dataType: int64
+		formatString: 0
+		lineageTag: 863d3344-14dc-4006-8f71-ce62d90a9a49
+		summarizeBy: sum
+		sourceColumn: nreportto2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lapproval1
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a66bbe43-c841-4811-a15d-4f832fc1ebcf
+		summarizeBy: none
+		sourceColumn: lapproval1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column napprovedby1
+		dataType: int64
+		formatString: 0
+		lineageTag: 426792e0-db5d-4585-b132-fb6151745ee3
+		summarizeBy: sum
+		sourceColumn: napprovedby1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dapproved1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cdfbd4f4-3755-4ce3-a3c6-d3f8c8a332c9
+		summarizeBy: none
+		sourceColumn: dapproved1
+
+		variation Variation
+			isDefault
+			relationship: 2844882a-47b0-4efe-a103-997cdcb077cd
+			defaultHierarchy: LocalDateTable_f3495900-b1c7-4df0-8345-c4ca693cd26b.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column capprovedby1
+		dataType: string
+		lineageTag: 6474e30f-fd65-45d6-95de-7f210294b34d
+		summarizeBy: none
+		sourceColumn: capprovedby1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lapproval2
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e3913ab8-e9e4-453e-9c0a-cbfa5b264eb6
+		summarizeBy: none
+		sourceColumn: lapproval2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column napprovedby2
+		dataType: int64
+		formatString: 0
+		lineageTag: d0a2feaa-cd70-4577-a5c3-4c02d8d107e8
+		summarizeBy: sum
+		sourceColumn: napprovedby2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dapproved2
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 94fd1bfd-1077-4732-8433-be1c54af8961
+		summarizeBy: none
+		sourceColumn: dapproved2
+
+		variation Variation
+			isDefault
+			relationship: 3c5df30a-2687-4d57-9af9-37b1347b1bfb
+			defaultHierarchy: LocalDateTable_daad099e-e3e2-46f0-8bb7-5996d01c4e45.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column capprovedby2
+		dataType: string
+		lineageTag: 94f80dd6-16bf-429a-b9e3-507f3cedd58a
+		summarizeBy: none
+		sourceColumn: capprovedby2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lreject1
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c0e5d9f5-ed0e-456c-be66-cf55b6c655ee
+		summarizeBy: none
+		sourceColumn: lreject1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nrejectedby1
+		dataType: int64
+		formatString: 0
+		lineageTag: 82e57533-0465-4eea-ac5a-35a1a15bbb53
+		summarizeBy: sum
+		sourceColumn: nrejectedby1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dreject1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f453ef9c-2d3e-463b-b0a7-bc57e98e9797
+		summarizeBy: none
+		sourceColumn: dreject1
+
+		variation Variation
+			isDefault
+			relationship: daec8dfb-fc80-47dd-9e28-ffbe144756be
+			defaultHierarchy: LocalDateTable_1d4d2e44-6c03-4634-b575-382de82cbd5a.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lreject2
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1aa4da60-07e1-434c-9c80-a263d69b60d7
+		summarizeBy: none
+		sourceColumn: lreject2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nrejectedby2
+		dataType: int64
+		formatString: 0
+		lineageTag: 2227c565-19b8-457b-9bea-ba5dc91de805
+		summarizeBy: sum
+		sourceColumn: nrejectedby2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dreject2
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a3ccbfdc-7145-42cb-864f-32cd6e43bb6d
+		summarizeBy: none
+		sourceColumn: dreject2
+
+		variation Variation
+			isDefault
+			relationship: 0a85a6b6-205c-407e-b959-fd02f9129993
+			defaultHierarchy: LocalDateTable_ef356726-ce3b-4263-a9c4-1ac2641e1565.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nmgmtfeeamount_client
+		dataType: double
+		lineageTag: 487244a9-2cae-4de8-ad79-c6f2ce544ee6
+		summarizeBy: sum
+		sourceColumn: nmgmtfeeamount_client
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmgmtfeepercentage_client
+		dataType: double
+		lineageTag: b25309b3-8779-4f6c-a5d7-babe2d4dddb9
+		summarizeBy: sum
+		sourceColumn: nmgmtfeepercentage_client
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lsubpvendorexport
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 92c69a78-57ee-47e5-8553-4ba6c84dea61
+		summarizeBy: none
+		sourceColumn: lsubpvendorexport
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dsubpvendorexport
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 16df286b-8fe8-499f-8df8-e175fed7e965
+		summarizeBy: none
+		sourceColumn: dsubpvendorexport
+
+		variation Variation
+			isDefault
+			relationship: c3c5df2d-2098-4d86-b017-8321d71feb98
+			defaultHierarchy: LocalDateTable_c9cf5989-b7ee-498f-8d56-556273f1f3ee.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column csubpvendorexport
+		dataType: string
+		lineageTag: ad338543-c112-456a-b813-35e073bc547b
+		summarizeBy: none
+		sourceColumn: csubpvendorexport
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column npaymenttermdiscountpercentage
+		dataType: double
+		lineageTag: 360c688b-05b5-4da8-918d-869f62d6bd29
+		summarizeBy: sum
+		sourceColumn: npaymenttermdiscountpercentage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmanagmentrate
+		dataType: double
+		lineageTag: ca0d95e1-f484-4837-a83b-26c7ca4230d9
+		summarizeBy: sum
+		sourceColumn: nmanagmentrate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nthirdpartysystemfeepercent
+		dataType: double
+		lineageTag: 30ecb715-f127-4ab0-a01f-0e8b73d38fe2
+		summarizeBy: sum
+		sourceColumn: nthirdpartysystemfeepercent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nrecruitingfeepercent
+		dataType: double
+		lineageTag: ef71385a-9120-47f1-8c2b-1ea3bac555f3
+		summarizeBy: sum
+		sourceColumn: nrecruitingfeepercent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nthirdpartysystemfee
+		dataType: double
+		lineageTag: ed5816b4-0791-412c-be34-32af7cae5824
+		summarizeBy: sum
+		sourceColumn: nthirdpartysystemfee
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nrecruitingfee
+		dataType: double
+		lineageTag: b543920d-565d-4ddc-ae1a-62d98fa4a8b3
+		summarizeBy: sum
+		sourceColumn: nrecruitingfee
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nrateupdateid
+		dataType: int64
+		formatString: 0
+		lineageTag: 84ae25e6-d7fd-4c89-ba43-528503e8c8be
+		summarizeBy: sum
+		sourceColumn: nrateupdateid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column crateupdatetable
+		dataType: string
+		lineageTag: b82824a0-929b-4d35-be3c-6d0248b9a01f
+		summarizeBy: none
+		sourceColumn: crateupdatetable
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nmiscamountbill_bill
+		dataType: double
+		lineageTag: 1cf729b2-281c-4e73-ae50-6b765ff2a21f
+		summarizeBy: sum
+		sourceColumn: nmiscamountbill_bill
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmiscamountbill_bill_with_tax
+		dataType: double
+		lineageTag: c3d90b57-5b25-43b7-8483-9ff174d87b35
+		summarizeBy: sum
+		sourceColumn: nmiscamountbill_bill_with_tax
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nmiscamountbill_with_tax
+		dataType: double
+		lineageTag: a4327afd-2ddf-4558-a41e-a4135d6e887c
+		summarizeBy: sum
+		sourceColumn: nmiscamountbill_with_tax
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cxrefcode
+		dataType: string
+		lineageTag: d208753b-9ace-476f-a347-64bf322651e7
+		summarizeBy: none
+		sourceColumn: cxrefcode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Timecard-171b2e20-0c47-4ae8-9bc1-3d16e10f6a11 = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "timecardentry",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Inserted Time" = Table.AddColumn(DataTable, "StartTime", each DateTime.Time([dstarttime]), type time),
+				    #"Inserted Time1" = Table.AddColumn(#"Inserted Time", "EndTime", each DateTime.Time([dendtime]), type time),
+				    #"Removed Columns" = Table.RemoveColumns(#"Inserted Time1",{"StartTime", "EndTime"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

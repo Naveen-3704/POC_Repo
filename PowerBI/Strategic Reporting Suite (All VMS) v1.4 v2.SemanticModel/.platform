@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Strategic Reporting Suite (All VMS) v1.4 v2"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "34e615db-938d-4d47-9ebe-9e2233f2c9f8"
+  }
+}

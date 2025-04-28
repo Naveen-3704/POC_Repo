@@ -1,0 +1,11 @@
+relationship a45ee2b7-4173-1a3e-4dbb-1326fe8428ec
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: ReportAccess.'Report Name'
+	toColumn: ReportNav.'Report Name'
+
+relationship 16fe4045-d35e-403c-8ecc-a702b32f0f03
+	joinOnDateBehavior: datePartOnly
+	fromColumn: financials.Date
+	toColumn: LocalDateTable_196b4fcf-e407-415d-a9ac-02fa39b76d8b.Date
+

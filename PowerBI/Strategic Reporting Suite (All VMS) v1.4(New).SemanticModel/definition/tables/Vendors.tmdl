@@ -1,0 +1,133 @@
+table Vendors
+	lineageTag: fd286424-f758-4259-bc99-0b70418e7e07
+
+	column nvendorlocationid
+		dataType: int64
+		formatString: 0
+		lineageTag: e5e9ea16-ff72-4ff1-bdb3-678bf9e6c55c
+		summarizeBy: none
+		sourceColumn: nvendorlocationid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendor
+		dataType: string
+		lineageTag: 162420c1-80d8-4840-969d-12696d5ccf32
+		summarizeBy: none
+		sourceColumn: Vendor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"Vendors","TableItemName":"Vendor (Payroll)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'Diversity Class'
+		dataType: string
+		lineageTag: 45016681-e2f2-40a2-807d-e7e77263e1be
+		summarizeBy: none
+		sourceColumn: Diversity Class
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Vendor'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a9f3dc69-cf48-4f9e-918b-17b4a7235e21
+		summarizeBy: none
+		sourceColumn: Active Vendor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Diverse Vendor'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d53a4d38-45ac-45a6-845c-751797e64494
+		summarizeBy: none
+		sourceColumn: Diverse Vendor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvendorid
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cd6a57c-1a44-4b7f-8687-8fbcfe4bfc44
+		summarizeBy: sum
+		sourceColumn: nvendorid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Diverse Vendor Slicer' = IF(Vendors[Diverse Vendor] = TRUE(), "Diverse", "Non-Diverse")
+		lineageTag: 5e1f57f4-fab7-4253-8868-ce4572428985
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vendor (Payroll)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('Vendors'[Vendor]),
+				"(Blank)",
+				'Vendors'[Vendor] IN {"AllsourcePPS, Inc."},
+				"Payroll",
+				"Other"
+			)
+		lineageTag: b7cc11c6-84de-4377-8efe-dd82ca28f51d
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "Vendors"
+				          }
+				        },
+				        "Property": "Vendor"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"v","Entity":"Vendors"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"v"}},"Property":"Vendor"}}],"GroupItems":[{"DisplayName":"(Blank)","BlankDefaultPlaceholder":true},{"DisplayName":"Payroll","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"v"}},"Property":"Vendor"}}],"Values":[[{"Literal":{"Value":"'AllsourcePPS, Inc.'"}}]]}}},{"DisplayName":"Other"}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Vendors-657bc879-35d5-400d-9ff6-beeb7c183aa1 = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "vendorlocation_desc",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(DataTable, each [nlanguageid] = 1),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"nvendorlocationid", "clocationname"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"nvendorlocationid"}, vendorlocation, {"nvendorlocationid"}, "vendorlocation", JoinKind.LeftOuter),
+				    #"Expanded vendorlocation" = Table.ExpandTableColumn(#"Merged Queries", "vendorlocation", {"nvendorid"}, {"nvendorid"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded vendorlocation", {"nvendorid"}, vendor, {"nvendorid"}, "vendor", JoinKind.LeftOuter),
+				    #"Expanded vendor" = Table.ExpandTableColumn(#"Merged Queries1", "vendor", {"cdiversitybusinessclass", "lactive", "ldiversitysupplier"}, {"cdiversitybusinessclass", "lactive", "ldiversitysupplier"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded vendor",{{"clocationname", "Vendor"}, {"cdiversitybusinessclass", "Diversity Class"}, {"lactive", "Active Vendor"}, {"ldiversitysupplier", "Diverse Vendor"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

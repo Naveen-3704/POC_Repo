@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "Bookmarkedae62bd35e0262cf702"
+    },
+    {
+      "name": "Bookmark9e3d08aa61ecdc60953f"
+    },
+    {
+      "name": "Bookmark7e4d015c761ccd17061c"
+    },
+    {
+      "name": "Bookmark01c6bcb679fa6f3d1171"
+    },
+    {
+      "name": "Bookmark90e624f67dc0c0fe32a2"
+    },
+    {
+      "name": "Bookmark64ce30399ba61c2631c3"
+    },
+    {
+      "name": "Bookmark6f4b4039960ef46337cf"
+    },
+    {
+      "name": "f138a731bbad7786a143",
+      "displayName": "Invoice",
+      "children": [
+        "af77d291920ec0c70ce8",
+        "9bd822406b902db0cadc"
+      ]
+    },
+    {
+      "name": "a4b7df95e18b1599272f"
+    },
+    {
+      "name": "5054de9f986949305577"
+    }
+  ]
+}

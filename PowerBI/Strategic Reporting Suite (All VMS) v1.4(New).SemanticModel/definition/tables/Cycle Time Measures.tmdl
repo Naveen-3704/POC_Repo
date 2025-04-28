@@ -1,0 +1,195 @@
+table 'Cycle Time Measures'
+	lineageTag: 4ae2c84f-e5e7-4506-b724-f463e2047280
+
+	measure Text-CycleTimeCalc =
+			
+			"Note: all Cycle Time calculations are in " & MIN('Cycle Time Calculation Select'[Cycle Time Calculation Select])
+		lineageTag: e9e99fa9-8f78-4d00-8888-724844ccc77c
+
+		changedProperty = IsHidden
+
+	measure 'AgileOne Time' =
+			
+			CALCULATE(AVERAGE('Time to Fill'[Approved:Received]),
+			    jobrequest[Requisition Approved Date] <> BLANK(),
+			    assignment[Job Received Date] <> BLANK(),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        assignment[Hire Date]
+			    )
+			)
+		formatString: 0.00
+		lineageTag: 86d46ed6-8cc2-45cc-8870-b43f8df7dd57
+
+		changedProperty = IsHidden
+
+	measure 'Approval Time' =
+			
+			CALCULATE(AVERAGE('Time to Fill'[Create:Approved]),
+			    jobrequest[Requisition Create Date] <> BLANK(),
+			    jobrequest[Requisition Approved Date] <> BLANK(),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        assignment[Hire Date]
+			    )
+			)
+		formatString: 0.00
+		lineageTag: 88541ad0-fdb0-4d92-b7ad-ecae2af4ecf4
+
+		changedProperty = IsHidden
+
+	measure 'Client Time' =
+			
+			CALCULATE(AVERAGE('Time to Fill'[Submitted:Hired]),
+			    assignment[Candidate Submitted Date] <> BLANK(),
+			    assignment[Hire Date] <> BLANK(),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        assignment[Hire Date]
+			    )
+			)
+		formatString: 0.00
+		lineageTag: 064fb61d-c0e1-4920-afd8-1a749368be56
+
+		changedProperty = IsHidden
+
+	measure 'Supplier Time' =
+			
+			CALCULATE(AVERAGE('Time to Fill'[Received:Submitted]),
+			    assignment[Job Received Date] <> BLANK(),
+			    assignment[Candidate Submitted Date] <> BLANK(),
+			    assignment[Hire Date] <> BLANK(),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        assignment[Hire Date]
+			    )
+			)
+		formatString: 0.00
+		lineageTag: c5bec490-137b-4370-807d-7930f768a427
+
+		changedProperty = IsHidden
+
+	measure 'Time to Fill' =
+			
+			CALCULATE(AVERAGE('Time to Fill'[Approved:Hired]),
+			    jobrequest[Requisition Approved Date] <> BLANK(),
+			    assignment[Hire Date] <> BLANK(),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        assignment[Hire Date]
+			    )
+			)
+		formatString: 0.00
+		lineageTag: 4e478608-c2cc-4490-a55d-1e6921ba7c8e
+
+		changedProperty = IsHidden
+
+	measure BusinessDaysOrCalendarDays =
+			
+			IF(
+			    MIN('Cycle Time Calculation Select'[Cycle Time Calculation Select]) = "Business Days",
+			    MAX(0,SUM('Date Table'[WorkdayFlag])-1),
+			    COUNT('Date Table'[Date])-1
+			)
+		formatString: 0
+		lineageTag: bb3564b4-2367-4f63-af15-8d34ba0457b9
+
+		changedProperty = IsHidden
+
+	measure UI-Cyc_01 =
+			
+			switch(SELECTEDVALUE('UI-Slicer Selection'[User Selection]),
+			    "Time to Fill",[Time to Fill],
+			    "AgileOne Time",[AgileOne Time],
+			    "Supplier Time",[Supplier Time],
+			    "Client Time",[Client Time],
+			    "Null")
+		formatString: 0.00
+		lineageTag: 189705ea-2d4e-4469-8f63-d5807ce1b292
+
+		changedProperty = IsHidden
+
+	measure 'UI-Cyc_01 SPLY' =
+			
+			calculate([UI-Cyc_01],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		lineageTag: 56b0e424-6f82-46c3-8e0f-fe7368d2cd33
+
+		changedProperty = IsHidden
+
+	measure 'UI-Cyc_01 YOY %' =
+			
+			if(or([UI-Cyc_01] = blank(), [UI-Cyc_01 SPLY] = BLANK()), BLANK(),
+			([UI-Cyc_01] - [UI-Cyc_01 SPLY]) / [UI-Cyc_01 SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 81263fb4-af79-40c2-b190-0da27e970c88
+
+		changedProperty = IsHidden
+
+	measure 'Received to Hire Time' =
+			
+			CALCULATE(AVERAGE('Time to Fill'[Received:Hired]),
+			    Assignment[Job Received Date] <> BLANK(),
+			    Assignment[Hire Date] <> BLANK(),
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        Assignment[Hire Date]
+			    )
+			)
+		lineageTag: 3e7f2bbe-6ed9-4147-8eda-acb5ba6712b3
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Received to First Submitted' =
+			
+			var RequestTable =
+			    FILTER(
+			        SUMMARIZE(
+			            CALCULATETABLE( assignment,
+			                assignment[Job Received Date] <> BLANK(),
+			                assignment[Candidate Submitted Date] <> BLANK()
+			            ),
+			            assignment[nrequestid],
+			            "Received", MIN(assignment[Job Received Date]),
+			            "1st Submit", MIN(assignment[Candidate Submitted Date])
+			        ),
+			        [1st Submit] >= FIRSTDATE('Date Table'[Date]) &&
+			        [1st Submit] <= LASTDATE('Date Table'[Date])
+			    )
+			var Result =
+			    AVERAGEX( RequestTable,
+			        CALCULATE( [BusinessDaysOrCalendarDays],
+			            DATESBETWEEN('Date Table'[Date], [Received], [1st Submit])
+			        )
+			    )
+			
+			return
+			Result
+		lineageTag: 9e4d3fc5-d6df-41f9-b99c-b522d8afd41e
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Conversion Score' = BLANK()
+		formatString: 0
+		lineageTag: 297bed16-4b07-4e08-a9b2-d10bf7b4705e
+
+		changedProperty = IsHidden
+
+	partition 'Cycle Time Measures-4c2939d6-6c88-4ea6-9c54-8f9dd23aebf8' = m
+		mode: import
+		queryGroup: MEASURES
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

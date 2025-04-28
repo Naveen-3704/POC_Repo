@@ -1,0 +1,76 @@
+table 'Special Bills (2)'
+	lineageTag: f59db13a-a0a8-4b50-a0e1-4a7e7d0790b1
+
+	column 'Data.nrequestid'
+		dataType: string
+		lineageTag: 64e35ec6-0a95-4cfd-ae17-884aa476fecd
+		summarizeBy: none
+		sourceColumn: Data.nrequestid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCT
+		dataType: string
+		lineageTag: f803af01-17d5-47bc-9ce2-601ebc0d7bc0
+		summarizeBy: none
+		sourceColumn: ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COSTR
+		dataType: string
+		lineageTag: 0a503d59-41c4-472b-888f-7d8db8c3de7c
+		summarizeBy: none
+		sourceColumn: COSTR
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSID
+		dataType: string
+		lineageTag: be729226-6466-4bbd-bce8-99c959814f14
+		summarizeBy: none
+		sourceColumn: POSID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BU
+		dataType: string
+		lineageTag: cc0e3958-547e-4cbc-b9dd-a506841e09d2
+		summarizeBy: none
+		sourceColumn: BU
+
+		annotation SummarizationSetBy = Automatic
+
+	column OFSIT
+		dataType: string
+		lineageTag: 6c3ee130-f6fd-42b6-95d8-1a0eab894bd5
+		summarizeBy: none
+		sourceColumn: OFSIT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Special Bills (2)' = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "jobspecialbill",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    #"Filtered Rows1" = Table.SelectRows(DataFlow, each ([entity] = "jobspecialbill")),
+				    #"Expanded Data" = Table.ExpandTableColumn(#"Filtered Rows1", "Data", {"njobsbid", "nrequestid", "csbcode", "cvalue", "lsplit", "lmultiplepredefinevalue", "dmodified", "nmodifiedbywho", "nmodifiedby", "ncreatedbywho", "ncreatedby", "dcreated"}, {"Data.njobsbid", "Data.nrequestid", "Data.csbcode", "Data.cvalue", "Data.lsplit", "Data.lmultiplepredefinevalue", "Data.dmodified", "Data.nmodifiedbywho", "Data.nmodifiedby", "Data.ncreatedbywho", "Data.ncreatedby", "Data.dcreated"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Expanded Data", {"Data.csbcode"}, globalspecialbill_desc, {"csbcode"}, "globalspecialbill_desc", JoinKind.LeftOuter),
+				    #"Expanded globalspecialbill_desc" = Table.ExpandTableColumn(#"Merged Queries", "globalspecialbill_desc", {"cdesc"}, {"cdesc"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Expanded globalspecialbill_desc",{"Data.nrequestid", "Data.csbcode", "Data.cvalue"}),
+				    #"Pivoted Column" = Table.Pivot(#"Removed Other Columns", List.Distinct(#"Removed Other Columns"[Data.csbcode]), "Data.csbcode", "Data.cvalue")
+				in
+				    #"Pivoted Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

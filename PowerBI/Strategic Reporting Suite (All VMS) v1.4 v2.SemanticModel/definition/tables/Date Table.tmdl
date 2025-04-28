@@ -1,0 +1,97 @@
+table 'Date Table'
+	lineageTag: 91ef85d5-568a-4d6d-b854-cffa2b50e0a4
+
+	column Date
+		formatString: mm/dd/yyyy
+		lineageTag: 52c650cc-d8a3-48f7-92b2-c3245d4146c1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 4c146b6b-18a1-4caa-b659-c92065aab2f5
+			defaultHierarchy: LocalDateTable_45d61b71-7d25-423f-8ac6-5d0f4fe622f7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Day
+		formatString: 0
+		lineageTag: 68fd139b-7af1-4294-a86c-50d7f177eb7f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: 7bafd0bc-fa22-4451-bc3b-a03e321c52c9
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 7c1f240c-0ec6-4a16-810b-d6b4c90b2e1e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Workday
+		formatString: 0
+		lineageTag: 356fe730-7221-44a8-aac2-105f0c484c40
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Workday]
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkdayFlag
+		formatString: 0
+		lineageTag: 3fae9f3b-16e7-48c0-8e1b-79b7a1f3e59a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [WorkdayFlag]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Offset' = DATEDIFF(TODAY(), 'Date Table'[Date], QUARTER)
+		formatString: 0
+		lineageTag: 14aa9569-8bd6-444a-9817-dadf8c0566cd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter = QUARTER('Date Table'[Date])
+		formatString: 0
+		lineageTag: 8aa29e4b-6505-476d-81ba-d4208f788fb5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Offset' = DATEDIFF(TODAY(), 'Date Table'[Date], YEAR)
+		formatString: 0
+		lineageTag: 822f89f0-0b63-42c6-ad1e-2bfc62481939
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Table-4dbfda6e-95fb-45e5-b5fd-0116d7b4f260' = calculated
+		mode: import
+		source =
+				ADDCOLUMNS(
+				    CALENDAR(DATE(2007,1,1),date(YEAR(TODAY()),MONTH(TODAY())+1,1)-1),
+				    "Day", DAY([Date]),
+				    "Month", MONTH([Date]),
+				    "Year", YEAR([DATE]),
+				    "Workday",WEEKDAY([DATE],2),
+				    "WorkdayFlag",IF(WEEKDAY([DATE],2)<6,1,0)
+				)
+

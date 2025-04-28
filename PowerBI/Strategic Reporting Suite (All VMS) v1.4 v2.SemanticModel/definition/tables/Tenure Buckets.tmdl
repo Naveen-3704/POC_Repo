@@ -1,0 +1,64 @@
+table 'Tenure Buckets'
+	lineageTag: cea8503f-54b2-4b0c-b896-867d856dc30d
+
+	column Bucket
+		dataType: string
+		lineageTag: cf07ba53-7504-486b-b162-a6fd9ee45333
+		summarizeBy: none
+		sourceColumn: Bucket
+		sortByColumn: 'Max Days'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Max Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 47f09107-4fe6-4742-9eea-4538e400d7f3
+		summarizeBy: none
+		sourceColumn: Max Days
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Min Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: ae55ed9d-00ed-4110-8506-f559d2f4e8d2
+		summarizeBy: none
+		sourceColumn: Min Days
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 87292f30-26af-421f-86fe-687011ba74bf
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tenure Buckets-569cf5a8-6d47-493a-8dd1-b8dde6e2005b' = m
+		mode: import
+		queryGroup: MAPPING\manual
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMtA1U8jNL1bSUTIAYkMLMKkUqxOtZKZraASVgggbm4FII7CkoZGukQlUFiJubgRWA5Y1MtGGykFEDQ1gAMgxASsJ9fP28w/3A/J1DeFSIGyqFBsLAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Bucket = _t, #"Min Days" = _t, #"Max Days" = _t, Index = _t]),
+				    #"Changed Type1" = Table.TransformColumnTypes(Source,{{"Index", Int64.Type}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type1",{{"Max Days", Int64.Type}, {"Bucket", type text}, {"Min Days", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_QueryRelationships = {"columnCount":3,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/Map-TenureBuckets/Changed Type.{Bucket,0}","Section1/Map-TenureBuckets/Changed Type.{Min Days,1}","Section1/Map-TenureBuckets/Changed Type.{Max Days,2}"],"ColumnCount":3,"KeyColumnNames":[],"ColumnIdentities":["Section1/Map-TenureBuckets/Changed Type.{Bucket,0}","Section1/Map-TenureBuckets/Changed Type.{Min Days,1}","Section1/Map-TenureBuckets/Changed Type.{Max Days,2}"],"RelationshipInfo":[]}
+
+	annotation PBI_NavigationStepName = Navigation
+

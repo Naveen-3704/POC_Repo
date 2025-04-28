@@ -1,0 +1,16 @@
+{
+    "metadata": {
+        "components": {
+            "Avg Sales and Profit": "Page",
+            "Sales Bar": "Page",
+            "Sum of Sales By Segment": "Page",
+            "Table": "Page",
+            "Total Profit": "Page",
+            "Total Sales": "Page",
+            "Total Units Sold ": "Page",
+            "Dashboard 1": "Dashboard"
+        }
+    },
+    "semanticModel": {},
+    "report": {}
+}

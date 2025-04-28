@@ -1,0 +1,54 @@
+table 'End of Assignment Reasons'
+	lineageTag: e8582ba9-60cd-4d9b-b899-73255ed07174
+
+	column 'End of Assignment Reason'
+		dataType: string
+		lineageTag: 5e834230-0c1c-4981-8f5d-8d48063e442a
+		summarizeBy: none
+		sourceColumn: End of Assignment Reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key-clevelcode_cleveltype
+		dataType: string
+		lineageTag: 7e4098a7-9390-48d4-8ac6-b09dab7209b2
+		summarizeBy: none
+		sourceColumn: Key-clevelcode_cleveltype
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EOA Negative/Positive'
+		dataType: string
+		lineageTag: eb50aa8f-657e-4dd7-9e92-9010e4415369
+		summarizeBy: none
+		sourceColumn: EOA Negative/Positive
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'End of Assignment Reasons-b5736c69-94bd-47f3-9514-506cee1067f3' = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				    Source = globalcodes_desc,
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([nlanguageid] = 1) and ([cleveltype] = "eoareason" or [cleveltype] = "EOAreason")),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"cleveldesc", "clevelcode", "cleveltype"}),
+				    #"Added Custom1" = Table.AddColumn(#"Removed Other Columns", "Key-clevelcode_cleveltype", each [clevelcode] & [cleveltype]),
+				    #"Merged Queries" = Table.NestedJoin(#"Added Custom1", {"clevelcode"}, globalcodesnegativereason, {"clevelcode"}, "globalcodesnegativereason", JoinKind.LeftOuter),
+				    #"Expanded globalcodesnegativereason" = Table.ExpandTableColumn(#"Merged Queries", "globalcodesnegativereason", {"nglobalcodesnegativereasonid"}, {"nglobalcodesnegativereasonid"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded globalcodesnegativereason", "EOA Negative/Positive", each if [nglobalcodesnegativereasonid] <> null then "Negative" else "Positive/Neutral"),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Added Custom",{"cleveldesc", "Key-clevelcode_cleveltype", "EOA Negative/Positive"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns1",{{"cleveldesc", "End of Assignment Reason"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

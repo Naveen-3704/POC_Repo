@@ -1,0 +1,388 @@
+table assignment
+	lineageTag: 94b49931-6e37-4a1d-bb47-6c77f078542b
+
+	column 'Assignment #'
+		dataType: int64
+		formatString: 0
+		lineageTag: 09a87c9f-7946-4a5a-a73d-57e08b2340de
+		summarizeBy: none
+		sourceColumn: Assignment #
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nrequestid
+		dataType: int64
+		formatString: 0
+		lineageTag: 82927ad2-ad8b-4f2f-94af-41df9e9ee7af
+		summarizeBy: none
+		sourceColumn: nrequestid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nvendorlocationid
+		dataType: int64
+		formatString: 0
+		lineageTag: c2640acb-0fd0-4724-844d-c6759619e859
+		summarizeBy: none
+		sourceColumn: nvendorlocationid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment Status'
+		dataType: string
+		lineageTag: ffd463b0-9ab3-4ecb-9579-635fa8cf93f2
+		summarizeBy: none
+		sourceColumn: Assignment Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment Start Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: 46f8713e-ec7b-4242-a337-36be91913783
+		summarizeBy: none
+		sourceColumn: Assignment Start Date
+
+		variation Variation
+			isDefault
+			relationship: 8dfc8f78-9b74-4858-803b-cab54304b29d
+			defaultHierarchy: LocalDateTable_a39182c1-4bb8-4d91-ad55-1e55f61f1f33.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Assignment End Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: b1c312c6-9bce-42da-93df-7b59d10ebe03
+		summarizeBy: none
+		sourceColumn: Assignment End Date
+
+		variation Variation
+			isDefault
+			relationship: f2bf7553-dd73-4ce1-b29c-833c140fbe6f
+			defaultHierarchy: LocalDateTable_480f354e-3a25-4f9c-b140-fa9a043a4a98.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Hire Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: 617e30d9-3666-408c-842c-a3642f4ba59d
+		summarizeBy: none
+		sourceColumn: Hire Date
+
+		variation Variation
+			isDefault
+			relationship: 0de845d7-a7a3-45b8-b5f9-732e5c1afaab
+			defaultHierarchy: LocalDateTable_e68e21e7-121f-4fd6-acbe-0c1e6f00a5b9.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column creason
+		dataType: string
+		lineageTag: 635d5da4-8fd0-48d8-83ab-77a8f3315acc
+		summarizeBy: none
+		sourceColumn: creason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Received Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: 655ad50b-42bd-4b9e-87ee-bf50f7577da5
+		summarizeBy: none
+		sourceColumn: Job Received Date
+
+		variation Variation
+			isDefault
+			relationship: 40536df4-542a-4ea2-879c-e083d70a660b
+			defaultHierarchy: LocalDateTable_638ac38f-0d9f-4955-97fa-0d47f4eab8ad.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Candidate Submitted by Primary Vendor Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a422f273-0662-422d-8d68-5f86775387b1
+		summarizeBy: none
+		sourceColumn: Candidate Submitted by Primary Vendor Date
+
+		variation Variation
+			isDefault
+			relationship: f498b00e-f295-4385-af4b-92b1ae6dc0fa
+			defaultHierarchy: LocalDateTable_53600da0-6642-4dd7-8c0f-b6900b6b14f7.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Candidate Submitted Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: d0f52790-d421-4610-9779-7fad2202e4b6
+		summarizeBy: none
+		sourceColumn: Candidate Submitted Date
+
+		variation Variation
+			isDefault
+			relationship: 405d6aa5-6cb5-42a2-8c63-ab1805026094
+			defaultHierarchy: LocalDateTable_b8ab1b45-5b68-40e8-aa2b-f80256ea6a74.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column creasontype
+		dataType: string
+		lineageTag: 3056b5b0-ee48-494f-8cbf-c0ff1236029e
+		summarizeBy: none
+		sourceColumn: creasontype
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key-clevelcode_cleveltype =
+			
+			assignment[creason] & assignment[creasontype]
+		lineageTag: 380ad173-a502-4e49-9bfb-44607fdde8c6
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate Status' = ```
+			
+			IF('assignment'[Assignment Status] = "declinedbyprimaryvendor",
+			    "Rejected",
+			    IF( RELATED(Interviews[Interview Date]) <> BLANK(),
+			        IF('assignment'[Hire Date] <> BLANK(),
+			            "Engaged After Interview",
+			            "Interviewed, Not Engaged"),
+			        IF('assignment'[Hire Date] <> BLANK(),
+			            "Engaged Without Interview", 
+			            "Not Interviewed, Not Engaged")
+			    )
+			)
+			```
+		lineageTag: 2cb20159-71c4-4ba7-b4c5-2ed0141816d5
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bill Rate'
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 09f7ff7c-fb97-4e27-aaf1-a997aa93757d
+		summarizeBy: sum
+		sourceColumn: Bill Rate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Tenure Bucket' =
+			
+			var TenureLength = TODAY() - assignment[Assignment Start Date]
+			
+			return
+			LOOKUPVALUE('Tenure Buckets'[Bucket],'Tenure Buckets'[Min Days],
+			    CALCULATE(MIN('Tenure Buckets'[Min Days]),
+			        FILTER('Tenure Buckets',
+			            'Tenure Buckets'[Max Days] > TenureLength &&
+			            'Tenure Buckets'[Min Days] <= TenureLength
+			        )
+			    )
+			)
+		dataType: string
+		lineageTag: 35eb9bf6-d839-4563-a978-9a502abe859f
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time to Submit' =
+			
+			if(assignment[Candidate Submitted Date] < assignment[Job Received Date],
+			    BLANK(),
+			    MAX(0,
+			        Calculate([BusinessDaysOrCalendarDays],
+			            DATESBETWEEN('Date Table'[Date],assignment[Job Received Date],assignment[Candidate Submitted Date])
+			        )
+			    )
+			)
+		formatString: 0
+		lineageTag: 5ec7bb5a-6b5e-4f14-aa55-33e705867e98
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Received:Submitted =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        assignment[Job Received Date],
+			        assignment[Candidate Submitted Date]
+			    )
+			)
+		formatString: 0
+		lineageTag: 95e999cb-cfa1-4780-bd68-ad5c1f13c1c0
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Worker Name'
+		dataType: string
+		lineageTag: 15608590-2506-4038-af08-633c06adb72a
+		summarizeBy: none
+		sourceColumn: Worker Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CandidateStatusBridge = ```
+			
+			UNION(
+			
+			    SELECTCOLUMNS(
+			        FILTER('assignment', 
+			            NOT(ISBLANK('assignment'[Candidate Submitted Date])) &&
+			            RELATED(jobrequest[Go Live Filter]) <> "Go Live"
+			        ),
+			        "Assignment #", 'assignment'[Assignment #],
+			        "Status", "Candidates Submitted"
+			    ),
+			
+			    SELECTCOLUMNS(
+			        FILTER('assignment', 
+			            NOT(ISBLANK('assignment'[Candidate Submitted by Primary Vendor Date]))
+			        ),
+			        "Assignment #", 'assignment'[Assignment #],
+			        "Status", "Vendor Shortlisted"
+			    ),
+			
+			    SELECTCOLUMNS(
+			        FILTER('assignment', 
+			            NOT(ISBLANK(RELATED(Interviews[Interview Date])))
+			        ),
+			        "Assignment #", 'assignment'[Assignment #],
+			        "Status", "Candidates Interviewed"
+			    ),
+			
+			    SELECTCOLUMNS(
+			        FILTER('assignment', 
+			            'assignment'[Assignment Status] IN { "declinedbyprimaryvendor", "rejected" }
+			        ),
+			        "Assignment #", 'assignment'[Assignment #],
+			        "Status", "Candidates Rejected"
+			    ),
+			
+			    SELECTCOLUMNS(
+			        FILTER('assignment', 
+			            NOT(ISBLANK('assignment'[Hire Date]))
+			        ),
+			        "Assignment #", 'assignment'[Assignment #],
+			        "Status", "Candidates Engaged"
+			    )
+			)
+			
+			```
+		lineageTag: 3d83b462-51c8-4774-9176-23b06a48dfa7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate Status Rank' = ```
+			
+			SWITCH(
+			    'assignment'[CandidateStatusBridge],
+			    "Candidates Submitted", 1,
+			    "Vendor Shortlisted", 2,
+			    "Candidates Interviewed", 3,
+			    "Candidates Rejected", 4,
+			    "Candidates Engaged", 5,
+			    BLANK()
+			)
+			
+			```
+		formatString: 0
+		lineageTag: b7e0f158-d9a4-4e52-a468-559d9e75802c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition assignment-88ae5da8-203a-4978-a235-852b4b5fec78 = m
+		mode: import
+		queryGroup: 'MAIN TABLES'
+		source =
+				let
+				  tablename = "assignment",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Merged Queries" = Table.NestedJoin(DataTable, {"napplicantid"}, applicant, {"napplicantid"}, "applicant", JoinKind.LeftOuter),
+				    #"Expanded applicant1" = Table.ExpandTableColumn(#"Merged Queries", "applicant", {"cfname", "clname"}, {"cfname", "clname"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded applicant1", "Worker Name", each [clname] & ", " & [cfname]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"dstart", type date}, {"dend", type date}, {"dhiredate", type date}, {"djobreceived", type date}, {"dsubmitted", type date}, {"dcreated", type date}, {"Worker Name", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"nassignmentid", "nrequestid", "nvendorlocationid", "capplicantstatusid", "dstart", "dend", "dhiredate", "nappbillrate", "creason", "djobreceived", "dsubmitted", "dcreated", "creasontype", "Worker Name"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"nassignmentid", "Assignment #"}, {"dstart", "Assignment Start Date"}, {"dend", "Assignment End Date"}, {"dhiredate", "Hire Date"}, {"nappbillrate", "Bill Rate"}, {"djobreceived", "Job Received Date"}, {"capplicantstatusid", "Assignment Status"}, {"dcreated", "Candidate Submitted Date"}, {"dsubmitted", "Candidate Submitted by Primary Vendor Date"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":153,"keyColumnNames":["nassignmentid"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/applicant.{napplicantid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentactivity.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentapprovals.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentchanges.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentsbilling.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/interview.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/timecardheader.{nassignmentid,2}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":3,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocation.{nvendorlocationid,0}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nassignmentid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrequestid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{napplicantid,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nvendorlocationid,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{capplicantstatusid,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nuserid,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nreportto,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lexempt,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{npolicyid,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dstart,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dhiredate,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cpayrollid,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lshowclient,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{napppayrate,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nappbillrate,15}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nbillrateflatfee,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nbillratepercent,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cbillrateunit,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cbillratecurrency,19}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{notpayrate,20}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{notbillrate,21}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ndtpayrate,22}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ndtbillrate,23}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nestimatedcost,24}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cnotes,25}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ccomments,26}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{davailibility,27}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lshiftpremium,28}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nshiftdifferentialgroupid,29}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ctimecardtype,30}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nskillmatch,31}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nofferrate,32}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ltemptofull,33}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dtemptofull,34}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lassgsbvalue,35}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninitailbalance,36}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nremainbalance,37}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nspentamount,38}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cemptype,39}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninclusivebill,40}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninclusiveotbill,41}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninclusivedtbill,42}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ltransition,43}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{capprovetype,44}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nexpense,45}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nbillcontactid,46}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lpayroll,47}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ldonotcalculaterate,48}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lisproject,49}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lprojectmanager,50}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cproposalname,51}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{creason,52}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nreplaceassignmentid,53}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dendmax,54}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedmonths,55}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkeddays,56}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours,57}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lbldgaccess,58}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsysaccess,59}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lclientdatafeed,60}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{loverextdurationlimit,61}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnotallowextension,62}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{csbstring,63}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{limplementationassign,64}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnobillassignment,65}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntriplepayrate,66}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntriplebillrate,67}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntripleinclusivebillrate,68}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{djobreceived,69}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lmanagementfeeincluded,70}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dtimecardactivate,71}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnotallowmodifytcsbilling,72}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntaxdiscount,73}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nlengthdiscount,74}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{capprovalnumber,75}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dsubmitted,76}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntimecardspent,77}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nexpensespent,78}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninitialtimecardamount,79}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninitialexpenseamount,80}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnomanagementfee,81}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lshowassignmentidontc,82}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cavailability,83}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nmanagementfee,84}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lvendoraddpaymentschedule,85}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lexceedvendorproposerate,86}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lappytenurediscount,87}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsanfranciscohealthordinance,88}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsanfranciscohealthsickleave,89}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{napplicanthistoryworkedhours,90}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ltenurediscountexempt,91}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ldeductmanagementfee,92}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrank,93}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dnotifyassignmentend,94}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nfulltimeestimatedconversionfee,95}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nfulltimepaidamount,96}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsendtowarehouse,97}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsalestaxexempt,98}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{csalestaxexemptcert,99}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lmonthlybilling,100}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninvoicefrequency,101}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nsubmittedinclusivebill,102}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedinclusivebill,103}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lexcludeinvoicefrequencyupdate,104}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lawrapplied,105}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lawremailsent,106}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrpayrate,107}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrpayotrate,108}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrpaydtrate,109}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrbillrate,110}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrbillotrate,111}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrbilldtrate,112}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrinclusivebill,113}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrinclusiveotbill,114}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrinclusivedtbill,115}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cpaytype,116}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lawrenabled,117}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrestimatedcost,118}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nreportto2,119}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lupdatesbillingrate,120}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dcreated,121}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ncreatedby,122}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nclientlocationid,123}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{creasontype,124}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{npaymenttermid,125}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours_reg,126}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours_ot,127}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours_dt,128}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dsanfranciscohealthordinancestart,129}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dstartsurvey,130}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lupdatesbillingratebyjobtitle,131}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nadditionaltimecardspend,132}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ncreatedbywho,133}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nmodifiedbywho,134}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nmodifiedby,135}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dmodified,136}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntotalestimatedcost,137}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nranktried,138}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nsalary,139}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntrialperioddays,140}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend_flexibilityearly,141}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend_flexibilitylate,142}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrenewed,143}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{noriginalinclusivebill,144}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninstantdiscountpercent,145}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nglobalpayincscheduleid,146}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lglobalpayincschedulerateeditable,147}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend_original,148}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedpayrate,149}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedbillrate,150}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedninclusivebill,151}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrating,152}"],"ColumnCount":153,"KeyColumnNames":["nassignmentid"],"ColumnIdentities":["Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nassignmentid,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrequestid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{napplicantid,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nvendorlocationid,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{capplicantstatusid,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nuserid,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nreportto,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lexempt,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{npolicyid,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dstart,9}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend,10}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dhiredate,11}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cpayrollid,12}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lshowclient,13}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{napppayrate,14}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nappbillrate,15}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nbillrateflatfee,16}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nbillratepercent,17}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cbillrateunit,18}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cbillratecurrency,19}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{notpayrate,20}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{notbillrate,21}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ndtpayrate,22}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ndtbillrate,23}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nestimatedcost,24}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cnotes,25}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ccomments,26}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{davailibility,27}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lshiftpremium,28}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nshiftdifferentialgroupid,29}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ctimecardtype,30}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nskillmatch,31}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nofferrate,32}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ltemptofull,33}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dtemptofull,34}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lassgsbvalue,35}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninitailbalance,36}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nremainbalance,37}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nspentamount,38}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cemptype,39}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninclusivebill,40}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninclusiveotbill,41}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninclusivedtbill,42}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ltransition,43}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{capprovetype,44}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nexpense,45}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nbillcontactid,46}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lpayroll,47}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ldonotcalculaterate,48}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lisproject,49}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lprojectmanager,50}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cproposalname,51}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{creason,52}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nreplaceassignmentid,53}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dendmax,54}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedmonths,55}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkeddays,56}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours,57}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lbldgaccess,58}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsysaccess,59}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lclientdatafeed,60}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{loverextdurationlimit,61}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnotallowextension,62}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{csbstring,63}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{limplementationassign,64}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnobillassignment,65}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntriplepayrate,66}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntriplebillrate,67}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntripleinclusivebillrate,68}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{djobreceived,69}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lmanagementfeeincluded,70}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dtimecardactivate,71}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnotallowmodifytcsbilling,72}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntaxdiscount,73}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nlengthdiscount,74}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{capprovalnumber,75}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dsubmitted,76}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntimecardspent,77}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nexpensespent,78}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninitialtimecardamount,79}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninitialexpenseamount,80}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lnomanagementfee,81}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lshowassignmentidontc,82}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cavailability,83}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nmanagementfee,84}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lvendoraddpaymentschedule,85}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lexceedvendorproposerate,86}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lappytenurediscount,87}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsanfranciscohealthordinance,88}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsanfranciscohealthsickleave,89}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{napplicanthistoryworkedhours,90}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ltenurediscountexempt,91}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ldeductmanagementfee,92}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrank,93}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dnotifyassignmentend,94}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nfulltimeestimatedconversionfee,95}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nfulltimepaidamount,96}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsendtowarehouse,97}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lsalestaxexempt,98}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{csalestaxexemptcert,99}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lmonthlybilling,100}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninvoicefrequency,101}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nsubmittedinclusivebill,102}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedinclusivebill,103}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lexcludeinvoicefrequencyupdate,104}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lawrapplied,105}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lawremailsent,106}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrpayrate,107}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrpayotrate,108}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrpaydtrate,109}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrbillrate,110}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrbillotrate,111}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrbilldtrate,112}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrinclusivebill,113}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrinclusiveotbill,114}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrinclusivedtbill,115}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{cpaytype,116}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lawrenabled,117}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nawrestimatedcost,118}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nreportto2,119}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lupdatesbillingrate,120}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dcreated,121}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ncreatedby,122}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nclientlocationid,123}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{creasontype,124}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{npaymenttermid,125}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours_reg,126}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours_ot,127}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nworkedhours_dt,128}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dsanfranciscohealthordinancestart,129}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dstartsurvey,130}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lupdatesbillingratebyjobtitle,131}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nadditionaltimecardspend,132}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ncreatedbywho,133}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nmodifiedbywho,134}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nmodifiedby,135}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dmodified,136}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntotalestimatedcost,137}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nranktried,138}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nsalary,139}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ntrialperioddays,140}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend_flexibilityearly,141}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend_flexibilitylate,142}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrenewed,143}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{noriginalinclusivebill,144}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{ninstantdiscountpercent,145}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nglobalpayincscheduleid,146}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{lglobalpayincschedulerateeditable,147}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{dend_original,148}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedpayrate,149}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedbillrate,150}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nengagedninclusivebill,151}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignment.{nrating,152}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/applicant.{napplicantid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentactivity.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentapprovals.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentchanges.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/assignmentsbilling.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/interview.{nassignmentid,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/jobrequest.{nrequestid,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/timecardheader.{nassignmentid,2}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":3,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/vendorlocation.{nvendorlocationid,0}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,54 @@
+table Map-ScorecardWeights
+	lineageTag: 265ee479-71e4-4d39-8408-11fa9bbdd3c6
+
+	column Metric
+		dataType: string
+		lineageTag: 8146595c-8262-418e-ad3f-e52ed672a75e
+		summarizeBy: none
+		sourceColumn: Metric
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weighting (Must Equal 100)'
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 9dc521f7-2b00-4780-ad9c-9b5d1ed042fb
+		summarizeBy: sum
+		sourceColumn: Weighting (Must Equal 100)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Max Score'
+		dataType: double
+		lineageTag: f33eeb04-21d5-4208-b525-5f67266be9ea
+		summarizeBy: sum
+		sourceColumn: Category Max Score
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Map-ScorecardWeights-dc26c2c8-6910-437f-930d-d9b2fd00e5cb = m
+		mode: import
+		queryGroup: MAPPING\manual
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("Zc7BCsIwEIThV1lyLkWfQVrwomC8hR5SMsaFZANJWl/f65ZeP36Ycc7cpaPujJ8ZzGW8mmVwZpLoIzKkK3wgjjRJUGS/pfbETWezTw1ku69a7bZm7vTmDKVPWYuv4TCCQDOnBK23Ijtq4yIKX1tCo/Kh89vlDw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Metric = _t, #"Weighting (Must Equal 100)" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Metric", type text}, {"Weighting (Must Equal 100)", Percentage.Type}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Category Max Score", each [#"Weighting (Must Equal 100)"] * 50),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Category Max Score", type number}})
+				in
+				    #"Changed Type1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/Map-ScorecardWeights/Changed Type.{Metric,0}","Section1/Map-ScorecardWeights/Changed Type.{Weighting (Must Equal 100),1}"],"ColumnCount":2,"KeyColumnNames":[],"ColumnIdentities":["Section1/Map-ScorecardWeights/Changed Type.{Metric,0}","Section1/Map-ScorecardWeights/Changed Type.{Weighting (Must Equal 100),1}"],"RelationshipInfo":[]}
+

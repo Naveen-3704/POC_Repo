@@ -1,0 +1,397 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.2.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU10",
+      "reportVersionAtImport": "5.62",
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "AccessibleDefault",
+      "reportVersionAtImport": "5.62",
+      "type": "SharedResources"
+    }
+  },
+  "layoutOptimization": "None",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7abc9fdd2222e1308e0c",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "jobrequest"
+              }
+            },
+            "Property": "Job Category"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "Filter",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "jobrequest"
+              }
+            },
+            "Property": "Requisition Status"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User",
+        "isHiddenInViewMode": true,
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "87a17eefff6a2ab01be8",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Attribute Table"
+              }
+            },
+            "Property": "Value"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "a8f71b5b2ba371ca9409",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "jobrequest"
+              }
+            },
+            "Property": "Job Category"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "4fff80e4abd824e0b477",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date Table"
+              }
+            },
+            "Property": "Year Offset"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "Date Table",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "Year Offset"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "-1L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "0L"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "-2L"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          },
+          "visible": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "advanceCardE03760C5AB684758B56AA29F9E6C257B",
+      "type": "CustomVisual",
+      "items": [
+        {
+          "name": "advanceCardE03760C5AB684758B56AA29F9E6C257B.pbiviz.json",
+          "path": "advanceCardE03760C5AB684758B56AA29F9E6C257B.pbiviz.json",
+          "type": "CustomVisualMetadata"
+        }
+      ]
+    },
+    {
+      "name": "drilldownCartogramD5E1077C70074FFCB26AFC2A636614BF",
+      "type": "CustomVisual",
+      "items": [
+        {
+          "name": "drilldownCartogramD5E1077C70074FFCB26AFC2A636614BF.pbiviz.json",
+          "path": "drilldownCartogramD5E1077C70074FFCB26AFC2A636614BF.pbiviz.json",
+          "type": "CustomVisualMetadata"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Agile-One_Logo-01587489492488142.png",
+          "path": "Agile-One_Logo-01587489492488142.png",
+          "type": "Image"
+        },
+        {
+          "name": "Agile-One_Logo-0212203088782412319.png",
+          "path": "Agile-One_Logo-0212203088782412319.png",
+          "type": "Image"
+        },
+        {
+          "name": "Agile-One_Logo_(1)5265642250452569.png",
+          "path": "Agile-One_Logo_(1)5265642250452569.png",
+          "type": "Image"
+        },
+        {
+          "name": "Agile-One_Logo_(1)5801303761458243.png",
+          "path": "Agile-One_Logo_(1)5801303761458243.png",
+          "type": "Image"
+        },
+        {
+          "name": "Agile-One_Logo_(1)7423288312426843.png",
+          "path": "Agile-One_Logo_(1)7423288312426843.png",
+          "type": "Image"
+        },
+        {
+          "name": "Agile-One_Logo_(1)8866496788441709.png",
+          "path": "Agile-One_Logo_(1)8866496788441709.png",
+          "type": "Image"
+        },
+        {
+          "name": "ICON_Solutions344822370789704.png",
+          "path": "ICON_Solutions344822370789704.png",
+          "type": "Image"
+        },
+        {
+          "name": "ICON_Third_Party_Partner5550444729037436.png",
+          "path": "ICON_Third_Party_Partner5550444729037436.png",
+          "type": "Image"
+        },
+        {
+          "name": "LightOneWorld6346599843629719.png",
+          "path": "LightOneWorld6346599843629719.png",
+          "type": "Image"
+        },
+        {
+          "name": "LightOneWorld7191011085697541.png",
+          "path": "LightOneWorld7191011085697541.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2024-08-13_005250056570626520245026.png",
+          "path": "Screenshot_2024-08-13_005250056570626520245026.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2024-08-13_00525006481237062411438.png",
+          "path": "Screenshot_2024-08-13_00525006481237062411438.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2024-08-13_0052507367510441432765.png",
+          "path": "Screenshot_2024-08-13_0052507367510441432765.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2024-08-13_0052507557813994977005.png",
+          "path": "Screenshot_2024-08-13_0052507557813994977005.png",
+          "type": "Image"
+        },
+        {
+          "name": "th6073175550981831.jpg",
+          "path": "th6073175550981831.jpg",
+          "type": "Image"
+        },
+        {
+          "name": "World_Image3326955400057563.png",
+          "path": "World_Image3326955400057563.png",
+          "type": "Image"
+        },
+        {
+          "name": "World_Image44902561306749256.png",
+          "path": "World_Image44902561306749256.png",
+          "type": "Image"
+        },
+        {
+          "name": "World_Image4766192923129209.png",
+          "path": "World_Image4766192923129209.png",
+          "type": "Image"
+        },
+        {
+          "name": "World_Image8624034534152407.png",
+          "path": "World_Image8624034534152407.png",
+          "type": "Image"
+        },
+        {
+          "name": "World_Image9468100636290768.png",
+          "path": "World_Image9468100636290768.png",
+          "type": "Image"
+        },
+        {
+          "name": "AgileOne_logo9435808081385475.png",
+          "path": "AgileOne_logo9435808081385475.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2025-04-11_161817578673703430107.png",
+          "path": "Screenshot_2025-04-11_161817578673703430107.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2025-04-11_1618174124810523794651.png",
+          "path": "Screenshot_2025-04-11_1618174124810523794651.png",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU10",
+          "path": "BaseThemes/CY24SU10.json",
+          "type": "BaseTheme"
+        },
+        {
+          "name": "AccessibleDefault",
+          "path": "BuiltInThemes/AccessibleDefault.json",
+          "type": "CustomTheme"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "queryLimitOption": "None",
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  },
+  "slowDataSourceSettings": {
+    "isCrossHighlightingDisabled": false,
+    "isSlicerSelectionsButtonEnabled": false,
+    "isFilterSelectionsButtonEnabled": false,
+    "isFieldWellButtonEnabled": false,
+    "isApplyAllButtonEnabled": false
+  }
+}

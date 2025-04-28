@@ -1,0 +1,43 @@
+table Navigation
+	lineageTag: f0604391-2078-40c0-bd19-b3d0606e62e7
+
+	measure ShowSalesBookmark = ```
+			IF(
+			    SELECTEDVALUE('Navigation'[Role]) = "Sales",
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 701a22fc-0a12-47f2-b861-6bab64b996e6
+
+	column Role
+		lineageTag: 431836e7-cf55-42dd-a7f2-9d0ac09bc6ab
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Role]
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetPage
+		lineageTag: f21b3a11-7d64-4551-b4d4-11b318a42df6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [TargetPage]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Navigation = calculated
+		mode: import
+		source =
+				DATATABLE(
+				  "Role", STRING, "TargetPage", STRING,
+				  {
+				    {"Sales", "Client 22"},
+				    {"Finance", "Client 11"}
+				  }
+				)
+
+	annotation PBI_Id = 9395de65839d4cffa72af84585c0c78e
+

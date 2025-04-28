@@ -1,0 +1,428 @@
+table 'Assignment Measures'
+	lineageTag: 2e9b0cf5-2b26-4b7d-b759-768426895152
+
+	measure 'Assignments Worked' =
+			
+			CALCULATE(DISTINCTCOUNT('assignment'[Assignment #]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    FILTER('assignment',
+			        'assignment'[Assignment End Date] >= FIRSTDATE('Date Table'[Date]) &&
+			        'assignment'[Assignment Start Date] <= LASTDATE('Date Table'[Date])
+			    )
+			)
+		formatString: #,0
+		lineageTag: 981cacb3-81b7-4203-8368-0599cc0efe6f
+
+		changedProperty = IsHidden
+
+	measure 'Assignment Starts' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('assignment'[Assignment #]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'assignment'[Assignment Start Date]
+			    )
+			)
+		formatString: #,0
+		lineageTag: a6e887b3-0941-460a-beb5-77dcddd1725d
+
+		changedProperty = IsHidden
+
+	measure 'Negative Turnover %' =
+			
+			IFERROR(DIVIDE(
+			    [Negative Ends],[Assignment Ends]),
+			    "N/A"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f4155ec1-ef0b-4cdb-b5b5-43ea383e295f
+
+		changedProperty = IsHidden
+
+	measure 'Negative Ends' = ```
+			
+			VAR result = 
+			    CALCULATE(
+			        [Assignment Ends],
+			        'End of Assignment Reasons'[EOA Negative/Positive] = "Negative"
+			    )
+			RETURN
+			IF(
+			    ISBLANK(result),
+			    0,
+			    result
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 150d0b9e-bf00-4a74-a496-31d7f1500481
+
+		changedProperty = IsHidden
+
+	measure Conversions =
+			
+			var EOAConversion = {"Engaged by Client", "Hired by Client", "Hired by the Client"}
+			
+			return
+			CALCULATE([Assignment Ends],
+			    'End of Assignment Reasons'[End of Assignment Reason] in EOAConversion
+			)
+		formatString: #,0
+		lineageTag: de38fb9b-4fe5-465d-a6ae-2f7b12940fe2
+
+		changedProperty = IsHidden
+
+	measure 'Assignment Ends' =
+			
+			CALCULATE(DISTINCTCOUNT('assignment'[Assignment #]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'assignment'[Assignment End Date]
+			    )
+			)
+		formatString: #,0
+		lineageTag: 48bb76f7-7e10-44ba-a1cf-37b701fb902a
+
+		changedProperty = IsHidden
+
+	measure 'Average Bill Rate (Worked)' =
+			
+			CALCULATE(Average(invoice[Bill Rate]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    invoice[Charge Code] = "Standard Regular",
+			    FILTER('assignment',
+			        'assignment'[Assignment End Date] >= FIRSTDATE('Date Table'[Date]) &&
+			        'assignment'[Assignment Start Date] <= LASTDATE('Date Table'[Date])
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 24d25d42-53ee-4475-a471-5c955b771ed6
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Bill Rate (Starts)' =
+			
+			CALCULATE(AVERAGE(invoice[Bill Rate]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    invoice[Charge Code] = "Standard Regular",
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'assignment'[Assignment Start Date]
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9791a08c-35dd-4fd6-9a7c-f09d61e16687
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Current Active Workers' =
+			
+			CALCULATE(DISTINCTCOUNT('assignment'[Assignment #]),
+			FILTER('assignment',
+			    'assignment'[Assignment End Date] >= TODAY() &&
+			    'assignment'[Assignment Start Date] <= TODAY() &&
+			    'assignment'[Assignment Status] = "active"
+			)
+			)
+		formatString: #,0
+		lineageTag: 965b6bc5-ffbb-4c22-9bf4-248153f02028
+
+		changedProperty = IsHidden
+
+	measure UI-Asgn_01 =
+			
+			switch(SELECTEDVALUE('UI-Slicer Selection'[User Selection]),
+			    "Current Active",[Current Active Workers],
+			    "Assignments Worked",[Assignments Worked],
+			    "Assignment Starts",[Assignment Starts],
+			    "Assignment Ends",[Assignment Ends],
+			    "Negative Turnover",[Negative Ends],
+			    "Conversions",[Conversions],
+			    "Avg Bill Rate (Starts)", [Average Bill Rate (Starts)],
+			    "Avg Bill Rate (Worked)", [Average Bill Rate (Worked)],
+			    "Null")
+		formatString: 0
+		lineageTag: 0cefe1dc-b608-4228-9f6a-6f78ebecdc82
+
+		changedProperty = IsHidden
+
+	measure 'UI-Asgn_01 SPLY' =
+			
+			calculate([UI-Asgn_01],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		formatString: 0
+		lineageTag: 0795cfbd-288d-45cb-be86-4996992b9097
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'UI-Asgn_01 YOY %' =
+			
+			if(or([UI-Asgn_01] = blank(), [UI-Asgn_01 SPLY] = BLANK()), BLANK(),
+			([UI-Asgn_01] - [UI-Asgn_01 SPLY]) / [UI-Asgn_01 SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 091ab7d4-4121-4f9b-9137-253f0722cbaa
+
+		changedProperty = IsHidden
+
+	measure 'Average Tenure' =
+			
+			CALCULATE(AVERAGE(assignment[Tenure Bucket]),
+			    'assignment'[Assignment Status] = "active",
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'assignment'[Assignment Start Date]
+			    )
+			)
+		formatString: 0
+		lineageTag: 56116353-679b-4903-83e1-30aa8ab2eeab
+
+		changedProperty = IsHidden
+
+	measure 'False Starts' =
+			
+			CALCULATE([Assignment Starts],
+			    'End of Assignment Reasons'[EOA Negative/Positive] = "False Start"
+			)
+		formatString: 0
+		lineageTag: e09c9e66-40df-460f-bac4-d202747f6f3b
+
+		changedProperty = IsHidden
+
+	measure 'False Start %' =
+			
+			IFERROR(DIVIDE(
+			    [False Starts],[Assignment Starts]),
+			    "N/A"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 11a296f6-98b0-42ad-8267-bc5a8098d7d4
+
+		changedProperty = IsHidden
+
+	measure 'Onboarding Compliant Starts' = BLANK()
+		formatString: 0
+		lineageTag: 157e9cdc-657b-46f7-ae36-6888a095bed3
+
+		changedProperty = IsHidden
+
+	measure 'Onboarding Compliance %' =
+			
+			IFERROR(DIVIDE(
+			    [Onboarding Compliant Starts],[Assignment Starts]),
+			    "N/A"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3a0e327e-653d-4502-a542-1c228aaf9e3d
+
+		changedProperty = IsHidden
+
+	measure 'Conversion %' =
+			
+			IFERROR(DIVIDE(
+			    [Conversions],[Assignment Ends]),
+			    "N/A"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a19ae740-f8c9-4d79-b516-d444e2211009
+
+		changedProperty = IsHidden
+
+	measure 'Expired Assignments' =
+			
+			var assignments = CALCULATE(DISTINCTCOUNT('assignment'[Assignment #]),
+			FILTER('assignment',
+			    'assignment'[Assignment End Date] < TODAY() &&
+			    'assignment'[Assignment Status] = "active"
+			)
+			)
+			RETURN IF (assignments = BLANK(), 0, assignments)
+		formatString: 0
+		lineageTag: b67014ef-f13b-459c-92f2-251789e864d2
+
+		changedProperty = IsHidden
+
+	measure 'Payroll Spend %' = DIVIDE([Payroll Spend],[Total Spend])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 91d21429-6e87-402a-9fe7-f47f24b83402
+
+		changedProperty = IsHidden
+
+	measure 'Diverse Spend SPLY' = CALCULATE([Diverse Spend],SAMEPERIODLASTYEAR('Date Table'[Date]))
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 69f10ec0-1a28-458a-b6cd-6cd45eb15b31
+
+	measure PercentageChange = DIVIDE( - CALCULATE([Value], PREVIOUSQUARTER('Date'[Date])), CALCULATE([Value], PREVIOUSQUARTER('Date'[Date])), 0) * 100
+		lineageTag: d4c50d92-8213-4e62-8593-3cf69ee01223
+
+	measure 'Active Workers % QoQ Change' = ```
+			
+			VAR CurrentQuarterCount = 
+			    CALCULATE(
+			        DISTINCTCOUNT('assignment'[Assignment #]),
+			        FILTER(
+			            'assignment',
+			            'assignment'[Assignment End Date] >= TODAY() &&
+			            'assignment'[Assignment Start Date] <= TODAY() &&
+			            'assignment'[Assignment Status] = "active"
+			        )
+			    )
+			
+			VAR LastQuarterCount =
+			    CALCULATE(
+			        DISTINCTCOUNT('assignment'[Assignment #]),
+			        FILTER(
+			            'assignment',
+			            'assignment'[Assignment End Date] >= STARTOFQUARTER(PREVIOUSQUARTER('Date Table'[Date])) &&
+			            'assignment'[Assignment Start Date] <= ENDOFQUARTER(PREVIOUSQUARTER('Date Table'[Date])) &&
+			            'assignment'[Assignment Status] = "active"
+			        )
+			    )
+			
+			RETURN
+			DIVIDE(CurrentQuarterCount - LastQuarterCount, LastQuarterCount, 0) * 100
+			
+			```
+		lineageTag: d855c15d-0b78-4a0a-b83b-c160f77a307f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Assignments Worked (1 Year Ago Same Period)' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT('assignment'[Assignment #]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    FILTER(
+			        'assignment',
+			        'assignment'[Assignment End Date] >= DATEADD(FIRSTDATE('Date Table'[Date]), -1, YEAR) &&
+			        'assignment'[Assignment Start Date] <= DATEADD(LASTDATE('Date Table'[Date]), -1, YEAR)
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: fb5335e5-22c8-4ae7-ae20-68377e6c0933
+
+	measure 'Assignment Starts (1 Year Ago)' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT('assignment'[Assignment #]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    TREATAS(
+			        DATEADD(VALUES('Date Table'[Date]), -1, YEAR),
+			        'assignment'[Assignment Start Date]
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 9901b791-3f05-48ef-bfc6-a939c1161a35
+
+	measure 'Assignment Ends (1 Year Ago)' =
+			
+			Var result =
+			CALCULATE(
+			    DISTINCTCOUNT('assignment'[Assignment #]),
+			    'Worked Applicant Statuses'[Status] = "Worked",
+			    TREATAS(
+			        DATEADD(VALUES('Date Table'[Date]), -1, YEAR),
+			        'assignment'[Assignment End Date]
+			    )
+			)
+			
+			RETURN
+			IF(
+			    ISBLANK(result),
+			    0,
+			    result
+			)
+		formatString: 0
+		lineageTag: 1ed6f9a5-f200-4f11-9126-b625c42a593c
+
+	measure 'Negative Ends (1 Year Ago Same Period)' = ```
+			
+			Var result = 
+			CALCULATE([Assignment Ends (1 Year Ago)],
+			    'End of Assignment Reasons'[EOA Negative/Positive] = "Negative"
+			)
+			
+			RETURN
+			IF(
+			    ISBLANK(result),
+			    0,
+			    result
+			)
+			```
+		formatString: 0
+		lineageTag: eaf1d36a-49b2-4a81-ac3e-3acd926033f7
+
+	measure 'Negative Turnover % (1 Year Ago Same Period)' = ```
+			
+			Var result = 
+			IFERROR(DIVIDE(
+			    [Negative Ends (1 Year Ago Same Period)],[Assignment Ends (1 Year Ago)]),
+			    "N/A"
+			)
+			
+			RETURN
+			IF(
+			    ISBLANK(result),
+			    0,
+			    result
+			)
+			```
+		lineageTag: 8722646c-935e-49a7-8682-400c459bc99c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Conversions (1 Year Ago Same Period)' =
+			
+			var EOAConversion = {"Engaged by Client", "Hired by Client", "Hired by the Client"}
+			
+			return
+			IF(
+			    ISBLANK(CALCULATE([Assignment Ends (1 Year Ago)],
+			    'End of Assignment Reasons'[End of Assignment Reason] in EOAConversion
+			)), 0, CALCULATE([Assignment Ends (1 Year Ago)],
+			    'End of Assignment Reasons'[End of Assignment Reason] in EOAConversion
+			))
+		formatString: 0
+		lineageTag: 69afc251-572e-4053-8c23-a39a2b5bdb4f
+
+	measure 'Active Workers LY' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT('assignment'[Assignment #]),
+			    FILTER(
+			        'assignment',
+			        'assignment'[Assignment End Date] >= DATEADD('Date Table'[Date], -1, YEAR) &&
+			        'assignment'[Assignment Start Date] <= DATEADD('Date Table'[Date], -1, YEAR)
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: ac2b1283-7aab-4a8e-899a-781261d1c919
+
+	partition 'Assignment Measures-0689e963-dcbc-464c-8b20-0a0c324e32cd' = m
+		mode: import
+		queryGroup: MEASURES
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,31 @@
+table DFName
+	excludeFromModelRefresh
+	lineageTag: 4cdb487e-a13e-4e21-9e28-d1beaa5207aa
+
+	column DFName
+		dataType: string
+		lineageTag: 169e672c-ca47-4d9b-9044-b85fbadecae0
+		summarizeBy: none
+		sourceColumn: DFName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DFName-81673cae-a34a-46fe-b27a-3e3de6aa6f26 = m
+		mode: import
+		source =
+				let
+				  Source = PowerPlatform.Dataflows(null),
+				  ID = Source{[Id="Workspaces"]}[Data],
+				  #"Workspace" = ID{[workspaceName = #"Workspace Name"]}[Data],
+				  #"Removed Other Columns" = Table.SelectColumns(#"Workspace",{"dataflowName"}),
+				  #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each Text.Contains([dataflowName], "Master")),
+				  DF = #"Filtered Rows"[dataflowName]
+				in
+				  DF
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = List
+

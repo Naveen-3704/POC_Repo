@@ -1,0 +1,152 @@
+table globaljobtitles
+	lineageTag: f077c42b-5fde-4267-b10b-fbd63f20d47d
+
+	column cjobtitlecode
+		dataType: string
+		lineageTag: 555a5df1-3ea2-4fb0-ba2a-a8254227fcae
+		summarizeBy: none
+		sourceColumn: cjobtitlecode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column njobcategoryid
+		dataType: int64
+		formatString: 0
+		lineageTag: dee18130-9b81-4c97-8d97-fe982feab821
+		summarizeBy: sum
+		sourceColumn: njobcategoryid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cclientcutomcode
+		dataType: string
+		lineageTag: 50830880-4cf1-4f7f-b889-7463fcf47332
+		summarizeBy: none
+		sourceColumn: cclientcutomcode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lemailprimvendor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 65e5f57c-a4ca-429b-9935-711618f9797e
+		summarizeBy: none
+		sourceColumn: lemailprimvendor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ldeleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 027a18da-408d-40fb-9a92-ebe6442c4190
+		summarizeBy: none
+		sourceColumn: ldeleted
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ddeleted
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 23628e0b-665c-4368-81d4-e41aa3000b60
+		summarizeBy: none
+		sourceColumn: ddeleted
+
+		variation Variation
+			isDefault
+			relationship: bc6e216e-8522-4b22-bd76-7718b6e13634
+			defaultHierarchy: LocalDateTable_2dc3cb69-f388-463f-aa45-024b41a568a9.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dcreated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db2bf717-e092-419b-bc48-43f6e7475824
+		summarizeBy: none
+		sourceColumn: dcreated
+
+		variation Variation
+			isDefault
+			relationship: e7358606-7bb5-48e1-ad59-4887d628afc4
+			defaultHierarchy: LocalDateTable_66872d6a-9b08-4d44-a0e4-72b101c61424.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ncreatedby
+		dataType: int64
+		formatString: 0
+		lineageTag: fb82854b-0cc7-41dc-a3ce-b1a2d539e4ca
+		summarizeBy: sum
+		sourceColumn: ncreatedby
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cwccode
+		dataType: string
+		lineageTag: 4c13f031-85f7-4f49-9b25-6269c064f66c
+		summarizeBy: none
+		sourceColumn: cwccode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nfilltype
+		dataType: int64
+		formatString: 0
+		lineageTag: ebcdb32b-cdea-4079-8268-a5bbc8f1338f
+		summarizeBy: sum
+		sourceColumn: nfilltype
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cjobfamily
+		dataType: string
+		lineageTag: 1c0c6753-5523-43e8-9ec1-e40e694e3f57
+		summarizeBy: none
+		sourceColumn: cjobfamily
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition globaljobtitles-b00c4e0d-d667-4523-9242-e158bbd2380e = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "globaljobtitles",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Uppercased Text" = Table.TransformColumns(DataTable,{{"cjobtitlecode", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"cjobtitlecode", Text.Trim, type text}})
+				in
+				    #"Trimmed Text"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":10,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/globaljobtitles/Uppercased Text.{cjobtitlecode,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{njobcategoryid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{cclientcutomcode,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{lemailprimvendor,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{ldeleted,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{ddeleted,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{dcreated,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{ncreatedby,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{cwccode,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{nfilltype,9}"],"ColumnCount":10,"KeyColumnNames":[],"ColumnIdentities":["Section1/globaljobtitles/Uppercased Text.{cjobtitlecode,0}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{njobcategoryid,1}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{cclientcutomcode,2}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{lemailprimvendor,3}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{ldeleted,4}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{ddeleted,5}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{dcreated,6}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{ncreatedby,7}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{cwccode,8}","Server.Database\\/2/SQL/10.200.1.74;epHenkelIT/dbo/globaljobtitles.{nfilltype,9}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

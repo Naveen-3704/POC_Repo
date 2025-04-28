@@ -1,0 +1,33 @@
+table WorkspaceNames
+	excludeFromModelRefresh
+	lineageTag: 28f41b89-d104-4faf-9cec-9c4f26326063
+
+	column WorkspaceNames
+		dataType: string
+		lineageTag: ddf4b88d-8207-46d9-ac20-ed49553b68bd
+		summarizeBy: none
+		sourceColumn: WorkspaceNames
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition WorkspaceNames-2560180b-3596-4620-83da-e63e321977ba = m
+		mode: import
+		source =
+				let
+				  Source = PowerPlatform.Dataflows(null),
+				  ID = Source{[Id="Workspaces"]}[Data],
+				  #"Removed Other Columns" = Table.SelectColumns(ID,{"workspaceName"}),
+				  workspaceName = #"Removed Other Columns"[workspaceName],
+				  #"Sorted Items" = List.Sort(workspaceName,Order.Ascending),
+				  #"Removed Duplicates" = List.Distinct(#"Sorted Items")
+				in
+				  #"Removed Duplicates"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = List
+

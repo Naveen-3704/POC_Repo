@@ -1,0 +1,9 @@
+role 'Sales Team'
+	modelPermission: read
+
+	tablePermission financials = [Segment] == "Enterprise"
+
+	tablePermission ReportAccess = [Role] == "Sales Team"
+
+	annotation PBI_Id = b572b4204d9e429b9572ded8d83042a7
+

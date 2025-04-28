@@ -1,0 +1,836 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 12993.5,
+            "y": 25
+          },
+          "nodeIndex": "Assignment Measures",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 15422.2,
+            "y": 25
+          },
+          "nodeIndex": "Attribute Table",
+          "size": {
+            "height": 156,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 13264.1,
+            "y": 25
+          },
+          "nodeIndex": "Candidate Quality Measures",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 11530.343898624184,
+            "y": 25
+          },
+          "nodeIndex": "CustomerCurrency",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 15702.3,
+            "y": 44
+          },
+          "nodeIndex": "Cycle Time Calculation Select",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 14158,
+            "y": 53.5
+          },
+          "nodeIndex": "Cycle Time Measures",
+          "size": {
+            "height": 213,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 154.97,
+            "y": 1213.3
+          },
+          "nodeIndex": "Date Table",
+          "size": {
+            "height": 198,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 13834.5,
+            "y": 25
+          },
+          "nodeIndex": "End of Assignment Reasons",
+          "size": {
+            "height": 156,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 9511.19761988608,
+            "y": 421.49335474157908
+          },
+          "nodeIndex": "First Timecard",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8858.10678221553,
+            "y": 421.49335474157908
+          },
+          "nodeIndex": "Interviews",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 12723,
+            "y": 25
+          },
+          "nodeIndex": "Invoice Measures",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 16279,
+            "y": 25
+          },
+          "nodeIndex": "Labor Charge Codes",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 10632.8,
+            "y": 25
+          },
+          "nodeIndex": "Map-ScorecardWeights",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3800.6520365270176,
+            "y": 25
+          },
+          "nodeIndex": "Map-State",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1989.25,
+            "y": 623
+          },
+          "nodeIndex": "Map-VendorICC",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2262.5,
+            "y": 521.25
+          },
+          "nodeIndex": "Map-VendorSOW",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1988.5,
+            "y": 417.75
+          },
+          "nodeIndex": "Map-VendorTemp",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 14481.6,
+            "y": 25
+          },
+          "nodeIndex": "Requisition Measures",
+          "size": {
+            "height": 270,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 32.8708,
+            "y": 238.978
+          },
+          "nodeIndex": "Requisitions Accepted/Rejected by Vendor",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 10352.2,
+            "y": 25
+          },
+          "nodeIndex": "Tenure Buckets",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 16008.4,
+            "y": 25
+          },
+          "nodeIndex": "Time to Fill",
+          "size": {
+            "height": 194,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1687.6399414807049,
+            "y": 44
+          },
+          "nodeIndex": "UI-Slicer Selection",
+          "size": {
+            "height": 118,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 15142,
+            "y": 25
+          },
+          "nodeIndex": "Vendor Measures",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 11820.1,
+            "y": 25
+          },
+          "nodeIndex": "Vendors",
+          "size": {
+            "height": 156,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 13544.7,
+            "y": 25
+          },
+          "nodeIndex": "Worked Applicant Statuses",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 665.74,
+            "y": 943.749
+          },
+          "nodeIndex": "assignment",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8205.015944544979,
+            "y": 345.49335474157908
+          },
+          "nodeIndex": "globaljobtitles",
+          "size": {
+            "height": 289,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 674.65,
+            "y": 1491.49
+          },
+          "nodeIndex": "invoice",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 672.29,
+            "y": 510.422
+          },
+          "nodeIndex": "jobrequest",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 17017.5,
+            "y": 85
+          },
+          "nodeIndex": "DFName",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 17386.7,
+            "y": 85
+          },
+          "nodeIndex": "WorkspaceNames",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 17819.4,
+            "y": 25
+          },
+          "nodeIndex": "Timecard",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 18638.5292,
+            "y": 822.745
+          },
+          "nodeIndex": "Scorecard Averages",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 18922.5292,
+            "y": 822.745
+          },
+          "nodeIndex": "Screening Demo",
+          "nodeLineageTag": "ff90a6c7-4695-4050-b865-55193213d02a",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 19206.5292,
+            "y": 834.745
+          },
+          "nodeIndex": "Data Glossary",
+          "nodeLineageTag": "f7510bad-c799-4161-8d6f-12bc6cd998f1",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 19490.5292,
+            "y": 822.745
+          },
+          "nodeIndex": "globalspecialbill_desc",
+          "nodeLineageTag": "e02e46f1-0627-4413-92c9-403182b3d35e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 18404.5292,
+            "y": 722.745
+          },
+          "nodeIndex": "Special Bills",
+          "nodeLineageTag": "b31a0f64-5de5-4972-8c4a-517e52a8a7e2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 18120.5292,
+            "y": 722.745
+          },
+          "nodeIndex": "Special Bills (2)",
+          "nodeLineageTag": "f59db13a-a0a8-4b50-a0e1-4a7e7d0790b1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 19774.5292,
+            "y": 810.745
+          },
+          "nodeIndex": "Currency Conversion to USD",
+          "nodeLineageTag": "f0a255d7-f298-43d4-bc7a-c2af48ab5c7a",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 20058.5292,
+            "y": 870.745
+          },
+          "nodeIndex": "Report Table",
+          "nodeLineageTag": "3d9e9845-35db-450b-9386-56c6761d85b6",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 17.985878990921382,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 611.995,
+            "y": 0.249439
+          },
+          "nodeIndex": "Attribute Table",
+          "size": {
+            "height": 164,
+            "width": 242
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 419,
+            "y": 319
+          },
+          "nodeIndex": "jobrequest",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 770,
+            "y": 303
+          },
+          "nodeIndex": "Timecard",
+          "size": {
+            "height": 300,
+            "width": 233
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Requests",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 816,
+            "y": 0
+          },
+          "nodeIndex": "End of Assignment Reasons",
+          "size": {
+            "height": 156,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1364,
+            "y": 0
+          },
+          "nodeIndex": "First Timecard",
+          "size": {
+            "height": 141,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1090,
+            "y": 0
+          },
+          "nodeIndex": "Interviews",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1642,
+            "y": 0
+          },
+          "nodeIndex": "Tenure Buckets",
+          "size": {
+            "height": 160,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 274,
+            "y": 0
+          },
+          "nodeIndex": "Vendors",
+          "size": {
+            "height": 217,
+            "width": 228
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 542,
+            "y": 0
+          },
+          "nodeIndex": "Worked Applicant Statuses",
+          "size": {
+            "height": 137,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 361,
+            "y": 274
+          },
+          "nodeIndex": "assignment",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "jobrequest",
+          "size": {
+            "height": 241,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 681,
+            "y": 408
+          },
+          "nodeIndex": "Timecard",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Assignment",
+      "zoomValue": 50.346892102823141,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 373.27660000000003,
+            "y": 0
+          },
+          "nodeIndex": "Date Table",
+          "size": {
+            "height": 221,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 651.27659999999992,
+            "y": 0.932812
+          },
+          "nodeIndex": "Labor Charge Codes",
+          "size": {
+            "height": 122,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 91.2766,
+            "y": 0
+          },
+          "nodeIndex": "assignment",
+          "size": {
+            "height": 223,
+            "width": 242
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 355,
+            "y": 289
+          },
+          "nodeIndex": "invoice",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Invoice",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 3,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 518,
+            "y": 353
+          },
+          "nodeIndex": "Requisitions Accepted/Rejected by Vendor",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 274,
+            "y": 0
+          },
+          "nodeIndex": "Vendors",
+          "size": {
+            "height": 213,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "jobrequest",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "VendorJobs",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 342,
+            "y": 396
+          },
+          "nodeIndex": "Time to Fill",
+          "size": {
+            "height": 179,
+            "width": 238
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 168,
+            "y": 0
+          },
+          "nodeIndex": "assignment",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "TTF",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

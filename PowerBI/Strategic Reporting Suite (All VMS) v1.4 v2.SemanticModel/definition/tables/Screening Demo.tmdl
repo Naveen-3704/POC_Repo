@@ -1,0 +1,70 @@
+table 'Screening Demo'
+	lineageTag: ff90a6c7-4695-4050-b865-55193213d02a
+
+	column 'Client Location'
+		dataType: string
+		lineageTag: 724291f3-1b7e-48e8-970f-972eed52ba7c
+		summarizeBy: none
+		sourceColumn: Client Location
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Screening
+		dataType: string
+		lineageTag: 48979893-7c94-4e56-9a7a-fb71817d0961
+		summarizeBy: none
+		sourceColumn: Screening
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Requested
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dd69335-836f-4ac6-a42f-62c3149b8b36
+		summarizeBy: sum
+		sourceColumn: Requested
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Completed
+		dataType: int64
+		formatString: 0
+		lineageTag: ebf8f346-a1f2-4247-88f2-8e70b270b6d4
+		summarizeBy: sum
+		sourceColumn: Completed
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Compliance
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 842ba671-edeb-4bc1-b3d8-1b745c38100c
+		summarizeBy: sum
+		sourceColumn: Compliance
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Screening Demo' = m
+		mode: import
+		queryGroup: MAPPING\manual
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("fdLBCoMwDAbgVxmF3aS0SZsm77DbdhMPIjKEoTB8f2atA6tbTz89fORv2rpWj2luX6pS9+7d9+MwPi92OQljwJieHMQMGuCqmuoXgD1wwhKTtKd/ADPAwSbgXAK3qWvnYRrXJnmvYB3FcSTGhm0MFxXsFSOkW2myRYWZMsJJgRwUnBqCMUQpcb2XaIaigp2ysq1PNJUV5ipAUh4PCk8NiZ2P4cWlDWLZwM5QCOk3+ONb4and17DZ9oB+Mc0H", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Client Location" = _t, Screening = _t, Requested = _t, Completed = _t, Compliance = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Requested", Int64.Type}, {"Completed", Int64.Type}, {"Compliance", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

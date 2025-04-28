@@ -1,0 +1,40 @@
+table 'UI-Slicer Selection'
+	lineageTag: cebce6b5-cec2-4c0e-a64c-c3d0cc4203c4
+
+	column 'User Selection'
+		dataType: string
+		lineageTag: 6215e1ef-df89-458c-b9c8-a34fc8e41be0
+		summarizeBy: none
+		sourceColumn: User Selection
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Page
+		dataType: string
+		lineageTag: cfda40a4-1b6d-42d8-b018-c4b0576fe0b3
+		summarizeBy: none
+		sourceColumn: Page
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'UI-Slicer Selection-cc62c7be-a4b0-4211-95ca-f516361d9f4b' = m
+		mode: import
+		queryGroup: 'USER INTERFACE\manual (2)'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jZM/b8IwEMW/isXUSgyoQ/c0pRILpQS1A2Vwk1N0rTmn9iUV376XAElEHMTkP7/n0/n5ebudrOG3BM9+Mq2nXkVF4WwF2WQ3HYfqs5zNHh5VUn7tkVk2NjZ44AWNGakVa0ohRFfWI6Ol8V46Ra9+5D3mtAdiUXQLrz6s+7muUQlrJ5WvSeaUBQRLyDVjBWpTOpJW3VASW5J9X7fbwAVVFlMQsrGsjUoKoOyCrJz9hpSD7BnrctBj8SE10gHum6IyKLaNM0Ma5WjglU7rAU7KojAIbgTHwsSKDmrKMNMM6q3UBvnQlDhHoqV+VLwgBlch/N0mn1Ou89uka6gNHGrfxTTrAua3YCQ6Ad6PTQi3kWlhOC4tbv7F4E91Tx/JCTFAPcnbqnV94bsTzO4b6TEbRweOFxympa855+xCtfsH", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [Page = _t, #"User Selection" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"User Selection", type text}}),
+				    #"Sorted Rows" = Table.Sort(#"Changed Type",{{"Page", Order.Ascending}, {"User Selection", Order.Ascending}})
+				in
+				    #"Sorted Rows"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/UI-Slicer Selection/Source.{Page,0}","Section1/UI-Slicer Selection/Changed Type.{User Selection,1}"],"ColumnCount":2,"KeyColumnNames":[],"ColumnIdentities":["Section1/UI-Slicer Selection/Source.{Page,0}","Section1/UI-Slicer Selection/Changed Type.{User Selection,1}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

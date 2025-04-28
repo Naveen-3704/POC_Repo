@@ -1,0 +1,39 @@
+table ReportAccess
+	lineageTag: 983d20f8-07c1-4f67-a617-17c7f5b9202c
+
+	measure measure
+		lineageTag: f8e874b6-bcdb-4b8f-93f1-e216d13f6642
+
+	column Role
+		lineageTag: 7a437fd7-3549-4f85-83c3-221b46c3752a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Role]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Name'
+		lineageTag: 31d70571-8b74-46b3-9ef9-fe65fb64aae7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Report Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ReportAccess = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "Role", STRING,
+				    "Report Name", STRING,
+				    {
+				        {"Sales Team", "Sales"},
+				        {"Finance Team", "Finance"},
+				        {"Finance Team", "Sales"}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 4faa6676c40542cc923aca914d7cd4e7
+

@@ -1,0 +1,59 @@
+table Interviews
+	lineageTag: 1ee4405d-82d3-424b-b6ed-8b7af6fc6bbd
+
+	column nassignmentid
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b0f15ac-00eb-4b73-9100-9cffc7371e76
+		summarizeBy: none
+		sourceColumn: nassignmentid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Interview Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: 23e5c792-2672-4f05-959a-6d35103b0479
+		summarizeBy: none
+		sourceColumn: Interview Date
+
+		variation Variation
+			isDefault
+			relationship: 46c5aa2c-f228-4bd2-9202-a630fbfa5ddb
+			defaultHierarchy: LocalDateTable_291002be-a9f6-42c1-835d-a0e16ef58b48.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition Interviews-2ec88fa2-a2fc-49d5-93e8-45bd4ec816d0 = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "interview",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(DataTable,{"nassignmentid", "dconfirmedatetime"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each [dconfirmedatetime] <> null and [dconfirmedatetime] <> ""),
+				    #"Grouped Rows" = Table.Group(#"Filtered Rows", {"nassignmentid"}, {{"dinterview", each List.Min([dconfirmedatetime]), type datetime}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Grouped Rows",{{"dinterview", type date}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"dinterview", "Interview Date"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":["nassignmentid"],"queryRelationships":[],"columnIdentities":["Section1/interview/Grouped Rows.{nassignmentid,0}","Section1/interview/Changed Type.{dinterview,1}"],"ColumnCount":2,"KeyColumnNames":["nassignmentid"],"ColumnIdentities":["Section1/interview/Grouped Rows.{nassignmentid,0}","Section1/interview/Changed Type.{dinterview,1}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

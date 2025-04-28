@@ -1,0 +1,117 @@
+table 'Time to Fill'
+	lineageTag: eda02fa5-7bfa-49fa-b262-c83c9e2b3e5e
+
+	column nrequestid
+		formatString: 0
+		lineageTag: 5ead0460-3a38-4088-9f85-758f6db05b38
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: assignment[nrequestid]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Create:Approved =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        RELATED(jobrequest[Requisition Create Date]),
+			        RELATED(jobrequest[Requisition Approved Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: 9725ccd5-d16e-46fb-be93-8361a46750ff
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Approved:Received =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        RELATED(jobrequest[Requisition Approved Date]),
+			        RELATED(assignment[Job Received Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: 4dea7b5b-855a-4d6b-b645-55efbf5642e9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Received:Submitted =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        RELATED(assignment[Job Received Date]),
+			        RELATED(assignment[Candidate Submitted Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: c322802f-fd5e-4c73-9597-cba5e6e73c26
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Submitted:Hired =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        RELATED(assignment[Candidate Submitted Date]),
+			        RELATED(assignment[Hire Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: a061a004-65a3-44fd-8cee-38d41eaaecb3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Approved:Hired =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        RELATED(jobrequest[Requisition Approved Date]),
+			        RELATED(assignment[Hire Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: 66763b04-85d5-4375-a1d2-b98e3ab16d66
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment #'
+		formatString: 0
+		lineageTag: 4f5f629c-1160-4c73-9bdc-10fd6641f0fe
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Assignment #]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Received:Hired =
+			
+			CALCULATE([BusinessDaysOrCalendarDays],
+			    DATESBETWEEN('Date Table'[Date],
+			        RELATED(assignment[Job Received Date]),
+			        RELATED(assignment[Hire Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: e9066f7f-3c0c-46d7-9261-2765b0eb3181
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Time to Fill-8745d06d-b99e-4d41-8f2f-3c2ea4815b70' = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    FILTER(assignment,
+				        assignment[Hire Date] <> BLANK()
+				    ),
+				    assignment[nrequestid],
+				    "Assignment #", CALCULATE(MIN(assignment[Assignment #]),FILTER(assignment,assignment[Hire Date] = MIN(assignment[Hire Date])))
+				)
+

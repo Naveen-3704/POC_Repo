@@ -1,0 +1,59 @@
+table 'First Timecard'
+	lineageTag: 32c9f394-3ccb-4f60-a1aa-ad02097af4ba
+
+	column nassignmentid
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ebb9cae-e959-4ba6-bc97-6edd4a67e3fc
+		summarizeBy: none
+		sourceColumn: nassignmentid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Timecard Date'
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: 73bae35b-ce1b-4ee9-aea8-af6871ca5fd6
+		summarizeBy: none
+		sourceColumn: First Timecard Date
+
+		variation Variation
+			isDefault
+			relationship: 4f899b70-4423-41a0-af89-0a6a12a90de6
+			defaultHierarchy: LocalDateTable_5f5af441-0b7c-42a8-bcce-278fa24532d1.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition 'First Timecard-82bec4df-9ef3-4467-aa2c-755d1475056c' = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				  tablename = "timecardentry",
+				    Source = PowerPlatform.Dataflows(null),
+				    ID = Source{[Id="Workspaces"]}[Data],
+				    Workspace = ID{[workspaceName=#"Workspace Name"]}[Data],
+				    DataFlow = Workspace{[dataflowName= List.Single(DFName)]}[Data],
+				    DataTable = DataFlow{[entity=tablename]}[Data],
+				    #"Filtered Rows1" = Table.SelectRows(DataTable, each [nregular] > 0),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows1",{"dstarttime", "nassignmentid"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Removed Other Columns",{"nassignmentid", "dstarttime"}),
+				    #"Grouped Rows" = Table.Group(#"Reordered Columns", {"nassignmentid"}, {{"First Timecard Date", each List.Min([dstarttime]), type datetime}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Grouped Rows",{{"First Timecard Date", type date}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":["nassignmentid"],"queryRelationships":[],"columnIdentities":["Section1/timecardentry/Grouped Rows.{nassignmentid,0}","Section1/timecardentry/Grouped Rows.{dfirsttimecard,1}"],"ColumnCount":2,"KeyColumnNames":["nassignmentid"],"ColumnIdentities":["Section1/timecardentry/Grouped Rows.{nassignmentid,0}","Section1/timecardentry/Grouped Rows.{dfirsttimecard,1}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

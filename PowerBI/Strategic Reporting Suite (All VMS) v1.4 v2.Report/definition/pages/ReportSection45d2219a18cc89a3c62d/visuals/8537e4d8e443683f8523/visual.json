@@ -1,0 +1,426 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.6.0/schema.json",
+  "name": "8537e4d8e443683f8523",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 65,
+    "width": 560,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Vendor Scorecard",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Calibri",
+                      "fontSize": "24pt",
+                      "color": "#ffffff"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              }
+            ]
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "expr": {
+              "expr": {
+                "Min": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "Subquery": {
+                          "Query": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "DateTable",
+                                "Type": 0
+                              },
+                              {
+                                "Name": "subquery",
+                                "Expression": {
+                                  "Subquery": {
+                                    "Query": {
+                                      "Version": 2,
+                                      "From": [
+                                        {
+                                          "Name": "sd",
+                                          "Entity": "DateTable",
+                                          "Type": 0
+                                        }
+                                      ],
+                                      "Select": [
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Date"
+                                          },
+                                          "Name": "DateTable.Date"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Month"
+                                          },
+                                          "Name": "DateTable.Month"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Workday"
+                                          },
+                                          "Name": "DateTable.Workday"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "WorkdayFlag"
+                                          },
+                                          "Name": "DateTable.WorkdayFlag"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Quarter"
+                                          },
+                                          "Name": "DateTable.Quarter"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Year"
+                                          },
+                                          "Name": "DateTable.Year"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Quarter / Year"
+                                          },
+                                          "Name": "DateTable.Quarter / Year"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Month Offset"
+                                          },
+                                          "Name": "DateTable.Month Offset"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Year Offset"
+                                          },
+                                          "Name": "DateTable.Year Offset"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Quarter Offset"
+                                          },
+                                          "Name": "DateTable.Quarter Offset"
+                                        },
+                                        {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "sd"
+                                              }
+                                            },
+                                            "Property": "Quarter (Format)"
+                                          },
+                                          "Name": "DateTable.Quarter (Format)"
+                                        }
+                                      ],
+                                      "OrderBy": [
+                                        {
+                                          "Direction": 2,
+                                          "Expression": {
+                                            "Column": {
+                                              "Expression": {
+                                                "SourceRef": {
+                                                  "Source": "sd"
+                                                }
+                                              },
+                                              "Property": "Date"
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "Top": 1
+                                    }
+                                  }
+                                },
+                                "Type": 2
+                              }
+                            ],
+                            "Select": [
+                              {
+                                "HierarchyLevel": {
+                                  "Expression": {
+                                    "Hierarchy": {
+                                      "Expression": {
+                                        "PropertyVariationSource": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Name": "Variation",
+                                          "Property": "Date"
+                                        }
+                                      },
+                                      "Hierarchy": "Date Hierarchy"
+                                    }
+                                  },
+                                  "Level": "Year"
+                                },
+                                "Name": "DateTable.Date.Variation.Date Hierarchy.Year"
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Date"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Month"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Workday"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "WorkdayFlag"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Quarter"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Year"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Quarter / Year"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Month Offset"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Year Offset"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Quarter Offset"
+                                        }
+                                      },
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Quarter (Format)"
+                                        }
+                                      }
+                                    ],
+                                    "Table": {
+                                      "SourceRef": {
+                                        "Source": "subquery"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "OrderBy": [
+                              {
+                                "Direction": 2,
+                                "Expression": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "d"
+                                      }
+                                    },
+                                    "Property": "Date"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "Property": "DateTable.Date.Variation.Date Hierarchy.Year"
+                    }
+                  },
+                  "IncludeAllTypes": 1
+                },
+                "Annotations": {
+                  "NaturalLanguage": {
+                    "version": 1,
+                    "kind": "NaturalLanguage",
+                    "annotation": {
+                      "name": "Value",
+                      "utterance": "Year with the last date table by date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "Value"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

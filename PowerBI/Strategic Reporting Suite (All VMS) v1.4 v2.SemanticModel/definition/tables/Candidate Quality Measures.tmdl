@@ -1,0 +1,135 @@
+table 'Candidate Quality Measures'
+	lineageTag: 4218cf8a-ba98-42f0-ad51-2936c80f000c
+
+	measure 'Submittals per Requisition' = DIVIDE([Candidates Submitted],[Requisitions Created])
+		lineageTag: 1028c388-90f6-45c8-9e50-e1e905e17d18
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Candidates Submitted' =
+			
+			CALCULATE(DISTINCTCOUNT('assignment'[Assignment #]),jobrequest[Go Live Filter] <> "Go Live",
+			    TREATAS(
+			        VALUES('Date Table'[Date]),
+			        'assignment'[Candidate Submitted Date]
+			    )
+			)
+		formatString: #,0
+		lineageTag: a5d5224a-04bb-4586-a590-f6fe3a3ff276
+
+		changedProperty = IsHidden
+
+	measure 'Rejected %' = DIVIDE([Candidates Rejected],[Candidates Submitted])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d969b953-dc94-403c-880c-ec3137280299
+
+		changedProperty = IsHidden
+
+	measure 'Candidates Rejected' =
+			
+			var RejectedTable = {"declinedbyprimaryvendor","rejected"}
+			
+			return
+			CALCULATE([Candidates Submitted],
+			    'assignment'[Assignment Status] in RejectedTable
+			)
+		formatString: 0
+		lineageTag: 1b38de6a-1a1c-409e-ac7e-f42e5cdb64a7
+
+		changedProperty = IsHidden
+
+	measure 'Interviewed %' =
+			
+			IFERROR(DIVIDE(
+			    [Candidates Interviewed],[Candidates Submitted]),
+			    "N/A"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1fe46f63-a133-4a26-9c31-e3a090467989
+
+		changedProperty = IsHidden
+
+	measure 'Candidates Interviewed' =
+			
+			CALCULATE([Candidates Submitted],
+			    Interviews[Interview Date] <> BLANK()
+			)
+		formatString: 0
+		lineageTag: a897d9f4-23db-4e92-9ec8-d294864a5260
+
+		changedProperty = IsHidden
+
+	measure 'Engaged %' = DIVIDE([Candidates Engaged],[Candidates Submitted])
+		formatString: 0%;-0%;0%
+		lineageTag: 6841f4d9-6763-4851-bb8b-d4d0562c236f
+
+		changedProperty = IsHidden
+
+	measure 'Candidates Engaged' =
+			
+			CALCULATE([Candidates Submitted],
+			    'assignment'[Hire Date] <> BLANK()
+			)
+		formatString: #,0
+		lineageTag: fcf43221-e26f-4dbf-bb90-0b73a9f742b9
+
+		changedProperty = IsHidden
+
+	measure UI-CQlty_01 =
+			
+			switch(SELECTEDVALUE('UI-Slicer Selection'[User Selection]),
+			    "Submitted Candidates",[Candidates Submitted],
+			    "Interviewed Candidates", [Candidates Interviewed],
+			    "Engaged Candidates", [Candidates Engaged],
+			    "Rejected Candidates", [Vendor Rejected],
+			    "Null")
+		formatString: 0
+		lineageTag: e294607f-ea69-4578-9c44-68bbd12352dc
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'UI-CQlty_01 SPLY' =
+			
+			CALCULATE([UI-CQlty_01],
+			ALL('Date Table'),
+			SAMEPERIODLASTYEAR('Date Table'[Date]))
+		formatString: 0
+		lineageTag: 89aac8e3-a413-4b4a-ba12-b75ed62d8089
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'UI-CQlty_01 YOY %' =
+			
+			if(or([UI-CQlty_01] = blank(), [UI-CQlty_01 SPLY] = BLANK()), BLANK(),
+			([UI-CQlty_01] - [UI-CQlty_01 SPLY]) / [UI-CQlty_01 SPLY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1801121d-d204-47cd-8824-99e78bf818a7
+
+		changedProperty = IsHidden
+
+	measure 'Candidates Submitted Daily' = CALCULATE(DIVIDE([Candidates Submitted], SUM('Date Table'[WorkdayFlag])))
+		lineageTag: 3485781b-11e8-4f3e-a209-3a66beff2875
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Candidate Quality Measures-b7b1e5ec-219d-4af7-89dd-3f05f2a6a56d' = m
+		mode: import
+		queryGroup: MEASURES
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

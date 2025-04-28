@@ -1,0 +1,29 @@
+table CustomerCurrency
+	lineageTag: 71b43be0-31ed-4790-850c-dfb9ac15896c
+
+	column Currency
+		dataType: string
+		lineageTag: d6077ba1-a403-48d9-98c6-74ca6835f2c6
+		summarizeBy: none
+		sourceColumn: Currency
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CustomerCurrency-f7cccd93-50cd-40bf-8351-ece0ce005cb8 = m
+		mode: import
+		queryGroup: SOURCE
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcnZ0UYqNBQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [Currency = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Currency", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":1,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/CustomerCurrency/Changed Type.{Currency,0}"],"ColumnCount":1,"KeyColumnNames":[],"ColumnIdentities":["Section1/CustomerCurrency/Changed Type.{Currency,0}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

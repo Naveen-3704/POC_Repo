@@ -1,0 +1,44 @@
+table Map-State
+	lineageTag: 3aef7874-dc21-48c3-8607-e56031cab670
+
+	column 'State Name'
+		dataType: string
+		lineageTag: 08819945-2a4e-4465-835a-8c6273754000
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 65d85c61-8ceb-4084-a863-1e5e2c8c0b81
+		summarizeBy: none
+		sourceColumn: State
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Map-State-4837cf4a-48d0-4056-8358-04ca917b9955 = m
+		mode: import
+		queryGroup: MAPPING\manual
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("VVTbTuMwFPyViGeEaC4UHqHdQlqSVi3QZREPpjWN1cRGtgN0v2a/Zb9sz/iE0pWQRef43GYmfno6WnjhZVSKRh4ddz8GZo0fo3y24P+fj5+OLmvhtoLgywkd8Rf2IpoA3tLRY9BuhXbCAZ3TkTHaSKtWQkcL0ZiQsaDj7LRLUb+NDugvOtIAXomttFHuaqHXBF7ldJxzi4Go1auxWiFlcIlCjJvaWLE2QKe43qFay5VXq9YjcEfHRQgMlfM0lI/MK+1Zt81LKDgcYBfuNJS1+BAWdAx/AOaBR9RHrXF5FBZnOkZyLS0RuI4Cjw51C7WyRksXKo8KjMrrXUtjNwG9xgK9hNFWNIDucZGXuqEBlKLfN2Cgx3Tm5gOpeUjlbfK1qLB5PgTGuXldK20UtMjDoH2G9VqJwHdeAmWexqbSzhsdXXpT14SPA7OcMhb2XblvOcZBDu4yUXrTkLRzKV8JnUD1cx5q8mWFCeSOmb2J1L5dbXeAHwEz17emVa6b6xatY6a1EM6JVdU66T1KFSGWdTG76yYqsHecdrDS0KyAZnHyddVVoq67HUKlGyzI25NQldoIDRi7xWcdTOZxxmOoAmTF/Q53zrQWuhSwWsz7lsb6SlodUTescthshmYX+2z8vb2FAoGbbgyjPVNQwKjJ6XfZaCCsIT0RLOHRpH8QHIotT1mCh4SrlfLFdp9tCSqSXgd/RDeieXOVCtYuwUPCNJXiHXx/K12Cjf7ZPnEsrZPQrhwjK90HCvmpVnBgCZsnWRd4F+FDKR8Axvvbj8ZuAcMACVefVgrp0zANEzXd1uTq8MRM8e6kzMfUyo2BVFN4LeWtZlJrt6vfBb8LM9gk5YazVlpvojnPN0NSv4uIWrTAlsC4+ryiR++bgDkISHnPhWn/F2IBIdLsILgXYgEhUl7tTsJGToLtO9go7Xf4Z/g87n4CY9HuTxYn9G5oY6Np6+sdfV0HNroHuX2e5t6LChCckjJhD4peFSbgAQRkvQP4q8zfP/QykU8jtMLNIDF3f5C2IQ8CRdmMKVkK8ore+ED6MhRmuyyVWxntVMBRJmMultL56GCYJeTPeOzlzjRUDCjUz4ii538=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [cworklocstate = _t, cState = _t, Column1 = _t]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Removed Duplicates" = Table.Distinct(#"Promoted Headers"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Duplicates",{{"FIPS Code", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"State Name", "State Code"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"State Code", "State"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_QueryRelationships = {"columnCount":3,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/Map-State/Source.{cworklocstate,0}","Section1/Map-State/Source.{cState,1}","Section1/Map-State/Changed Type.{FIPS Code,2}"],"ColumnCount":3,"KeyColumnNames":[],"ColumnIdentities":["Section1/Map-State/Source.{cworklocstate,0}","Section1/Map-State/Source.{cState,1}","Section1/Map-State/Changed Type.{FIPS Code,2}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+
